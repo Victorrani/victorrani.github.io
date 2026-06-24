@@ -3,24 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Victor Ranieri - Mestrando em Meteorologia no CPTEC/INPE">
-    <meta name="keywords" content="meteorologia, meteorology, USP, INPE, CPTEC, GOES">
-    <meta name="author" content="Victor Antunes Ranieri">
-    <title>Victor Ranieri - Meteorologia</title>
+    <meta name="description" content="Projetos de Victor Ranieri em Meteorologia">
+    <title>Victor Ranieri - Projetos</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- GoatCounter Analytics -->
     <script data-goatcounter="https://victorrani.goatcounter.com/count"
-            async src="//gc.zgo.at/count.js"></script>
+        async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 
-    <!-- CABEÇALHO / MENU -->
     <header>
         <nav>
             <div class="nav-container">
                 <a href="index.html" class="logo">Victor Ranieri</a>
                 <div class="nav-links">
                     <a href="index.html">Home</a>
+                    <a href="projetos.html" class="active">Projetos</a> <!-- NOVO -->
                     <a href="meteorologia.html">Meteorologia</a>
                     <a href="contato.html">Contato</a>
                 </div>
@@ -28,90 +25,65 @@
         </nav>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main>
-        <!-- PERFIL -->
         <div class="profile">
-            <h1>Victor Antunes Ranieri</h1>
-            <p class="subtitle">Mestrando em Meteorologia | CPTEC/INPE</p>
-            <p class="location">🌍 Cachoeira Paulista - SP, Brasil</p>
+            <h1>Meus Projetos</h1>
+            <p class="subtitle">Ferramentas e estudos em meteorologia</p>
         </div>
 
-        <!-- BIOGRAFIA -->
-        <div class="bio">
-            <p>Mestrando em Meteorologia pelo CPTEC/INPE, residente em Cachoeira Paulista - SP. 
-            Formado em Meteorologia pela IAG-USP e Licenciado em Física pelo IF-USP.</p>
-            
-            <p>Busco nas ciências naturais compreender os fenômenos que regem o tempo e o clima, 
-            unindo a física da atmosfera com o desenvolvimento de ferramentas computacionais 
-            para análise de dados.</p>
-            
-            <p>Meu objetivo é contribuir para uma meteorologia mais acessível, eficiente e integrada, 
-            usando código aberto e compartilhando conhecimento. Cada ideia e script é um passo 
-            rumo à democratização da informação meteorológica, principalmente no Brasil e no mundo.</p>
-        </div>
-
-        <!-- HABILIDADES -->
-        <div class="skills">
-            <h2>Habilidades</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>Linguagens</h3>
-                    <p>Python, Shell Script</p>
+        <div class="projects-grid">
+            <!-- Projeto 1: MONAN -->
+            <div class="project-card">
+                <div class="project-icon">🌤️</div>
+                <h3>MONAN Forecast</h3>
+                <p>Previsão climática avançada utilizando o modelo MONAN do CPTEC/INPE</p>
+                <div class="project-tags">
+                    <span>Python</span>
+                    <span>NetCDF</span>
+                    <span>MONAN</span>
                 </div>
-                <div class="skill-card">
-                    <h3>Processamento de Dados Meteorológicos</h3>
-                    <p>NetCDF, GRIB, GOES, GPM IMERG, MONAN, INMET, NCEP</p>
-                </div>
+                <a href="projetos/monan.html" class="project-link">Ver detalhes →</a>
             </div>
-        </div>
 
-        <!-- ARTIGOS -->
-        <div class="articles">
-            <h2>Participação em artigos e Artigos Publicados</h2>
-
-            <div class="articles-list">
-                <div class="article-card">
-                    <p class="article-authors">BARROS, L. O.; SAPUCCI, L. F.; VIEZEL, C.; <strong>RANIERI, V. A.</strong>; BAÑOS, I. H.; BASTARZ, C. F.; VENDRASCO, E. P.; LOPES, T. G.; ALMEIDA, S. S. S.; MATTOS, J. G. Z.; ARAVEQUIA, J. A.</p>
-                    <p class="article-title">"Impact of GOES Atmospheric Motion Vector Data Assimilation on Forecasts over South America: Akará Cyclone Case Study"</p>
-                    <p class="article-journal">Remote Sensing, 2026</p>
+            <!-- Projeto 2: MODE-BR -->
+            <div class="project-card">
+                <div class="project-icon">🗺️</div>
+                <h3>MODE-BR Explorer</h3>
+                <p>Análise e visualização de dados do modelo MODE-BR para meteorologia</p>
+                <div class="project-tags">
+                    <span>Python</span>
+                    <span>GRIB</span>
+                    <span>MODE-BR</span>
                 </div>
-
-                <div class="article-card">
-                    <p class="article-authors">SOUZA, D. C.; <strong>RANIERI, V. A.</strong>; DIAS, P. L. S.; FLORES, A. R.; CAMARGO, R.</p>
-                    <p class="article-title">"Revisiting the rare transition of a South Atlantic cyclone to tropical storm Akará: energy cycle and stratosphere-troposphere interaction"</p>
-                    <p class="article-journal">Climate Dynamics, 2026</p>
-                </div>
+                <a href="projetos/mode-br.html" class="project-link">Ver detalhes →</a>
             </div>
-        </div>
 
-        <!-- LINKS RÁPIDOS -->
-        <div class="quick-links">
-            <h2>Onde me encontrar</h2>
-            <div class="links-grid">
-                <a href="https://github.com/Victorrani" target="_blank" class="link-card">GitHub</a>
-                <a href="http://lattes.cnpq.br/4984000936682340" target="_blank" class="link-card">Lattes</a>
-                <a href="#" class="link-card">ORCID</a>
-                <a href="#" class="link-card">ResearchGate</a>
-                <a href="https://www.linkedin.com/in/victor-ranieri/" target="_blank" class="link-card">LinkedIn</a>
+            <!-- Projeto 3: SatView -->
+            <div class="project-card">
+                <div class="project-icon">🛰️</div>
+                <h3>SatView</h3>
+                <p>Processamento e galeria de imagens de satélites meteorológicos (GOES, etc.)</p>
+                <div class="project-tags">
+                    <span>Python</span>
+                    <span>GOES</span>
+                    <span>Imagens</span>
+                </div>
+                <a href="projetos/satelite.html" class="project-link">Ver detalhes →</a>
             </div>
         </div>
     </main>
 
-    <!-- RODAPÉ -->
     <footer>
-    <p>&copy; 2026 Victor Antunes Ranieri</p>
-    <p>Cachoeira Paulista, SP</p>
-    
-    <!-- CONTADOR DE VISITAS -->
-    <div style="text-align: center; margin-top: 1rem;">
-        <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); padding: 5px 15px; border-radius: 30px;">
-            <span style="font-size: 1rem;">👁️</span>
-            <span style="color: rgba(255,255,255,0.8); font-size: 0.85rem;">Visitas:</span>
-            <img src="https://visitor-badge.laobi.icu/badge?page_id=victorrani.github.io" alt="contador" style="border-radius: 20px;">
+        <p>&copy; 2026 Victor Antunes Ranieri</p>
+        <p>Cachoeira Paulista, SP</p>
+        <div style="text-align: center; margin-top: 1rem;">
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); padding: 5px 15px; border-radius: 30px;">
+                <span style="font-size: 1rem;">👁️</span>
+                <span style="color: rgba(255,255,255,0.8); font-size: 0.85rem;">Visitas:</span>
+                <img src="https://visitor-badge.laobi.icu/badge?page_id=victorrani.github.io" alt="contador" style="border-radius: 20px;">
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
 </body>
 </html>
