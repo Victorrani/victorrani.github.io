@@ -31,12 +31,12 @@
 .project-card {
     background: white;
     border-radius: 12px;
-    padding: 2rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     border-top: 4px solid #3498db;
     display: flex;
     flex-direction: column;
+    overflow: hidden;  /* Importante para as bordas arredondadas */
 }
 
 .project-card:hover {
@@ -44,7 +44,60 @@
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Ícone do projeto */
+/* ========================================
+   NOVO: ESTILO PARA IMAGENS DOS CARDS
+   ======================================== */
+
+/* Wrapper da imagem */
+.project-image-wrapper {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: #ecf0f1;
+    position: relative;
+}
+
+/* Imagem propriamente dita */
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+}
+
+/* Efeito zoom na imagem ao passar o mouse */
+.project-card:hover .project-image {
+    transform: scale(1.05);
+}
+
+/* Placeholder enquanto a imagem não carrega */
+.project-image-wrapper::after {
+    content: "🖼️";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Quando a imagem carrega, esconde o placeholder */
+.project-image {
+    position: relative;
+    z-index: 1;
+}
+
+/* Conteúdo do card (texto e links) */
+.project-content {
+    padding: 1.5rem 1.5rem 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ícone do projeto (opcional - se quiser manter) */
 .project-icon {
     font-size: 3.5rem;
     margin-bottom: 0.5rem;
@@ -109,6 +162,54 @@
 }
 
 /* ========================================
+   VARIAÇÃO: IMAGEM COMO ÍCONE CIRCULAR
+   ======================================== */
+
+.project-icon-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 1.5rem auto 0.5rem;
+    display: block;
+    border: 3px solid #3498db;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover .project-icon-image {
+    transform: scale(1.05);
+    border-color: #2980b9;
+}
+
+/* ========================================
+   VARIAÇÃO: BADGE SOBRE A IMAGEM
+   ======================================== */
+
+.project-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #3498db;
+    color: white;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+.project-badge.orange {
+    background: #e67e22;
+    box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+}
+
+.project-badge.green {
+    background: #27ae60;
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+/* ========================================
    SUBPÁGINAS DE PROJETOS (monan.html, etc)
    ======================================== */
 
@@ -153,6 +254,38 @@
     margin-bottom: 0.5rem;
 }
 
+/* Imagens nas páginas de detalhe */
+.project-detail-image {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem auto;
+    display: block;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Galeria de imagens */
+.project-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.project-gallery img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.project-gallery img:hover {
+    transform: scale(1.03);
+}
+
 /* Botão voltar */
 .back-button {
     display: inline-block;
@@ -185,7 +318,15 @@
     }
     
     .project-card {
-        padding: 1.5rem;
+        padding: 0;
+    }
+    
+    .project-content {
+        padding: 1.2rem;
+    }
+    
+    .project-image-wrapper {
+        height: 180px;
     }
     
     .project-detail {
@@ -198,5 +339,19 @@
     
     .projects-header h1 {
         font-size: 2rem;
+    }
+    
+    .project-gallery {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-image-wrapper {
+        height: 150px;
+    }
+    
+    .project-gallery {
+        grid-template-columns: 1fr;
     }
 }
