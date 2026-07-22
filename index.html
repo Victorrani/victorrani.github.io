@@ -17,8 +17,10 @@
                 <a href="index.html" class="logo">Victor Ranieri</a>
                 <div class="nav-links">
                     <a href="index.html">Home</a>
-                    <a href="projetos.html" class="active">Projetos</a> <!-- NOVO -->
-                    <a href="meteorologia.html">Meteorologia</a>
+                    <a href="mode-br.html">MODE-br</a>
+                    <a href="satelite.html">MeteoEye</a>
+                    <a href="eyetrack.html">EyeTrack</a>
+                    <a href="monan.html">Forecast</a>
                     <a href="contato.html">Contato</a>
                 </div>
             </div>
@@ -32,43 +34,60 @@
         </div>
 
         <div class="projects-grid">
-            <!-- Projeto 1: MONAN -->
+            <!-- Projeto 1: Forecast -->
             <div class="project-card">
-                <div class="project-icon">🌤️</div>
-                <h3>MONAN Forecast</h3>
-                <p>Previsão climática avançada utilizando o modelo MONAN do CPTEC/INPE</p>
-                <div class="project-tags">
-                    <span>Python</span>
-                    <span>NetCDF</span>
-                    <span>MONAN</span>
+                <div class="project-image-wrapper">
+                    <img src="figs/forecast.jpg" alt="Mapas sinóticos" class="project-image">
                 </div>
-                <a href="projetos/monan.html" class="project-link">Ver detalhes →</a>
+                <div class="project-content">
+                    <h3>Forecast</h3>
+                    <p>Mapas sinóticos</p>
+                    <a href="projetos/monan.html" class="project-link">Ver detalhes →</a>
+                </div>
             </div>
 
-            <!-- Projeto 2: MODE-BR -->
+            <!-- Projeto 2: EyeTrack -->
             <div class="project-card">
-                <div class="project-icon">🗺️</div>
-                <h3>MODE-BR Explorer</h3>
-                <p>Análise e visualização de dados do modelo MODE-BR para meteorologia</p>
-                <div class="project-tags">
-                    <span>Python</span>
-                    <span>GRIB</span>
-                    <span>MODE-BR</span>
+                <div class="project-image-wrapper">
+                    <img src="figs/eyetrack.jpg" alt="EyeTrack - Trackfile generator" class="project-image">
                 </div>
-                <a href="projetos/mode-br.html" class="project-link">Ver detalhes →</a>
+                <div class="project-content">
+                    <h3>EyeTrack</h3>
+                    <p>EyeTrack - Trackfile generator</p>
+                    <div class="project-tags">
+                        <!-- Espaço para tags se necessário -->
+                    </div>
+                    <a href="projetos/eyetrack.html" class="project-link">Ver detalhes →</a>
+                </div>
             </div>
 
-            <!-- Projeto 3: SatView -->
+            <!-- Projeto 3: MODE-BR -->
             <div class="project-card">
-                <div class="project-icon">🛰️</div>
-                <h3>SatView</h3>
-                <p>Processamento e galeria de imagens de satélites meteorológicos (GOES, etc.)</p>
-                <div class="project-tags">
-                    <span>Python</span>
-                    <span>GOES</span>
-                    <span>Imagens</span>
+                <div class="project-image-wrapper">
+                    <img src="figs/mode-br.jpg" alt="MODE-BR - Avaliação de previsões" class="project-image">
                 </div>
-                <a href="projetos/satelite.html" class="project-link">Ver detalhes →</a>
+                <div class="project-content">
+                    <h3>MODE-BR</h3>
+                    <p>Avaliação de previsões orientada a objetos</p>
+                    <a href="projetos/mode-br.html" class="project-link">Ver detalhes →</a>
+                </div>
+            </div>
+
+            <!-- Projeto 4: SatView -->
+            <div class="project-card">
+                <div class="project-image-wrapper">
+                    <img src="figs/index/MELISSA_GOES19_202510261500.png" alt="SatView - Processamento de dados de satélite" class="project-image">
+                </div>
+                <div class="project-content">
+                    <h3>SatView</h3>
+                    <p>Processamento de dados de satélite (GOES16|GOES19)</p>
+                    <div class="project-tags">
+                        <span>Python</span>
+                        <span>GOES</span>
+                        <span>Imagens</span>
+                    </div>
+                    <a href="projetos/satelite.html" class="project-link">Ver detalhes →</a>
+                </div>
             </div>
         </div>
     </main>
