@@ -39,18 +39,23 @@
 
             <div class="project-card">
                 <div class="project-image-wrapper">
-                    <img src="figs/index/MELISSA_GOES19_202510261500.png" alt="SatView - Processamento de dados de satélite" class="project-image">
+                    <img src="figs/index/MELISSA_GOES19_202510261500.png" alt="SatView - Processamento de dados de satélite" class="project-image is-active">
+                    <img src="figs/satelite/melissa_ch13_noaa.jpg" alt="SatView - Processamento de dados de satélite" class="project-image" loading="lazy">
+                    <img src="figs/satelite/melissa_airmass.jpg" alt="SatView - Processamento de dados de satélite" class="project-image" loading="lazy">
+                    <img src="figs/satelite/melissa_cpd.jpg" alt="SatView - Processamento de dados de satélite" class="project-image" loading="lazy">
+                    <img src="figs/satelite/melissa_sod.jpg" alt="SatView - Processamento de dados de satélite" class="project-image" loading="lazy">
+                    <img src="figs/satelite/melissa_swvd.jpg" alt="SatView - Processamento de dados de satélite" class="project-image" loading="lazy">
                 </div>
                 <div class="project-content">
                     <h3>SatView</h3>
                     <p>Processamento de dados de satélite (GOES16|GOES19)</p>
-                    <a href="projetos/satelite.html" class="project-link">Ver detalhes →</a>
+                    <a href="projetos/satelite.html" class="project-link">Ver detalhes</a>
                 </div>
             </div>
             <!-- Projeto 2: EyeTrack -->
             <div class="project-card">
                 <div class="project-image-wrapper">
-                    <img src="figs/index/track_vort850_MONAN_20260721_093522_plot.png" alt="MasterTrack - Trackfile generator" class="project-image">
+                    <img src="figs/index/track_vort850_MONAN_20260721_093522_plot.png" alt="MasterTrack - Trackfile generator" class="project-image is-active">
                 </div>
                 <div class="project-content">
                     <h3>MasterTrack</h3>
@@ -58,40 +63,43 @@
                     <div class="project-tags">
                         <!-- Espaço para tags se necessário -->
                     </div>
-                    <a href="projetos/mastertrack.html" class="project-link">Ver detalhes →</a>
+                    <a href="projetos/mastertrack.html" class="project-link">Ver detalhes</a>
                 </div>
             </div>
 
             <div class="project-card">
                 <div class="project-image-wrapper">
-                    <img src="figs/tropical/balanco_2024-01.jpg" alt="Tropical - Balanços de energia com ERA5" class="project-image">
+                    <img src="figs/tropical/balanco_2024-01.jpg" alt="Tropical - Balanços de energia com ERA5" class="project-image is-active">
+                    <img src="figs/tropical/balanco_amazonia_oeste_out2021_out2023.jpg" alt="Tropical - Balanços de energia com ERA5" class="project-image" loading="lazy">
+                    <img src="figs/tropical/boxes.jpg" alt="Tropical - Balanços de energia com ERA5" class="project-image" loading="lazy">
+                    <img src="figs/tropical/anomalia_chuva_amazonia_oeste.jpg" alt="Tropical - Balanços de energia com ERA5" class="project-image" loading="lazy">
                 </div>
                 <div class="project-content">
                     <h3>Tropical</h3>
                     <p>Balanços de energia em domínios escolhidos (ERA5)</p>
-                    <a href="projetos/tropical.html" class="project-link">Ver detalhes →</a>
+                    <a href="projetos/tropical.html" class="project-link">Ver detalhes</a>
                 </div>
             </div>
 
             <div class="project-card">
                 <div class="project-image-wrapper">
-                    <img src="figs/forecast.jpg" alt="Mapas sinóticos" class="project-image">
+                    <img src="figs/forecast.jpg" alt="Mapas sinóticos" class="project-image is-active">
                 </div>
                 <div class="project-content">
                     <h3>Forecast</h3>
                     <p>Mapas sinóticos</p>
-                    <a href="projetos/forecast.html" class="project-link">Ver detalhes →</a>
+                    <a href="projetos/forecast.html" class="project-link">Ver detalhes</a>
                 </div>
             </div>
 
             <div class="project-card">
                 <div class="project-image-wrapper">
-                    <img src="figs/mode-br.jpg" alt="MODE-BR - Avaliação de previsões" class="project-image">
+                    <img src="figs/mode-br.jpg" alt="MODE-BR - Avaliação de previsões" class="project-image is-active">
                 </div>
                 <div class="project-content">
                     <h3>MODE-BR</h3>
                     <p>Avaliação de previsões orientada a objetos</p>
-                    <a href="projetos/mode-br.html" class="project-link">Ver detalhes →</a>
+                    <a href="projetos/mode-br.html" class="project-link">Ver detalhes</a>
                 </div>
             </div>
         </div>
@@ -108,6 +116,26 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Alterna as imagens de cada card (cards com uma imagem só ficam parados)
+        (function () {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            document.querySelectorAll('.project-image-wrapper').forEach(function (wrapper, n) {
+                var imgs = wrapper.querySelectorAll('.project-image');
+                if (imgs.length < 2) return;
+                var i = 0;
+                // Defasagem entre cards para não trocarem todos ao mesmo tempo
+                setTimeout(function () {
+                    setInterval(function () {
+                        imgs[i].classList.remove('is-active');
+                        i = (i + 1) % imgs.length;
+                        imgs[i].classList.add('is-active');
+                    }, 4000);
+                }, n * 1300);
+            });
+        })();
+    </script>
 
 </body>
 </html>
