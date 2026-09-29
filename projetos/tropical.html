@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tropical - Balanços de energia em domínios escolhidos pelo usuário com a reanálise ERA5">
+    <meta name="author" content="Victor Antunes Ranieri">
+    <title>Tropical - Victor Ranieri</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://victorrani.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="nav-container">
+                <a href="../index.html" class="logo">Victor Ranieri</a>
+                <div class="nav-links">
+                    <a href="../index.html">Home</a>
+                    <a href="satelite.html">SatView</a>
+                    <a href="mastertrack.html">MasterTrack</a>
+                    <a href="tropical.html">Tropical</a>
+                    <a href="forecast.html">Forecast</a>
+                    <a href="mode-br.html">MODE-br</a>
+                    <a href="../contato.html">Contato</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- APRESENTAÇÃO -->
+        <section class="project-hero">
+            <span class="eyebrow">Meteorologia Tropical · IAG/USP</span>
+            <h1>Tropical</h1>
+            <p class="lead">
+                Balanços de energia no topo da atmosfera, na atmosfera e na
+                superfície, além de chuva, nuvens e fluxos de calor, em regiões
+                que você escolhe. Usa médias mensais do ERA5 e anomalias em
+                relação à normal 1991–2020.
+            </p>
+            <div class="btn-row">
+                <a href="https://github.com/Victorrani/tropical" target="_blank" class="btn btn-primary">Ver no GitHub</a>
+                <a href="#como-usar" class="btn btn-ghost">Como usar</a>
+            </div>
+        </section>
+
+        <figure class="hero-figure">
+            <img src="../figs/tropical/balanco_2024-01.jpg" alt="Mapas dos balanços da Terra, da atmosfera e da superfície em janeiro de 2024">
+            <figcaption>Balanços de energia da Terra, da atmosfera e da superfície · ERA5 · janeiro de 2024</figcaption>
+        </figure>
+
+        <!-- O QUE FAZ -->
+        <section class="section">
+            <h2>O que faz</h2>
+            <p class="section-intro">Do download às figuras, com os seus domínios definidos em um único namelist.</p>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>Boxes definidos por você</h3>
+                    <p>Uma linha por região no namelist. Escolha se a média usa todos os pontos, só o continente ou só o oceano.</p>
+                </div>
+                <div class="feature">
+                    <h3>Download do ERA5</h3>
+                    <p>Baixa via API do Copernicus (CDS), divide pedidos grandes e retoma de onde parou se o servidor falhar.</p>
+                </div>
+                <div class="feature">
+                    <h3>Normal 1991–2020</h3>
+                    <p>Calcula a normal climatológica de cada box e as anomalias do período de análise em relação a ela.</p>
+                </div>
+                <div class="feature">
+                    <h3>Figuras prontas</h3>
+                    <p>Séries temporais, anomalias, ciclo anual por década e mapas mensais dos balanços e de cada variável.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOMÍNIOS -->
+        <section class="section">
+            <h2>Exemplo: quatro regiões do Brasil</h2>
+            <p class="section-intro">Teste com o período 2015–2025. Boxes de 10° × 10°; em sul e sao_paulo a média usa só o continente.</p>
+            <div class="split">
+                <figure class="hero-figure" style="margin: 0;">
+                    <img src="../figs/tropical/boxes.jpg" alt="Mapa com os quatro boxes: sul, sao_paulo, amazonia_oeste e amazonia_leste" loading="lazy">
+                </figure>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Box</th><th>Região</th><th class="num">lat</th><th class="num">lon</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>EXP1 sul</td><td>RS, Uruguai e NE da Argentina</td><td class="num">−35 a −25</td><td class="num">−60 a −50</td></tr>
+                            <tr><td>EXP2 sao_paulo</td><td>Estado de São Paulo</td><td class="num">−27 a −17</td><td class="num">−54 a −44</td></tr>
+                            <tr><td>EXP3 amazonia_oeste</td><td>Oeste da Amazônia</td><td class="num">−10 a 0</td><td class="num">−73 a −63</td></tr>
+                            <tr><td>EXP4 amazonia_leste</td><td>Leste da Amazônia</td><td class="num">−10 a 0</td><td class="num">−58 a −48</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECA NA AMAZÔNIA -->
+        <section class="section">
+            <h2>A seca de 2023 no oeste da Amazônia</h2>
+            <p class="section-intro">Outubro de 2021 (La Niña, em cima) comparado ao auge da seca em outubro de 2023 (embaixo).</p>
+            <div class="figure-stack">
+                <figure>
+                    <a href="../figs/tropical/balanco_amazonia_oeste_out2021_out2023.jpg" target="_blank"><img src="../figs/tropical/balanco_amazonia_oeste_out2021_out2023.jpg" alt="Balanços no box amazonia_oeste em outubro de 2021 e outubro de 2023" loading="lazy"></a>
+                </figure>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Média no box (outubro)</th><th class="num">2021</th><th class="num">2023</th><th class="num">Normal 1991–2020</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Chuva (mm)</td><td class="num">189</td><td class="num hl">68</td><td class="num">192</td></tr>
+                            <tr><td>Balanço atmosférico (W m⁻²)</td><td class="num">131</td><td class="num hl">30</td><td class="num">131</td></tr>
+                            <tr><td>Calor sensível (W m⁻², para cima)</td><td class="num">34</td><td class="num hl">57</td><td class="num">31</td></tr>
+                            <tr><td>Calor latente (W m⁻², para cima)</td><td class="num">122</td><td class="num">109</td><td class="num">121</td></tr>
+                            <tr><td>Temperatura a 2 m (°C)</td><td class="num">26,6</td><td class="num hl">28,2</td><td class="num">26,3</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- OUTRAS FIGURAS -->
+        <section class="section">
+            <h2>Séries e anomalias</h2>
+            <p class="section-intro">Clique para ampliar.</p>
+            <div class="figure-stack">
+                <figure>
+                    <a href="../figs/tropical/anomalia_chuva_amazonia_oeste.jpg" target="_blank"><img src="../figs/tropical/anomalia_chuva_amazonia_oeste.jpg" alt="Anomalias mensais de precipitação no oeste da Amazônia" loading="lazy"></a>
+                    <figcaption><strong>Anomalia de chuva · oeste da Amazônia</strong><span>Barras mensais e média móvel de 12 meses, 2015–2025</span></figcaption>
+                </figure>
+                <figure>
+                    <a href="../figs/tropical/anomalia_chuva_sul.jpg" target="_blank"><img src="../figs/tropical/anomalia_chuva_sul.jpg" alt="Anomalias mensais de precipitação no box sul" loading="lazy"></a>
+                    <figcaption><strong>Anomalia de chuva · Sul</strong><span>Barras mensais e média móvel de 12 meses, 2015–2025</span></figcaption>
+                </figure>
+                <figure>
+                    <a href="../figs/tropical/ciclo_anual_chuva_sao_paulo.jpg" target="_blank"><img src="../figs/tropical/ciclo_anual_chuva_sao_paulo.jpg" alt="Ciclo anual de precipitação em São Paulo" loading="lazy"></a>
+                    <figcaption><strong>Ciclo anual da chuva · São Paulo</strong><span>Normal 1991–2020, décadas de 1991 a 2025 e série 2015–2025</span></figcaption>
+                </figure>
+                <figure>
+                    <a href="../figs/tropical/temperatura_amazonia_leste.jpg" target="_blank"><img src="../figs/tropical/temperatura_amazonia_leste.jpg" alt="Série de temperatura a 2 m no leste da Amazônia" loading="lazy"></a>
+                    <figcaption><strong>Temperatura a 2 m · leste da Amazônia</strong><span>Série mensal com a normal 1991–2020</span></figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- COMO USAR -->
+        <section class="section" id="como-usar">
+            <h2>Como usar</h2>
+            <p class="section-intro">
+                Requer uma conta no Copernicus CDS com a chave em <code>~/.cdsapirc</code>.
+                O passo a passo completo está no README do repositório.
+            </p>
+            <div class="steps">
+                <div class="step">
+                    <h3>Clone e crie o ambiente</h3>
+                    <pre><code>git clone https://github.com/Victorrani/tropical.git
+cd tropical
+conda env create -f env/environment.yml
+conda activate tropical-env</code></pre>
+                </div>
+                <div class="step">
+                    <h3>Defina os boxes</h3>
+                    <p>Em <code>scripts/analysis/namelist.txt</code>, uma linha por região.</p>
+                    <pre><code>exp_name=EXP1;name=sul;lat_max=-25;lat_min=-35;lon_max=-50;lon_min=-60;superficie=terra</code></pre>
+                </div>
+                <div class="step">
+                    <h3>Baixe os dados e gere a normal</h3>
+                    <pre><code>python scripts/download/get_data.py mascara
+python scripts/analysis/normal.py
+python scripts/download/get_data.py analise 2015 2025</code></pre>
+                </div>
+                <div class="step">
+                    <h3>Processe e plote</h3>
+                    <pre><code>python scripts/analysis/slice.py
+python scripts/analysis/time_serie_vars.py
+python scripts/analysis/climatologia.py
+python scripts/analysis/desv.py
+python scripts/plots/plot_desv.py</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Victor Antunes Ranieri</p>
+        <p>Cachoeira Paulista, SP</p>
+    </footer>
+
+</body>
+</html>

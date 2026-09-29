@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SatView (sat_goes) - Download e plotagem de imagens dos satélites GOES-16 e GOES-19 em Python">
+    <meta name="author" content="Victor Antunes Ranieri">
+    <title>SatView - Victor Ranieri</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://victorrani.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="nav-container">
+                <a href="../index.html" class="logo">Victor Ranieri</a>
+                <div class="nav-links">
+                    <a href="../index.html">Home</a>
+                    <a href="satelite.html">SatView</a>
+                    <a href="mastertrack.html">MasterTrack</a>
+                    <a href="tropical.html">Tropical</a>
+                    <a href="forecast.html">Forecast</a>
+                    <a href="mode-br.html">MODE-br</a>
+                    <a href="../contato.html">Contato</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- APRESENTAÇÃO -->
+        <section class="project-hero">
+            <span class="eyebrow">sat_goes · fase 1</span>
+            <h1>SatView</h1>
+            <p class="lead">
+                Scripts em Python para baixar e plotar imagens dos satélites
+                GOES-16 e GOES-19 sobre a América do Sul. Aberto, customizável
+                e totalmente em português.
+            </p>
+            <div class="btn-row">
+                <a href="https://github.com/Victorrani/sat_goes" target="_blank" class="btn btn-primary">Ver no GitHub</a>
+                <a href="#como-usar" class="btn btn-ghost">Como usar</a>
+            </div>
+        </section>
+
+        <figure class="hero-figure">
+            <img src="../figs/satelite/melissa_truecolor.jpg" alt="Furacão Melissa em True Color, GOES-19, 28/10/2025 16 UTC">
+            <figcaption>Furacão Melissa · GOES-19 True Color · 28/10/2025 16 UTC</figcaption>
+        </figure>
+
+        <!-- O QUE FAZ -->
+        <section class="section">
+            <h2>O que faz</h2>
+            <p class="section-intro">Dois scripts: um baixa, outro plota. Sem configuração complicada.</p>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>Download automático</h3>
+                    <p>Baixa os dados direto do FTP do CPTEC/INPE para qualquer período (AAAAMMDDHH), cruzando meses e anos.</p>
+                </div>
+                <div class="feature">
+                    <h3>16 canais + 7 produtos</h3>
+                    <p>Canais individuais do ABI (ch01–ch16), RGBs e diferenças de canais usadas na análise operacional.</p>
+                </div>
+                <div class="feature">
+                    <h3>Plotagem pronta</h3>
+                    <p>Figuras com estados do Brasil, título padronizado e contornos com cor ajustada para cada produto.</p>
+                </div>
+                <div class="feature">
+                    <h3>Customizável</h3>
+                    <p>Escolha domínio (extent), título e paleta de cores. Faixas e fórmulas seguem os guias oficiais (CIMSS, NASA SPoRT).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUTOS -->
+        <section class="section">
+            <h2>Produtos</h2>
+            <p class="section-intro">Exemplos gerados com o sat_goes para o Furacão Melissa (GOES-19, 28/10/2025 16 UTC). Clique para ampliar.</p>
+            <div class="gallery">
+                <figure>
+                    <a href="../figs/satelite/melissa_truecolor.jpg" target="_blank"><img src="../figs/satelite/melissa_truecolor.jpg" alt="True Color" loading="lazy"></a>
+                    <figcaption><strong>True Color</strong><span>RGB dos canais 1, 2 e 3</span></figcaption>
+                </figure>
+                <figure>
+                    <a href="../figs/satelite/melissa_ch13_noaa.jpg" target="_blank"><img src="../figs/satelite/melissa_ch13_noaa.jpg" alt="Canal 13 com paleta NOAA" loading="lazy"></a>
+                    <figcaption><strong>Single Band · ch13</strong><span>Infravermelho realçado com paleta NOAA</span></figcaption>
+                </figure>
+                <figure>
+                    <a href="../figs/satelite/melissa_airmass.jpg" target="_blank"><img src="../figs/satelite/melissa_airmass.jpg" alt="AirMass RGB" loading="lazy"></a>
+                    <figcaption><strong>AirMass RGB</strong><span>Canais 8, 10, 12 e 13 · faixas NASA SPoRT</span></figcaption>
+                </figure>
+                <figure>
+                    <a href="../figs/satelite/melissa_swd.jpg" target="_blank"><img src="../figs/satelite/melissa_swd.jpg" alt="Split Window Difference" loading="lazy"></a>
+                    <figcaption><strong>SWD</strong><span>Split Window Difference · canais 13 e 15</span></figcaption>
+                </figure>
+                <figure>
+                    <a href="../figs/satelite/melissa_cpd.jpg" target="_blank"><img src="../figs/satelite/melissa_cpd.jpg" alt="Cloud Phase Difference" loading="lazy"></a>
+                    <figcaption><strong>CPD</strong><span>Cloud Phase Difference · CH14 − CH11</span></figcaption>
+                </figure>
+                <figure>
+                    <a href="../figs/satelite/melissa_wvd.jpg" target="_blank"><img src="../figs/satelite/melissa_wvd.jpg" alt="Water Vapor - IR Difference" loading="lazy"></a>
+                    <figcaption><strong>WVD</strong><span>Diferença WV − IR · destaque de overshooting top</span></figcaption>
+                </figure>
+                <figure>
+                    <a href="../figs/satelite/melissa_sod.jpg" target="_blank"><img src="../figs/satelite/melissa_sod.jpg" alt="Split Ozone Difference" loading="lazy"></a>
+                    <figcaption><strong>SOD</strong><span>Split Ozone Difference · canais 12 e 13</span></figcaption>
+                </figure>
+                <figure>
+                    <a href="../figs/satelite/melissa_swvd.jpg" target="_blank"><img src="../figs/satelite/melissa_swvd.jpg" alt="Split Water Vapor Difference" loading="lazy"></a>
+                    <figcaption><strong>SWVD</strong><span>Split Water Vapor Difference · canais 8 e 10</span></figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- COMO USAR -->
+        <section class="section" id="como-usar">
+            <h2>Como usar</h2>
+            <p class="section-intro">Os scripts são interativos: perguntam satélite, produto e período no terminal.</p>
+            <div class="steps">
+                <div class="step">
+                    <h3>Clone e crie o ambiente</h3>
+                    <pre><code>git clone https://github.com/Victorrani/sat_goes.git
+cd sat_goes
+conda env create -f environment.yml</code></pre>
+                </div>
+                <div class="step">
+                    <h3>Baixe os dados</h3>
+                    <p>Escolha o satélite (goes16 ou goes19), o produto e o período.</p>
+                    <pre><code>python 1.get_sat.py</code></pre>
+                </div>
+                <div class="step">
+                    <h3>Plote as imagens</h3>
+                    <p>O script detecta os produtos disponíveis no caso baixado e gera as figuras.</p>
+                    <pre><code>python 2.plot_sat.py</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÓXIMOS PASSOS -->
+        <section class="section">
+            <h2>Próximos passos</h2>
+            <ul class="roadmap">
+                <li class="done">Canais individuais e 7 produtos para GOES-16 e GOES-19</li>
+                <li>Acumulado de chuva IMERG e MERGE, com GIFs animados</li>
+                <li>Full Disk GOES direto da AWS</li>
+                <li>Novos satélites e sensores</li>
+                <li>Integração com ERA5 e GFS</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Victor Antunes Ranieri</p>
+        <p>Cachoeira Paulista, SP</p>
+    </footer>
+
+</body>
+</html>
