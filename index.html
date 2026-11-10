@@ -31,74 +31,82 @@
             <p class="subtitle">Ferramentas abertas em Python para análise e visualização de dados meteorológicos</p>
         </div>
 
-        <div class="projects-grid">
-            <!-- SatView -->
+        <section class="home-section">
+            <h2 class="section-label">Projetos</h2>
+            <div class="projects-grid featured">
 
-            <div class="project-card">
-                <div class="project-image-wrapper">
-                    <img src="figs/index/MELISSA_GOES19_202510261500.png" alt="SatView - Processamento de dados de satélite" class="project-image is-active">
-                    <img src="figs/satelite/melissa_ch13_noaa.jpg" alt="SatView - Processamento de dados de satélite" class="project-image" loading="lazy">
-                    <img src="figs/satelite/melissa_airmass.jpg" alt="SatView - Processamento de dados de satélite" class="project-image" loading="lazy">
-                    <img src="figs/satelite/melissa_cpd.jpg" alt="SatView - Processamento de dados de satélite" class="project-image" loading="lazy">
-                    <img src="figs/satelite/melissa_sod.jpg" alt="SatView - Processamento de dados de satélite" class="project-image" loading="lazy">
-                    <img src="figs/satelite/melissa_swvd.jpg" alt="SatView - Processamento de dados de satélite" class="project-image" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <h3>SatView</h3>
-                    <p>Processamento de dados de satélite (GOES16|GOES19)</p>
-                    <a href="projetos/satelite.html" class="project-link">Ver detalhes</a>
-                </div>
+                <!-- SatView -->
+                <article class="project-card">
+                    <div class="project-image-wrapper">
+                        <img src="figs/index/MELISSA_GOES19_202510261500.png" alt="SatView - imagens dos satélites GOES" class="project-image is-active">
+                        <img src="figs/satelite/melissa_ch13_noaa.jpg" alt="SatView - imagens dos satélites GOES" class="project-image" loading="lazy">
+                        <img src="figs/satelite/melissa_airmass.jpg" alt="SatView - imagens dos satélites GOES" class="project-image" loading="lazy">
+                        <img src="figs/satelite/melissa_cpd.jpg" alt="SatView - imagens dos satélites GOES" class="project-image" loading="lazy">
+                        <img src="figs/satelite/melissa_sod.jpg" alt="SatView - imagens dos satélites GOES" class="project-image" loading="lazy">
+                        <img src="figs/satelite/melissa_swvd.jpg" alt="SatView - imagens dos satélites GOES" class="project-image" loading="lazy">
+                    </div>
+                    <div class="project-content">
+                        <h3>SatView</h3>
+                        <p>Download e plotagem de imagens dos satélites GOES-16 e GOES-19 sobre a América do Sul.</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>GOES</span>
+                            <span>Satélite</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="projetos/satelite.html" class="project-link">Ver detalhes</a>
+                            <a href="https://github.com/Victorrani/sat_goes" target="_blank" rel="noopener" class="project-repo">GitHub ↗</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Tropical -->
+                <article class="project-card">
+                    <div class="project-image-wrapper">
+                        <img src="figs/tropical/balanco_2024-01.jpg" alt="Tropical - balanços de energia com ERA5" class="project-image is-active">
+                        <img src="figs/tropical/balanco_amazonia_oeste_out2021_out2023.jpg" alt="Tropical - balanços de energia com ERA5" class="project-image" loading="lazy">
+                        <img src="figs/tropical/boxes.jpg" alt="Tropical - balanços de energia com ERA5" class="project-image" loading="lazy">
+                        <img src="figs/tropical/anomalia_chuva_amazonia_oeste.jpg" alt="Tropical - balanços de energia com ERA5" class="project-image" loading="lazy">
+                    </div>
+                    <div class="project-content">
+                        <h3>Tropical</h3>
+                        <p>Balanços de energia em domínios escolhidos pelo usuário com a reanálise ERA5.</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>ERA5</span>
+                            <span>Clima</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="projetos/tropical.html" class="project-link">Ver detalhes</a>
+                            <a href="https://github.com/Victorrani/tropical" target="_blank" rel="noopener" class="project-repo">GitHub ↗</a>
+                        </div>
+                    </div>
+                </article>
+
             </div>
-            <!-- MasterTrack -->
-            <div class="project-card soon">
-                <div class="project-image-wrapper">
-                    <span class="project-badge">Em breve</span>
-                    <img src="figs/index/track_vort850_MONAN_20260721_093522_plot.png" alt="MasterTrack - Trackfile generator" class="project-image is-active">
-                </div>
-                <div class="project-content">
+        </section>
+
+        <section class="home-section">
+            <h2 class="section-label">Em desenvolvimento</h2>
+            <div class="upcoming-grid">
+                <div class="upcoming-card">
                     <h3>MasterTrack</h3>
-                    <p>Gerador de trackfiles de sistemas meteorológicos</p>
+                    <p>Geração de trackfiles de sistemas meteorológicos.</p>
                 </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-image-wrapper">
-                    <img src="figs/tropical/balanco_2024-01.jpg" alt="Tropical - Balanços de energia com ERA5" class="project-image is-active">
-                    <img src="figs/tropical/balanco_amazonia_oeste_out2021_out2023.jpg" alt="Tropical - Balanços de energia com ERA5" class="project-image" loading="lazy">
-                    <img src="figs/tropical/boxes.jpg" alt="Tropical - Balanços de energia com ERA5" class="project-image" loading="lazy">
-                    <img src="figs/tropical/anomalia_chuva_amazonia_oeste.jpg" alt="Tropical - Balanços de energia com ERA5" class="project-image" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <h3>Tropical</h3>
-                    <p>Balanços de energia em domínios escolhidos (ERA5)</p>
-                    <a href="projetos/tropical.html" class="project-link">Ver detalhes</a>
-                </div>
-            </div>
-
-            <div class="project-card soon">
-                <div class="project-image-wrapper">
-                    <span class="project-badge">Em breve</span>
-                </div>
-                <div class="project-content">
+                <div class="upcoming-card">
                     <h3>Forecast</h3>
-                    <p>Mapas sinóticos</p>
+                    <p>Mapas sinóticos operacionais.</p>
                 </div>
-            </div>
-
-            <div class="project-card soon">
-                <div class="project-image-wrapper">
-                    <span class="project-badge">Em breve</span>
-                </div>
-                <div class="project-content">
+                <div class="upcoming-card">
                     <h3>MODE-BR</h3>
-                    <p>Avaliação de previsões orientada a objetos</p>
+                    <p>Avaliação de previsões orientada a objetos.</p>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Meteo Projects</p>
+        <p>&copy; 2026 Meteo Projects · <a href="mailto:victor.ranieri@inpe.br">victor.ranieri@inpe.br</a></p>
         <div class="visitor-badge">
             <span>Visitas:</span>
             <img src="https://visitor-badge.laobi.icu/badge?page_id=victorrani.github.io" alt="contador de visitas">

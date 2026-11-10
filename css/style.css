@@ -755,15 +755,6 @@ code {
     }
 }
 
-/* Cards de projetos ainda não publicados */
-.project-card.soon {
-    opacity: 0.7;
-}
-
-.project-card.soon:hover {
-    opacity: 1;
-}
-
 footer .visitor-badge img {
     border-radius: 20px;
 }
@@ -775,4 +766,101 @@ footer .visitor-badge img {
 
 .feature h3 a:hover {
     color: #60a5fa;
+}
+
+.section-intro a,
+footer a {
+    color: #60a5fa;
+    text-decoration: none;
+}
+
+.section-intro a:hover,
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* ========================================
+   HOME - SEÇÕES
+   ======================================== */
+
+.home-section {
+    margin-bottom: 3.5rem;
+}
+
+.section-label {
+    color: #8888a0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.home-section .projects-grid {
+    margin: 0;
+}
+
+/* Projetos publicados: cards maiores */
+.projects-grid.featured {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+}
+
+.projects-grid.featured .project-image-wrapper {
+    height: 230px;
+}
+
+/* Rodapé do card: links sempre alinhados embaixo */
+.project-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.project-repo {
+    color: #8888a0;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.project-repo:hover {
+    color: #ffffff;
+}
+
+/* Em desenvolvimento: cartões compactos */
+.upcoming-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 1rem;
+}
+
+.upcoming-card {
+    background: rgba(20, 20, 35, 0.4);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+}
+
+.upcoming-card h3 {
+    color: #d0d0e0;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.upcoming-card p {
+    color: #8888a0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .projects-grid.featured .project-image-wrapper {
+        height: 180px;
+    }
 }
