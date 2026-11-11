@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Previsão de chuva do fim de semana para o Sul e o Sudeste do Brasil e avaliação da semana anterior">
+    <title>Forecast · Meteo Projects</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://victorrani.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="nav-container">
+                <a href="index.html" class="logo">Meteo Projects</a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="forecast.html">Forecast</a>
+                    <a href="projetos/satelite.html">SatView</a>
+                    <a href="projetos/tropical.html">Tropical</a>
+                    <a href="sobre.html">Sobre</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="project-hero">
+            <span class="eyebrow">Chuva no Sul e Sudeste</span>
+            <h1>Forecast</h1>
+            <p class="lead">Previsão do fim de semana e avaliação da semana anterior.</p>
+        </section>
+
+        <div class="fc-abas" role="tablist">
+            <button class="fc-aba" id="aba-previsao" data-aba="previsao" role="tab">Previsão</button>
+            <button class="fc-aba" id="aba-avaliacao" data-aba="avaliacao" role="tab">Avaliação</button>
+        </div>
+
+        <!-- ================= PREVISÃO ================= -->
+        <div class="fc-painel" id="painel-previsao">
+            <p class="fc-sub" id="pv-periodo"></p>
+
+            <section class="fc-resumo" id="pv-resumo"></section>
+
+            <section class="section">
+                <h2>Total do fim de semana</h2>
+                <figure class="fc-mapa">
+                    <a id="pv-total-link" target="_blank" rel="noopener"><img id="pv-total" alt="Chuva prevista no fim de semana"></a>
+                </figure>
+            </section>
+
+            <section class="section">
+                <h2>De 6 em 6 horas</h2>
+                <div class="fc-dias" id="pv-dias"></div>
+                <div class="fc-controles" id="pv-controles"></div>
+                <figure class="fc-mapa">
+                    <a id="pv-img-link" target="_blank" rel="noopener"><img id="pv-img" alt=""></a>
+                </figure>
+            </section>
+        </div>
+
+        <!-- ================= AVALIAÇÃO ================= -->
+        <div class="fc-painel" id="painel-avaliacao" hidden>
+            <p class="fc-sub" id="av-periodo"></p>
+
+            <section class="fc-resumo" id="av-resumo"></section>
+
+            <!-- ---------- 1. TOTAL DO FIM DE SEMANA ---------- -->
+            <section class="section fc-parte">
+                <h2>Total do fim de semana</h2>
+                <div class="fc-lado">
+                    <figure class="fc-painel-img">
+                        <figcaption>Previsão (MONAN)</figcaption>
+                        <div class="fc-mapa"><a id="av-tp-link" target="_blank" rel="noopener"><img id="av-tp" alt="Total previsto"></a></div>
+                    </figure>
+                    <figure class="fc-painel-img">
+                        <figcaption>Observado (MERGE)</figcaption>
+                        <div class="fc-mapa"><a id="av-to-link" target="_blank" rel="noopener"><img id="av-to" alt="Total observado"></a></div>
+                    </figure>
+                </div>
+
+                <div id="av-estat-total" hidden>
+                    <div class="fc-cards fc-espaco" id="av-cards"></div>
+
+                    <div class="fc-lado">
+                        <figure class="fc-painel-img">
+                            <figcaption>Diferença (previsão − observado)</figcaption>
+                            <div class="fc-mapa"><a id="av-dif-link" target="_blank" rel="noopener"><img id="av-dif" alt="Diferença previsão menos observado"></a></div>
+                        </figure>
+                        <figure class="fc-painel-img">
+                            <figcaption>Diagrama de desempenho (melhor = canto superior direito)</figcaption>
+                            <div class="fc-mapa"><a id="av-desemp72-link" target="_blank" rel="noopener"><img id="av-desemp72" alt="Diagrama de desempenho do total"></a></div>
+                        </figure>
+                    </div>
+
+                    <div class="fc-tabelas fc-uma">
+                        <div>
+                            <h3>Tabela de contingência</h3>
+                            <div class="table-wrap"><table class="data-table" id="av-ct72"></table></div>
+                        </div>
+                    </div>
+
+                    <div class="fc-lado fc-mode" id="av-mode-bloco" hidden>
+                        <figure class="fc-painel-img">
+                            <figcaption>Objetos do MODE (≥ <span id="av-mode-lim"></span> mm)</figcaption>
+                            <div class="fc-mapa"><a id="av-mode-link" target="_blank" rel="noopener"><img id="av-mode" alt="Objetos do MODE"></a></div>
+                        </figure>
+                        <div>
+                            <h3 class="fc-h3">Pares de objetos (previsão × observado)</h3>
+                            <div class="table-wrap"><table class="data-table" id="av-pares"></table></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ---------- 2. DE 6 EM 6 HORAS ---------- -->
+            <section class="section fc-parte">
+                <h2>De 6 em 6 horas</h2>
+                <div class="fc-dias" id="av-dias"></div>
+                <div class="fc-controles" id="av-controles">
+                    <label class="fc-produto">Satélite:
+                        <select id="av-produto"></select>
+                    </label>
+                </div>
+                <div class="fc-tres">
+                    <figure class="fc-painel-img">
+                        <figcaption>Previsão (MONAN)</figcaption>
+                        <div class="fc-mapa" id="av-prev"></div>
+                    </figure>
+                    <figure class="fc-painel-img">
+                        <figcaption>Observado (MERGE)</figcaption>
+                        <div class="fc-mapa" id="av-obs"></div>
+                    </figure>
+                    <figure class="fc-painel-img">
+                        <figcaption>Satélite GOES-19</figcaption>
+                        <div class="fc-mapa" id="av-sat"></div>
+                    </figure>
+                </div>
+
+                <div id="av-estat-6h" hidden>
+                    <figure class="fc-painel-img fc-janelas-fig">
+                        <figcaption>Estatísticas de cada janela ao longo do fim de semana</figcaption>
+                        <div class="fc-mapa"><a id="av-jan-link" target="_blank" rel="noopener"><img id="av-jan" alt="Estatísticas por janela de 6 horas"></a></div>
+                    </figure>
+                    <figure class="fc-painel-img fc-desemp">
+                        <figcaption>Diagrama de desempenho (12 janelas juntas)</figcaption>
+                        <div class="fc-mapa"><a id="av-desemp6-link" target="_blank" rel="noopener"><img id="av-desemp6" alt="Diagrama de desempenho de 6 horas"></a></div>
+                    </figure>
+                </div>
+            </section>
+
+            <p class="fc-nota" id="av-legenda" hidden>
+                <strong>CSI</strong>: acerto da área de chuva (1 = perfeito, 0 = nenhum) ·
+                <strong>FBIAS</strong>: área prevista ÷ área observada (1 = ideal, &gt; 1 = previu chuva em área maior) ·
+                <strong>GSS</strong>: acerto descontado o acaso (0 = sem habilidade) ·
+                <strong>MODE</strong>: deslocamento = posição do previsto em relação ao observado; área &gt; 1 = previsto maior; interesse de 0 a 1 (quanto maior, mais parecidos) ·
+                <span class="fc-pouco">*</span> poucos pontos com chuva observada, valor pouco confiável.
+            </p>
+        </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Meteo Projects · <a href="mailto:victor.ranieri@inpe.br">victor.ranieri@inpe.br</a></p>
+    </footer>
+
+    <script src="forecast/previsao/meta.js"></script>
+    <script src="forecast/avaliacao/meta.js"></script>
+    <script>
+    (function () {
+        var DIAS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+        var DIAS_LONGOS = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+        var PERIODOS = { 21: "Madrugada", 3: "Manhã", 9: "Tarde", 15: "Noite" };
+
+        // ---------- utilidades de data (horário de Brasília, lido com getUTC*) ----------
+        function brt(d) { return new Date(d.getTime() - 3 * 3600e3); }
+        function dm(d) { return String(d.getUTCDate()).padStart(2, "0") + "/" + String(d.getUTCMonth() + 1).padStart(2, "0"); }
+        function hh(d) { return String(d.getUTCHours()).padStart(2, "0") + "h"; }
+        function curto(d) { return DIAS[d.getUTCDay()] + " " + dm(d) + " " + hh(d); }
+        function numSemana(s) { return s.split("-S")[1] + "/" + s.split("-S")[0]; }
+
+        function periodoTexto(M) {
+            var init = new Date(M.rodada);
+            return "Semana " + numSemana(M.semana) + " · " + curto(brt(init)) + " a " +
+                curto(brt(new Date(init.getTime() + M.alcance * 3600e3))) + " (Brasília) · MONAN 5 km";
+        }
+
+        // Janelas de 6 h com rótulos; o dia é o da janela + 3 h (madrugada 21h-03h vai para o dia seguinte)
+        function janelas(M) {
+            var init = new Date(M.rodada);
+            return M.janelas.map(function (j) {
+                var fim = brt(new Date(init.getTime() + j.lead * 3600e3));
+                var ini = new Date(fim.getTime() - M.intervalo * 3600e3);
+                var dia = new Date(ini.getTime() + 3 * 3600e3);
+                return {
+                    dados: j, ini: ini, fim: fim, periodo: PERIODOS[ini.getUTCHours()] || "",
+                    diaChave: dm(dia), diaNome: DIAS_LONGOS[dia.getUTCDay()] + " " + dm(dia)
+                };
+            });
+        }
+
+        function resumo(el, M) {
+            el.innerHTML = "";
+            (M.texto || []).forEach(function (t) { var p = document.createElement("p"); p.textContent = t; el.appendChild(p); });
+            if (M.destaques && M.destaques.length) {
+                var ul = document.createElement("ul");
+                M.destaques.forEach(function (t) { var li = document.createElement("li"); li.textContent = t; ul.appendChild(li); });
+                el.appendChild(ul);
+            }
+            el.hidden = !el.childNodes.length;
+        }
+
+        function imagem(cont, src, alt, aviso) {
+            cont.innerHTML = "";
+            if (src) {
+                var a = document.createElement("a"); a.href = src; a.target = "_blank"; a.rel = "noopener";
+                var im = document.createElement("img"); im.src = src; im.alt = alt;
+                a.appendChild(im); cont.appendChild(a);
+            } else {
+                var d = document.createElement("div"); d.className = "fc-sem-dado";
+                d.textContent = aviso || "Sem dado para este horário"; cont.appendChild(d);
+            }
+        }
+
+        // Seletor de janelas (botões por dia + ◀ Animar ▶). onMostrar(i, janela) desenha a janela.
+        function seletor(contDias, contControles, js, onMostrar) {
+            var botoes = [], grupos = {}, atual = 0, timer = null;
+            js.forEach(function (j, i) {
+                if (!grupos[j.diaChave]) {
+                    var g = document.createElement("div"); g.className = "fc-dia";
+                    g.innerHTML = '<span class="fc-dia-nome"></span><div class="fc-dia-botoes"></div>';
+                    g.firstChild.textContent = j.diaNome;
+                    contDias.appendChild(g); grupos[j.diaChave] = g.lastChild;
+                }
+                var b = document.createElement("button"); b.className = "fc-janela";
+                b.innerHTML = "<strong>" + j.periodo + "</strong><span>" + hh(j.ini) + "–" + hh(j.fim) + "</span>";
+                b.addEventListener("click", function () { parar(); mostrar(i); });
+                grupos[j.diaChave].appendChild(b); botoes.push(b);
+            });
+
+            var prev = document.createElement("button"), play = document.createElement("button"),
+                next = document.createElement("button"), rot = document.createElement("span");
+            prev.className = next.className = "fc-btn"; play.className = "fc-btn fc-play"; rot.className = "fc-atual";
+            prev.textContent = "◀"; next.textContent = "▶"; play.textContent = "▶ Animar";
+            prev.setAttribute("aria-label", "Anterior"); next.setAttribute("aria-label", "Próximo");
+            [prev, play, next, rot].forEach(function (e) { contControles.appendChild(e); });
+
+            function mostrar(i) {
+                atual = (i + js.length) % js.length;
+                var j = js[atual];
+                rot.textContent = j.diaNome + " · " + j.periodo + " (" + hh(j.ini) + "–" + hh(j.fim) + ")";
+                botoes.forEach(function (b, k) { b.classList.toggle("ativo", k === atual); });
+                onMostrar(atual, j);
+            }
+            function parar() { clearInterval(timer); timer = null; play.textContent = "▶ Animar"; }
+            prev.addEventListener("click", function () { parar(); mostrar(atual - 1); });
+            next.addEventListener("click", function () { parar(); mostrar(atual + 1); });
+            play.addEventListener("click", function () {
+                if (timer) { parar(); return; }
+                play.textContent = "❚❚ Pausar";
+                timer = setInterval(function () { mostrar(atual + 1); }, 1200);
+            });
+            mostrar(0);
+            return {
+                anterior: function () { parar(); mostrar(atual - 1); },
+                proximo: function () { parar(); mostrar(atual + 1); },
+                redesenhar: function () { mostrar(atual); }
+            };
+        }
+
+        var seletores = {};
+
+        // ---------- PREVISÃO ----------
+        var P = window.PREVISAO;
+        if (P) {
+            var BP = "forecast/previsao/";
+            document.getElementById("aba-previsao").textContent = "Previsão · semana " + numSemana(P.semana);
+            document.getElementById("pv-periodo").textContent = periodoTexto(P);
+            resumo(document.getElementById("pv-resumo"), P);
+            document.getElementById("pv-total").src = BP + P.total;
+            document.getElementById("pv-total-link").href = BP + P.total;
+            var jp = janelas(P);
+            jp.forEach(function (j) { if (j.dados.img) { var im = new Image(); im.src = BP + j.dados.img; } });
+            seletores.previsao = seletor(document.getElementById("pv-dias"), document.getElementById("pv-controles"), jp,
+                function (i, j) {
+                    var src = j.dados.img ? BP + j.dados.img : null;
+                    var img = document.getElementById("pv-img"), link = document.getElementById("pv-img-link");
+                    img.src = src || ""; link.href = src || "#";
+                    img.alt = "Chuva prevista em 6 h, " + curto(j.ini) + " a " + curto(j.fim);
+                });
+        }
+
+        // ---------- AVALIAÇÃO ----------
+        var A = window.AVALIACAO;
+        if (A) {
+            var BA = "forecast/avaliacao/";
+            document.getElementById("aba-avaliacao").textContent = "Avaliação · semana " + numSemana(A.semana);
+            document.getElementById("av-periodo").textContent = periodoTexto(A);
+            resumo(document.getElementById("av-resumo"), A);
+            [["av-tp", A.total.prev], ["av-to", A.total.obs]].forEach(function (p) {
+                document.getElementById(p[0]).src = BA + p[1]; document.getElementById(p[0] + "-link").href = BA + p[1];
+            });
+            var sel = document.getElementById("av-produto");
+            A.produtos.forEach(function (p) {
+                var o = document.createElement("option"); o.value = p.id;
+                o.textContent = p.nome + (p.diurno ? " · só de dia" : ""); sel.appendChild(o);
+            });
+            var ja = janelas(A);
+            seletores.avaliacao = seletor(document.getElementById("av-dias"), document.getElementById("av-controles"), ja,
+                function (i, j) {
+                    var d = j.dados, prod = A.produtos.filter(function (p) { return p.id === sel.value; })[0];
+                    imagem(document.getElementById("av-prev"), d.prev && BA + d.prev, "Previsão");
+                    imagem(document.getElementById("av-obs"), d.obs && BA + d.obs, "Observado");
+                    imagem(document.getElementById("av-sat"), d.sat[prod.id] && BA + d.sat[prod.id], prod.nome,
+                        prod.diurno && !d.sat[prod.id] ? "Produto diurno: sem imagem à noite" : null);
+                });
+            sel.addEventListener("change", function () { seletores.avaliacao.redesenhar(); });
+
+            // Estatísticas
+            var E = A.estatisticas;
+            if (E) {
+                ["av-estat-total", "av-estat-6h", "av-legenda"].forEach(function (id) { document.getElementById(id).hidden = false; });
+                function f(v, d) { return v === null || v === undefined ? "–" : v.toFixed(d); }
+                function sinal(v) { return (v > 0 ? "+" : "") + v.toFixed(1); }
+                var fonte = E.fonte_obs || "MERGE";
+                document.querySelectorAll("#painel-avaliacao figcaption").forEach(function (fc) {
+                    fc.innerHTML = fc.innerHTML.replace("MERGE", fonte);
+                });
+                var cards = [
+                    ["BIAS do total", sinal(E.total.bias) + " mm", E.total.bias > 0 ? "previu mais chuva que o observado" : "previu menos chuva que o observado"],
+                    ["RMSE do total", f(E.total.rmse, 1) + " mm", "erro típico em cada ponto"],
+                    ["Chuva média", f(E.total.media_prev, 0) + " × " + f(E.total.media_obs, 0) + " mm", "previsto × observado"]
+                ];
+
+                // MODE
+                var M = E.mode_total;
+                if (M) {
+                    var pares = M.pares || [];
+                    var dmed = pares.length ? pares.reduce(function (s, p) { return s + p.distancia_km; }, 0) / pares.length : 0;
+                    cards.push(pares.length ? ["MODE (≥ " + M.limiar + " mm)", pares.length + (pares.length > 1 ? " pares" : " par"),
+                                               "deslocamento médio de " + Math.round(dmed) + " km"]
+                                            : ["MODE (≥ " + M.limiar + " mm)", "sem par", "nenhum objeto previsto casou com o observado"]);
+                    document.getElementById("av-mode-bloco").hidden = false;
+                    document.getElementById("av-mode-lim").textContent = M.limiar;
+                    if (E.fig_mode) { document.getElementById("av-mode").src = BA + E.fig_mode; document.getElementById("av-mode-link").href = BA + E.fig_mode; }
+                    var tp = document.getElementById("av-pares");
+                    tp.innerHTML = "<thead><tr><th>Par</th><th class=num>Deslocamento</th><th class=num>Área prev./obs.</th>" +
+                                   "<th class=num>p90</th><th class=num>Interesse</th></tr></thead>";
+                    var tbp = document.createElement("tbody");
+                    pares.forEach(function (p, k) {
+                        var tr = document.createElement("tr");
+                        tr.innerHTML = "<td>" + (k + 1) + "</td><td class=num>" + Math.round(p.distancia_km) + " km a " + p.direcao +
+                            "</td><td class=num>" + f(p.razao_area, 1) + "×</td><td class=num>" + sinal(p.dif_p90) +
+                            " mm</td><td class=num>" + f(p.interesse, 2) + "</td>";
+                        tbp.appendChild(tr);
+                    });
+                    if (!pares.length) tbp.innerHTML = "<tr><td colspan=5>Nenhum par casado</td></tr>";
+                    tp.appendChild(tbp);
+                }
+                var cc = document.getElementById("av-cards");
+                cards.forEach(function (c) {
+                    var d = document.createElement("div"); d.className = "fc-card";
+                    d.innerHTML = '<span class="fc-card-rot"></span><strong></strong><span class="fc-card-sub"></span>';
+                    d.children[0].textContent = c[0]; d.children[1].textContent = c[1]; d.children[2].textContent = c[2];
+                    cc.appendChild(d);
+                });
+                [["av-dif", E.fig_dif], ["av-desemp72", E.fig_desempenho_total], ["av-desemp6", E.fig_desempenho_6h],
+                 ["av-jan", E.fig_janelas]].forEach(function (p) {
+                    if (!p[1]) return;
+                    document.getElementById(p[0]).src = BA + p[1]; document.getElementById(p[0] + "-link").href = BA + p[1];
+                });
+
+                function tabela(id, linhas, unidade) {
+                    var t = document.getElementById(id);
+                    t.innerHTML = "<thead><tr><th>Limiar</th><th class=num>CSI</th><th class=num>FBIAS</th>" +
+                                  "<th class=num>GSS</th><th class=num>Pontos obs.</th></tr></thead>";
+                    var tb = document.createElement("tbody");
+                    linhas.forEach(function (l) {
+                        var tr = document.createElement("tr");
+                        var marca = l.pouco_confiavel ? ' <span class="fc-pouco">*</span>' : "";
+                        tr.innerHTML = "<td>≥ " + l.limiar + " " + unidade + marca + "</td><td class=num>" + f(l.csi, 2) +
+                            "</td><td class=num>" + f(l.fbias, 2) + "</td><td class=num>" + f(l.gss, 2) +
+                            "</td><td class=num>" + l.eventos_obs.toLocaleString("pt-BR") + "</td>";
+                        tb.appendChild(tr);
+                    });
+                    t.appendChild(tb);
+                }
+                tabela("av-ct72", E.contingencia_total, "mm");
+
+            }
+
+        } else {
+            document.getElementById("aba-avaliacao").hidden = true;
+        }
+
+        // ---------- abas (lembradas no endereço: forecast.html#avaliacao) ----------
+        var abaAtual = "previsao";
+        function abrir(nome) {
+            if (!seletores[nome]) nome = "previsao";
+            abaAtual = nome;
+            ["previsao", "avaliacao"].forEach(function (n) {
+                document.getElementById("painel-" + n).hidden = n !== nome;
+                document.getElementById("aba-" + n).classList.toggle("ativo", n === nome);
+                document.getElementById("aba-" + n).setAttribute("aria-selected", n === nome);
+            });
+        }
+        document.querySelectorAll(".fc-aba").forEach(function (b) {
+            b.addEventListener("click", function () { abrir(b.dataset.aba); history.replaceState(null, "", "#" + b.dataset.aba); });
+        });
+        abrir(location.hash.replace("#", "") || "previsao");
+
+        document.addEventListener("keydown", function (e) {
+            if (e.target.tagName === "SELECT") return;
+            if (e.key === "ArrowLeft") seletores[abaAtual].anterior();
+            if (e.key === "ArrowRight") seletores[abaAtual].proximo();
+        });
+    })();
+    </script>
+
+</body>
+</html>

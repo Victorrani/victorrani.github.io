@@ -17,6 +17,7 @@
                 <a href="index.html" class="logo">Meteo Projects</a>
                 <div class="nav-links">
                     <a href="index.html">Home</a>
+                    <a href="forecast.html">Forecast</a>
                     <a href="projetos/satelite.html">SatView</a>
                     <a href="projetos/tropical.html">Tropical</a>
                     <a href="sobre.html">Sobre</a>
@@ -30,6 +31,21 @@
             <h1>Meteo Projects</h1>
             <p class="subtitle">Ferramentas abertas em Python para análise e visualização de dados meteorológicos</p>
         </div>
+
+        <section class="home-section">
+            <h2 class="section-label">Previsão do fim de semana</h2>
+            <a href="forecast.html" class="fc-destaque">
+                <div class="fc-destaque-img">
+                    <img src="forecast/previsao/total.webp" alt="Chuva acumulada prevista para o fim de semana">
+                </div>
+                <div class="fc-destaque-texto">
+                    <span class="eyebrow" id="fc-home-semana">Forecast</span>
+                    <h3>Chuva no Sul e Sudeste</h3>
+                    <p id="fc-home-periodo">Previsão de chuva de 6 em 6 horas e acumulado do fim de semana, publicada toda sexta-feira.</p>
+                    <span class="project-link">Ver previsão</span>
+                </div>
+            </a>
+        </section>
 
         <section class="home-section">
             <h2 class="section-label">Projetos</h2>
@@ -113,6 +129,21 @@
         </div>
     </footer>
 
+    <script src="forecast/previsao/meta.js"></script>
+    <script>
+        // Semana e período da previsão publicada no card de destaque
+        (function () {
+            var F = window.PREVISAO;
+            if (!F) return;
+            var D = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+            function brt(h) { return new Date(new Date(F.rodada).getTime() + (h - 3) * 3600e3); }
+            function txt(d) { return D[d.getUTCDay()] + " " + String(d.getUTCDate()).padStart(2, "0") + "/" +
+                                     String(d.getUTCMonth() + 1).padStart(2, "0") + " " + String(d.getUTCHours()).padStart(2, "0") + "h"; }
+            document.getElementById("fc-home-semana").textContent = "Forecast · semana " + F.semana.split("-S")[1] + "/" + F.semana.split("-S")[0];
+            document.getElementById("fc-home-periodo").textContent = "Chuva prevista de " + txt(brt(0)) + " a " + txt(brt(F.alcance)) +
+                " (Brasília): mapas de 6 em 6 horas e o acumulado do fim de semana.";
+        })();
+    </script>
     <script>
         // Alterna as imagens de cada card (cards com uma imagem só ficam parados)
         (function () {

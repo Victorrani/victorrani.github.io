@@ -864,3 +864,587 @@ footer a:hover {
         height: 180px;
     }
 }
+
+/* ========================================
+   FORECAST
+   ======================================== */
+
+.fc-resumo {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 1.5rem;
+    background: rgba(20, 20, 35, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 1.6rem 1.8rem;
+    margin-bottom: 3rem;
+}
+
+.fc-resumo-texto p {
+    color: #d0d0e0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.fc-resumo-texto ul {
+    list-style: none;
+    display: grid;
+    gap: 0.45rem;
+}
+
+.fc-resumo-texto li {
+    color: #b0b0c0;
+    font-size: 0.92rem;
+    padding-left: 1.2rem;
+    position: relative;
+}
+
+.fc-resumo-texto li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #60a5fa;
+}
+
+.fc-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.4);
+    border-radius: 20px;
+    padding: 0.15rem 0.7rem;
+    margin-bottom: 0.8rem;
+}
+
+.fc-ficha {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1rem;
+    align-content: start;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    padding-left: 1.5rem;
+    font-size: 0.88rem;
+}
+
+.fc-ficha dt {
+    color: #8888a0;
+}
+
+.fc-ficha dd {
+    color: #e0e0ea;
+}
+
+/* Mapas: cartão branco (as figuras têm fundo branco) */
+.fc-mapa {
+    max-width: 820px;
+    margin: 0 auto;
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    padding: 0.6rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.fc-mapa img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+.fc-viewer {
+    display: grid;
+    gap: 1rem;
+}
+
+.fc-controles {
+    max-width: 820px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.fc-dias {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 0.8rem;
+}
+
+.fc-dia {
+    background: rgba(20, 20, 35, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 0.7rem;
+}
+
+.fc-dia-nome {
+    display: block;
+    color: #8888a0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem 0.2rem;
+}
+
+.fc-dia-botoes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.35rem;
+}
+
+.fc-janela {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    color: #c0c0d0;
+    padding: 0.45rem 0.2rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    display: grid;
+    gap: 0.1rem;
+}
+
+.fc-janela strong {
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.fc-janela span {
+    font-size: 0.68rem;
+    white-space: nowrap;
+    color: #8888a0;
+}
+
+.fc-janela:hover {
+    border-color: rgba(96, 165, 250, 0.4);
+}
+
+.fc-janela.ativo {
+    background: rgba(96, 165, 250, 0.18);
+    border-color: #60a5fa;
+    color: #fff;
+}
+
+.fc-janela.ativo span {
+    color: #c0d8ff;
+}
+
+.fc-controles {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.fc-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e0e0ea;
+    border-radius: 8px;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.85rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.fc-btn:hover {
+    border-color: #60a5fa;
+}
+
+.fc-play {
+    background: rgba(96, 165, 250, 0.15);
+    border-color: rgba(96, 165, 250, 0.4);
+}
+
+.fc-atual {
+    color: #b0b0c0;
+    font-size: 0.88rem;
+    margin-left: 0.4rem;
+}
+
+@media (max-width: 768px) {
+    .fc-resumo {
+        grid-template-columns: 1fr;
+        padding: 1.2rem;
+    }
+
+    .fc-ficha {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 1rem 0 0;
+    }
+
+    .fc-atual {
+        flex-basis: 100%;
+        margin: 0.2rem 0 0;
+    }
+}
+
+/* Home: destaque da previsão da semana */
+.fc-destaque {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    background: rgba(20, 20, 35, 0.6);
+    border: 1px solid rgba(96, 165, 250, 0.25);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.fc-destaque:hover {
+    border-color: rgba(96, 165, 250, 0.6);
+    transform: translateY(-4px);
+}
+
+.fc-destaque-img {
+    background: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.fc-destaque-img img {
+    width: 100%;
+    display: block;
+}
+
+.fc-destaque-texto {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.fc-destaque-texto .eyebrow {
+    color: #60a5fa;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.fc-destaque-texto h3 {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.fc-destaque-texto p {
+    color: #9999b0;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .fc-destaque {
+        grid-template-columns: 1fr;
+    }
+
+    .fc-destaque-texto {
+        padding: 1.3rem;
+    }
+}
+
+/* Forecast: abas, painéis lado a lado e avisos */
+.fc-abas {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.fc-aba {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #b0b0c0;
+    border-radius: 30px;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.fc-aba:hover {
+    border-color: rgba(96, 165, 250, 0.5);
+}
+
+.fc-aba.ativo {
+    background: rgba(96, 165, 250, 0.18);
+    border-color: #60a5fa;
+    color: #fff;
+}
+
+.fc-sub {
+    text-align: center;
+    color: #8888a0;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.fc-resumo p + p {
+    margin-top: 0.6rem;
+}
+
+.fc-resumo {
+    display: block;
+    max-width: 820px;
+    margin: 0 auto 3rem;
+}
+
+.fc-resumo p {
+    color: #d0d0e0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.fc-resumo ul {
+    list-style: none;
+    display: grid;
+    gap: 0.45rem;
+    margin-top: 1rem;
+}
+
+.fc-resumo li {
+    color: #b0b0c0;
+    font-size: 0.92rem;
+    padding-left: 1.2rem;
+    position: relative;
+}
+
+.fc-resumo li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #60a5fa;
+}
+
+.fc-dias {
+    margin-bottom: 1rem;
+}
+
+.fc-controles {
+    margin-bottom: 1rem;
+}
+
+.fc-produto {
+    margin-left: auto;
+    color: #8888a0;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.fc-produto select {
+    background: #15151f;
+    color: #e0e0ea;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 0.4rem 0.6rem;
+    font-family: inherit;
+    font-size: 0.85rem;
+}
+
+.fc-lado,
+.fc-tres {
+    display: grid;
+    gap: 1rem;
+    align-items: start;
+}
+
+.fc-lado {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fc-tres {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.fc-painel-img {
+    margin: 0;
+}
+
+.fc-painel-img figcaption {
+    color: #b0b0c0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.fc-lado .fc-mapa,
+.fc-tres .fc-mapa {
+    max-width: none;
+    padding: 0.4rem;
+}
+
+.fc-sem-dado {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    color: #666680;
+    font-size: 0.9rem;
+    background: #f2f2f5;
+    border-radius: 6px;
+}
+
+.fc-nota {
+    color: #666680;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .fc-tres {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .fc-lado {
+        grid-template-columns: 1fr;
+    }
+
+    .fc-produto {
+        margin-left: 0;
+        flex-basis: 100%;
+    }
+}
+
+/* Forecast: estatísticas */
+.fc-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.fc-card {
+    background: rgba(20, 20, 35, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    display: grid;
+    gap: 0.25rem;
+}
+
+.fc-card-rot {
+    color: #8888a0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.fc-card strong {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.fc-card-sub {
+    color: #9999b0;
+    font-size: 0.82rem;
+}
+
+.fc-tabelas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.8rem;
+}
+
+.fc-tabelas h3,
+.fc-detalhes summary {
+    color: #d0d0e0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+
+.fc-detalhes {
+    margin-top: 1.5rem;
+}
+
+.fc-detalhes summary {
+    cursor: pointer;
+}
+
+.fc-pouco {
+    color: #fbbf24;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .fc-tabelas {
+        grid-template-columns: 1fr;
+    }
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.fc-tabelas.fc-uma {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 760px;
+}
+
+.fc-desemp {
+    max-width: 620px;
+    margin: 1.8rem auto 0;
+}
+
+.fc-janelas-fig {
+    margin-top: 1.5rem;
+}
+
+.fc-mode {
+    margin-top: 1.8rem;
+    align-items: center;
+}
+
+.fc-h3 {
+    color: #d0d0e0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+
+.fc-esq {
+    text-align: left;
+}
+
+.fc-janelas-fig .fc-mapa {
+    max-width: none;
+}
+
+.fc-parte + .fc-parte {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 2.5rem;
+}
+
+.fc-espaco {
+    margin-top: 1.5rem;
+}
