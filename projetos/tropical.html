@@ -31,7 +31,7 @@
     <main>
         <!-- APRESENTAÇÃO -->
         <section class="project-hero">
-            <span class="eyebrow">Meteorologia Tropical · IAG/USP</span>
+            <span class="eyebrow">Meteorologia Tropical · IAG/USP · em desenvolvimento</span>
             <h1>Tropical</h1>
             <p class="lead">
                 Balanços de energia no topo da atmosfera, na atmosfera e na
@@ -39,10 +39,7 @@
                 que você escolhe. Usa médias mensais do ERA5 e anomalias em
                 relação à normal 1991–2020.
             </p>
-            <div class="btn-row">
-                <a href="https://github.com/Victorrani/tropical" target="_blank" class="btn btn-primary">Ver no GitHub</a>
-                <a href="#como-usar" class="btn btn-ghost">Como usar</a>
-            </div>
+            <p class="fc-nota">Projeto em desenvolvimento: o código ainda não está disponível para uso.</p>
         </section>
 
         <figure class="hero-figure">
@@ -147,42 +144,6 @@
             </div>
         </section>
 
-        <!-- COMO USAR -->
-        <section class="section" id="como-usar">
-            <h2>Como usar</h2>
-            <p class="section-intro">
-                Requer uma conta no Copernicus CDS com a chave em <code>~/.cdsapirc</code>.
-                O passo a passo completo está no README do repositório.
-            </p>
-            <div class="steps">
-                <div class="step">
-                    <h3>Clone e crie o ambiente</h3>
-                    <pre><code>git clone https://github.com/Victorrani/tropical.git
-cd tropical
-conda env create -f env/environment.yml
-conda activate tropical-env</code></pre>
-                </div>
-                <div class="step">
-                    <h3>Defina os boxes</h3>
-                    <p>Em <code>scripts/analysis/namelist.txt</code>, uma linha por região.</p>
-                    <pre><code>exp_name=EXP1;name=sul;lat_max=-25;lat_min=-35;lon_max=-50;lon_min=-60;superficie=terra</code></pre>
-                </div>
-                <div class="step">
-                    <h3>Baixe os dados e gere a normal</h3>
-                    <pre><code>python scripts/download/get_data.py mascara
-python scripts/analysis/normal.py
-python scripts/download/get_data.py analise 2015 2025</code></pre>
-                </div>
-                <div class="step">
-                    <h3>Processe e plote</h3>
-                    <pre><code>python scripts/analysis/slice.py
-python scripts/analysis/time_serie_vars.py
-python scripts/analysis/climatologia.py
-python scripts/analysis/desv.py
-python scripts/plots/plot_desv.py</code></pre>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer>

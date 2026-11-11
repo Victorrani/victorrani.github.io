@@ -59,8 +59,8 @@
                     <p>Baixa os dados direto do FTP do CPTEC/INPE para qualquer período (AAAAMMDDHH), cruzando meses e anos.</p>
                 </div>
                 <div class="feature">
-                    <h3>16 canais + 7 produtos</h3>
-                    <p>Canais individuais do ABI (ch01–ch16), RGBs e diferenças de canais usadas na análise operacional.</p>
+                    <h3>16 canais + 10 produtos</h3>
+                    <p>Canais individuais do ABI (ch01–ch16), 5 RGBs e 5 diferenças de canais usadas na análise operacional.</p>
                 </div>
                 <div class="feature">
                     <h3>Plotagem pronta</h3>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="feature">
                     <h3>Customizável</h3>
-                    <p>Escolha domínio (extent), título e paleta de cores. Faixas e fórmulas seguem os guias oficiais (CIMSS, NASA SPoRT).</p>
+                    <p>Escolha domínio (extent), título, paleta de cores e, nos RGBs, a legenda das cores dentro do mapa. Faixas e fórmulas seguem os guias oficiais (CIMSS, NASA SPoRT).</p>
                 </div>
             </div>
         </section>
@@ -89,6 +89,18 @@
                 <figure>
                     <a href="../figs/satelite/melissa_airmass.jpg" target="_blank"><img src="../figs/satelite/melissa_airmass.jpg" alt="AirMass RGB" loading="lazy"></a>
                     <figcaption><strong>AirMass RGB</strong><span>Canais 8, 10, 12 e 13 · faixas NASA SPoRT</span></figcaption>
+                </figure>
+                <figure>
+                    <a href="../figs/satelite/melissa_simplewv.jpg" target="_blank"><img src="../figs/satelite/melissa_simplewv.jpg" alt="Simple Water Vapor RGB" loading="lazy"></a>
+                    <figcaption><strong>Simple Water Vapor RGB</strong><span>Canais 8, 10 e 13 · umidade em vários níveis</span></figcaption>
+                </figure>
+                <figure>
+                    <a href="../figs/satelite/melissa_daysnowfog.jpg" target="_blank"><img src="../figs/satelite/melissa_daysnowfog.jpg" alt="Day Snow-Fog RGB" loading="lazy"></a>
+                    <figcaption><strong>Day Snow-Fog RGB</strong><span>Canais 3, 5, 7 e 13 · nevoeiro, neve e nuvens de gelo (diurno)</span></figcaption>
+                </figure>
+                <figure>
+                    <a href="../figs/satelite/melissa_daylandcloudfire.jpg" target="_blank"><img src="../figs/satelite/melissa_daylandcloudfire.jpg" alt="Day Land Cloud/Fire RGB" loading="lazy"></a>
+                    <figcaption><strong>Day Land Cloud/Fire RGB</strong><span>Canais 2, 3 e 6 · superfície, nuvens e queimadas (diurno)</span></figcaption>
                 </figure>
                 <figure>
                     <a href="../figs/satelite/melissa_swd.jpg" target="_blank"><img src="../figs/satelite/melissa_swd.jpg" alt="Split Window Difference" loading="lazy"></a>
@@ -119,12 +131,6 @@
             <p class="section-intro">Os scripts são interativos: perguntam satélite, produto e período no terminal.</p>
             <div class="steps">
                 <div class="step">
-                    <h3>Clone e crie o ambiente</h3>
-                    <pre><code>git clone https://github.com/Victorrani/sat_goes.git
-cd sat_goes
-conda env create -f environment.yml</code></pre>
-                </div>
-                <div class="step">
                     <h3>Baixe os dados</h3>
                     <p>Escolha o satélite (goes16 ou goes19), o produto e o período.</p>
                     <pre><code>python 1.get_sat.py</code></pre>
@@ -141,7 +147,9 @@ conda env create -f environment.yml</code></pre>
         <section class="section">
             <h2>Próximos passos</h2>
             <ul class="roadmap">
-                <li class="done">Canais individuais e 7 produtos para GOES-16 e GOES-19</li>
+                <li class="done">Canais individuais e 10 produtos para GOES-16 e GOES-19</li>
+                <li class="done">Legenda das cores dentro do mapa nos RGBs (opcional)</li>
+                <li class="done">Imagens no mesmo formato dos mapas do MONAN, usadas na avaliação do Forecast</li>
                 <li>Acumulado de chuva IMERG e MERGE, com GIFs animados</li>
                 <li>Full Disk GOES direto da AWS</li>
                 <li>Novos satélites e sensores</li>
