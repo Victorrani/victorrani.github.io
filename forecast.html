@@ -97,10 +97,14 @@
                         </figure>
                     </div>
 
-                    <div class="fc-tabelas fc-uma">
+                    <div class="fc-tabelas">
                         <div>
                             <h3>Tabela de contingência</h3>
                             <div class="table-wrap"><table class="data-table" id="av-ct72"></table></div>
+                        </div>
+                        <div id="av-pct-bloco" hidden>
+                            <h3>Percentis do total</h3>
+                            <div class="table-wrap"><table class="data-table" id="av-pct"></table></div>
                         </div>
                     </div>
 
@@ -140,23 +144,13 @@
                         <div class="fc-mapa" id="av-sat"></div>
                     </figure>
                 </div>
-
-                <div id="av-estat-6h" hidden>
-                    <figure class="fc-painel-img fc-janelas-fig">
-                        <figcaption>Estatísticas de cada janela ao longo do fim de semana</figcaption>
-                        <div class="fc-mapa"><a id="av-jan-link" target="_blank" rel="noopener"><img id="av-jan" alt="Estatísticas por janela de 6 horas"></a></div>
-                    </figure>
-                    <figure class="fc-painel-img fc-desemp">
-                        <figcaption>Diagrama de desempenho (12 janelas juntas)</figcaption>
-                        <div class="fc-mapa"><a id="av-desemp6-link" target="_blank" rel="noopener"><img id="av-desemp6" alt="Diagrama de desempenho de 6 horas"></a></div>
-                    </figure>
-                </div>
             </section>
 
             <p class="fc-nota" id="av-legenda" hidden>
                 <strong>CSI</strong>: acerto da área de chuva (1 = perfeito, 0 = nenhum) ·
                 <strong>FBIAS</strong>: área prevista ÷ área observada (1 = ideal, &gt; 1 = previu chuva em área maior) ·
                 <strong>GSS</strong>: acerto descontado o acaso (0 = sem habilidade) ·
+                <strong>P90</strong>: 10% dos pontos tiveram mais chuva que esse valor (P50 = metade; P99 = 1%) ·
                 <strong>MODE</strong>: deslocamento = posição do previsto em relação ao observado; área &gt; 1 = previsto maior; interesse de 0 a 1 (quanto maior, mais parecidos) ·
                 <span class="fc-pouco">*</span> poucos pontos com chuva observada, valor pouco confiável.
             </p>
@@ -324,7 +318,7 @@
             // Estatísticas
             var E = A.estatisticas;
             if (E) {
-                ["av-estat-total", "av-estat-6h", "av-legenda"].forEach(function (id) { document.getElementById(id).hidden = false; });
+                ["av-estat-total", "av-legenda"].forEach(function (id) { document.getElementById(id).hidden = false; });
                 function f(v, d) { return v === null || v === undefined ? "–" : v.toFixed(d); }
                 function sinal(v) { return (v > 0 ? "+" : "") + v.toFixed(1); }
                 var fonte = E.fonte_obs || "MERGE";
@@ -332,18 +326,18 @@
                     fc.innerHTML = fc.innerHTML.replace("MERGE", fonte);
                 });
                 var cards = [
-                    ["BIAS do total", sinal(E.total.bias) + " mm", E.total.bias > 0 ? "previu mais chuva que o observado" : "previu menos chuva que o observado"],
-                    ["RMSE do total", f(E.total.rmse, 1) + " mm", "erro típico em cada ponto"],
-                    ["Chuva média", f(E.total.media_prev, 0) + " × " + f(E.total.media_obs, 0) + " mm", "previsto × observado"]
+                    ["Viés do total", sinal(E.total.bias) + " mm", E.total.bias > 0 ? "previu mais chuva que o observado" : "previu menos chuva que o observado"],
+                    ["RMSE do total", f(E.total.rmse, 1) + " mm", "erro típico em cada ponto"]
                 ];
 
                 // MODE
                 var M = E.mode_total;
                 if (M) {
                     var pares = M.pares || [];
-                    var dmed = pares.length ? pares.reduce(function (s, p) { return s + p.distancia_km; }, 0) / pares.length : 0;
-                    cards.push(pares.length ? ["MODE (≥ " + M.limiar + " mm)", pares.length + (pares.length > 1 ? " pares" : " par"),
-                                               "deslocamento médio de " + Math.round(dmed) + " km"]
+                    var p0 = pares[0];   // par principal (maior interesse; o avaliacao_fds.py ordena)
+                    cards.push(pares.length ? ["Interesse MODE (≥ " + M.limiar + " mm)", f(p0.interesse, 2),
+                                               (pares.length > 1 ? "par principal de " + pares.length + " · " : "1 par · ") +
+                                               "deslocamento de " + Math.round(p0.distancia_km) + " km"]
                                             : ["MODE (≥ " + M.limiar + " mm)", "sem par", "nenhum objeto previsto casou com o observado"]);
                     document.getElementById("av-mode-bloco").hidden = false;
                     document.getElementById("av-mode-lim").textContent = M.limiar;
@@ -369,8 +363,7 @@
                     d.children[0].textContent = c[0]; d.children[1].textContent = c[1]; d.children[2].textContent = c[2];
                     cc.appendChild(d);
                 });
-                [["av-dif", E.fig_dif], ["av-desemp72", E.fig_desempenho_total], ["av-desemp6", E.fig_desempenho_6h],
-                 ["av-jan", E.fig_janelas]].forEach(function (p) {
+                [["av-dif", E.fig_dif], ["av-desemp72", E.fig_desempenho_total]].forEach(function (p) {
                     if (!p[1]) return;
                     document.getElementById(p[0]).src = BA + p[1]; document.getElementById(p[0] + "-link").href = BA + p[1];
                 });
@@ -391,6 +384,22 @@
                     t.appendChild(tb);
                 }
                 tabela("av-ct72", E.contingencia_total, "mm");
+
+                // Percentis do total: P50/P75 = chuva fraca espalhada, P95/P99 = núcleos
+                if (E.total.percentis) {
+                    var tp = document.getElementById("av-pct");
+                    tp.innerHTML = "<thead><tr><th>Percentil</th><th class=num>Previsto</th><th class=num>Observado</th>" +
+                                   "<th class=num>Diferença</th></tr></thead>";
+                    var tbp = document.createElement("tbody");
+                    E.total.percentis.forEach(function (q) {
+                        var tr = document.createElement("tr");
+                        tr.innerHTML = "<td>P" + q.p + "</td><td class=num>" + f(q.prev, 1) + " mm</td><td class=num>" +
+                            f(q.obs, 1) + " mm</td><td class=num>" + sinal(q.prev - q.obs) + " mm</td>";
+                        tbp.appendChild(tr);
+                    });
+                    tp.appendChild(tbp);
+                    document.getElementById("av-pct-bloco").hidden = false;
+                }
 
             }
 

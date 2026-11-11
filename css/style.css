@@ -1406,20 +1406,6 @@ footer a:hover {
     display: none !important;
 }
 
-.fc-tabelas.fc-uma {
-    grid-template-columns: minmax(0, 1fr);
-    max-width: 760px;
-}
-
-.fc-desemp {
-    max-width: 620px;
-    margin: 1.8rem auto 0;
-}
-
-.fc-janelas-fig {
-    margin-top: 1.5rem;
-}
-
 .fc-mode {
     margin-top: 1.8rem;
     align-items: center;
@@ -1434,10 +1420,6 @@ footer a:hover {
 
 .fc-esq {
     text-align: left;
-}
-
-.fc-janelas-fig .fc-mapa {
-    max-width: none;
 }
 
 .fc-parte + .fc-parte {

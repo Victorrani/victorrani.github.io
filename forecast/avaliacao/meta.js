@@ -10,7 +10,34 @@ window.AVALIACAO = {
       "bias": -0.8043369848812325,
       "rmse": 17.359833957776605,
       "media_prev": 13.850817473326828,
-      "media_obs": 14.65515422821045
+      "media_obs": 14.65515422821045,
+      "percentis": [
+        {
+          "p": 50,
+          "prev": 7.575816738636366,
+          "obs": 9.774998664855957
+        },
+        {
+          "p": 75,
+          "prev": 17.301583966306286,
+          "obs": 21.364999771118164
+        },
+        {
+          "p": 90,
+          "prev": 36.644587521112705,
+          "obs": 35.334999084472656
+        },
+        {
+          "p": 95,
+          "prev": 52.55145135377982,
+          "obs": 45.67274837493894
+        },
+        {
+          "p": 99,
+          "prev": 87.68877457498606,
+          "obs": 70.01010208129885
+        }
+      ]
     },
     "janelas": [
       {
@@ -979,9 +1006,7 @@ window.AVALIACAO = {
     },
     "fig_dif": "dif_total.webp",
     "fig_mode": "mode_total.webp",
-    "fig_janelas": "janelas_6h.webp",
-    "fig_desempenho_total": "desempenho_total.webp",
-    "fig_desempenho_6h": "desempenho_6h.webp"
+    "fig_desempenho_total": "desempenho_total.webp"
   },
   "semana": "2026-S45",
   "rodada": "2026-11-06T00:00Z",
