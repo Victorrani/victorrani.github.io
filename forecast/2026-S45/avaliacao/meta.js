@@ -1004,221 +1004,191 @@ window.AVALIACAO = {
         "far": 0.95008
       }
     },
-    "fig_dif": "dif_total.webp",
-    "fig_mode": "mode_total.webp",
-    "fig_desempenho_total": "desempenho_total.webp"
+    "fig_dif": "avaliacao/dif_total.webp",
+    "fig_mode": "avaliacao/mode_total.webp",
+    "fig_desempenho_total": "avaliacao/desempenho_total.webp"
   },
   "semana": "2026-S45",
   "rodada": "2026-11-06T00:00Z",
   "intervalo": 6,
   "alcance": 72,
   "total": {
-    "prev": "prev_total.webp",
-    "obs": "obs_total.webp"
+    "prev": "previsao/total.webp",
+    "obs": "avaliacao/obs_total.webp"
   },
   "janelas": [
     {
       "lead": 6,
-      "prev": "prev_006.webp",
-      "obs": "obs_006.webp",
+      "prev": "previsao/chuva6h_006.webp",
+      "obs": "avaliacao/obs_006.webp",
       "sat": {
-        "ch13_noaa": "sat_ch13_noaa_006.webp",
-        "airmass": "sat_airmass_006.webp",
-        "simplewv": "sat_simplewv_006.webp",
-        "true_color": null,
-        "daylandcloudfire": null,
-        "swd": "sat_swd_006.webp",
-        "cpd": "sat_cpd_006.webp",
-        "wvd": "sat_wvd_006.webp",
-        "sod": "sat_sod_006.webp",
-        "swvd": "sat_swvd_006.webp"
+        "ch13_noaa": "avaliacao/sat_ch13_noaa_006.webp",
+        "airmass": "avaliacao/sat_airmass_006.webp",
+        "simplewv": "avaliacao/sat_simplewv_006.webp",
+        "swd": "avaliacao/sat_swd_006.webp",
+        "cpd": "avaliacao/sat_cpd_006.webp",
+        "wvd": "avaliacao/sat_wvd_006.webp",
+        "sod": "avaliacao/sat_sod_006.webp",
+        "swvd": "avaliacao/sat_swvd_006.webp"
       }
     },
     {
       "lead": 12,
-      "prev": "prev_012.webp",
-      "obs": "obs_012.webp",
+      "prev": "previsao/chuva6h_012.webp",
+      "obs": "avaliacao/obs_012.webp",
       "sat": {
-        "ch13_noaa": null,
-        "airmass": null,
-        "simplewv": null,
-        "true_color": "sat_true_color_012.webp",
-        "daylandcloudfire": "sat_daylandcloudfire_012.webp",
-        "swd": null,
-        "cpd": "sat_cpd_012.webp",
-        "wvd": null,
-        "sod": null,
-        "swvd": "sat_swvd_012.webp"
+        "true_color": "avaliacao/sat_true_color_012.webp",
+        "cpd": "avaliacao/sat_cpd_012.webp",
+        "swvd": "avaliacao/sat_swvd_012.webp"
       }
     },
     {
       "lead": 18,
-      "prev": "prev_018.webp",
-      "obs": "obs_018.webp",
+      "prev": "previsao/chuva6h_018.webp",
+      "obs": "avaliacao/obs_018.webp",
       "sat": {
-        "ch13_noaa": "sat_ch13_noaa_018.webp",
-        "airmass": "sat_airmass_018.webp",
-        "simplewv": "sat_simplewv_018.webp",
-        "true_color": "sat_true_color_018.webp",
-        "daylandcloudfire": "sat_daylandcloudfire_018.webp",
-        "swd": "sat_swd_018.webp",
-        "cpd": "sat_cpd_018.webp",
-        "wvd": "sat_wvd_018.webp",
-        "sod": "sat_sod_018.webp",
-        "swvd": "sat_swvd_018.webp"
+        "ch13_noaa": "avaliacao/sat_ch13_noaa_018.webp",
+        "airmass": "avaliacao/sat_airmass_018.webp",
+        "simplewv": "avaliacao/sat_simplewv_018.webp",
+        "true_color": "avaliacao/sat_true_color_018.webp",
+        "swd": "avaliacao/sat_swd_018.webp",
+        "cpd": "avaliacao/sat_cpd_018.webp",
+        "wvd": "avaliacao/sat_wvd_018.webp",
+        "sod": "avaliacao/sat_sod_018.webp",
+        "swvd": "avaliacao/sat_swvd_018.webp"
       }
     },
     {
       "lead": 24,
-      "prev": "prev_024.webp",
-      "obs": "obs_024.webp",
+      "prev": "previsao/chuva6h_024.webp",
+      "obs": "avaliacao/obs_024.webp",
       "sat": {
-        "ch13_noaa": "sat_ch13_noaa_024.webp",
-        "airmass": "sat_airmass_024.webp",
-        "simplewv": "sat_simplewv_024.webp",
-        "true_color": null,
-        "daylandcloudfire": null,
-        "swd": "sat_swd_024.webp",
-        "cpd": "sat_cpd_024.webp",
-        "wvd": "sat_wvd_024.webp",
-        "sod": "sat_sod_024.webp",
-        "swvd": "sat_swvd_024.webp"
+        "ch13_noaa": "avaliacao/sat_ch13_noaa_024.webp",
+        "airmass": "avaliacao/sat_airmass_024.webp",
+        "simplewv": "avaliacao/sat_simplewv_024.webp",
+        "swd": "avaliacao/sat_swd_024.webp",
+        "cpd": "avaliacao/sat_cpd_024.webp",
+        "wvd": "avaliacao/sat_wvd_024.webp",
+        "sod": "avaliacao/sat_sod_024.webp",
+        "swvd": "avaliacao/sat_swvd_024.webp"
       }
     },
     {
       "lead": 30,
-      "prev": "prev_030.webp",
-      "obs": "obs_030.webp",
+      "prev": "previsao/chuva6h_030.webp",
+      "obs": "avaliacao/obs_030.webp",
       "sat": {
-        "ch13_noaa": "sat_ch13_noaa_030.webp",
-        "airmass": "sat_airmass_030.webp",
-        "simplewv": "sat_simplewv_030.webp",
-        "true_color": null,
-        "daylandcloudfire": null,
-        "swd": "sat_swd_030.webp",
-        "cpd": "sat_cpd_030.webp",
-        "wvd": "sat_wvd_030.webp",
-        "sod": "sat_sod_030.webp",
-        "swvd": "sat_swvd_030.webp"
+        "ch13_noaa": "avaliacao/sat_ch13_noaa_030.webp",
+        "airmass": "avaliacao/sat_airmass_030.webp",
+        "simplewv": "avaliacao/sat_simplewv_030.webp",
+        "swd": "avaliacao/sat_swd_030.webp",
+        "cpd": "avaliacao/sat_cpd_030.webp",
+        "wvd": "avaliacao/sat_wvd_030.webp",
+        "sod": "avaliacao/sat_sod_030.webp",
+        "swvd": "avaliacao/sat_swvd_030.webp"
       }
     },
     {
       "lead": 36,
-      "prev": "prev_036.webp",
-      "obs": "obs_036.webp",
+      "prev": "previsao/chuva6h_036.webp",
+      "obs": "avaliacao/obs_036.webp",
       "sat": {
-        "ch13_noaa": "sat_ch13_noaa_036.webp",
-        "airmass": "sat_airmass_036.webp",
-        "simplewv": "sat_simplewv_036.webp",
-        "true_color": "sat_true_color_036.webp",
-        "daylandcloudfire": "sat_daylandcloudfire_036.webp",
-        "swd": "sat_swd_036.webp",
-        "cpd": "sat_cpd_036.webp",
-        "wvd": "sat_wvd_036.webp",
-        "sod": "sat_sod_036.webp",
-        "swvd": "sat_swvd_036.webp"
+        "ch13_noaa": "avaliacao/sat_ch13_noaa_036.webp",
+        "airmass": "avaliacao/sat_airmass_036.webp",
+        "simplewv": "avaliacao/sat_simplewv_036.webp",
+        "true_color": "avaliacao/sat_true_color_036.webp",
+        "swd": "avaliacao/sat_swd_036.webp",
+        "cpd": "avaliacao/sat_cpd_036.webp",
+        "wvd": "avaliacao/sat_wvd_036.webp",
+        "sod": "avaliacao/sat_sod_036.webp",
+        "swvd": "avaliacao/sat_swvd_036.webp"
       }
     },
     {
       "lead": 42,
-      "prev": "prev_042.webp",
-      "obs": "obs_042.webp",
+      "prev": "previsao/chuva6h_042.webp",
+      "obs": "avaliacao/obs_042.webp",
       "sat": {
-        "ch13_noaa": null,
-        "airmass": null,
-        "simplewv": null,
-        "true_color": "sat_true_color_042.webp",
-        "daylandcloudfire": "sat_daylandcloudfire_042.webp",
-        "swd": null,
-        "cpd": "sat_cpd_042.webp",
-        "wvd": null,
-        "sod": null,
-        "swvd": "sat_swvd_042.webp"
+        "true_color": "avaliacao/sat_true_color_042.webp",
+        "cpd": "avaliacao/sat_cpd_042.webp",
+        "swvd": "avaliacao/sat_swvd_042.webp"
       }
     },
     {
       "lead": 48,
-      "prev": "prev_048.webp",
-      "obs": "obs_048.webp",
+      "prev": "previsao/chuva6h_048.webp",
+      "obs": "avaliacao/obs_048.webp",
       "sat": {
-        "ch13_noaa": "sat_ch13_noaa_048.webp",
-        "airmass": "sat_airmass_048.webp",
-        "simplewv": "sat_simplewv_048.webp",
-        "true_color": null,
-        "daylandcloudfire": null,
-        "swd": "sat_swd_048.webp",
-        "cpd": "sat_cpd_048.webp",
-        "wvd": "sat_wvd_048.webp",
-        "sod": "sat_sod_048.webp",
-        "swvd": "sat_swvd_048.webp"
+        "ch13_noaa": "avaliacao/sat_ch13_noaa_048.webp",
+        "airmass": "avaliacao/sat_airmass_048.webp",
+        "simplewv": "avaliacao/sat_simplewv_048.webp",
+        "swd": "avaliacao/sat_swd_048.webp",
+        "cpd": "avaliacao/sat_cpd_048.webp",
+        "wvd": "avaliacao/sat_wvd_048.webp",
+        "sod": "avaliacao/sat_sod_048.webp",
+        "swvd": "avaliacao/sat_swvd_048.webp"
       }
     },
     {
       "lead": 54,
-      "prev": "prev_054.webp",
-      "obs": "obs_054.webp",
+      "prev": "previsao/chuva6h_054.webp",
+      "obs": "avaliacao/obs_054.webp",
       "sat": {
-        "ch13_noaa": "sat_ch13_noaa_054.webp",
-        "airmass": "sat_airmass_054.webp",
-        "simplewv": "sat_simplewv_054.webp",
-        "true_color": null,
-        "daylandcloudfire": null,
-        "swd": "sat_swd_054.webp",
-        "cpd": "sat_cpd_054.webp",
-        "wvd": "sat_wvd_054.webp",
-        "sod": "sat_sod_054.webp",
-        "swvd": "sat_swvd_054.webp"
+        "ch13_noaa": "avaliacao/sat_ch13_noaa_054.webp",
+        "airmass": "avaliacao/sat_airmass_054.webp",
+        "simplewv": "avaliacao/sat_simplewv_054.webp",
+        "swd": "avaliacao/sat_swd_054.webp",
+        "cpd": "avaliacao/sat_cpd_054.webp",
+        "wvd": "avaliacao/sat_wvd_054.webp",
+        "sod": "avaliacao/sat_sod_054.webp",
+        "swvd": "avaliacao/sat_swvd_054.webp"
       }
     },
     {
       "lead": 60,
-      "prev": "prev_060.webp",
-      "obs": "obs_060.webp",
+      "prev": "previsao/chuva6h_060.webp",
+      "obs": "avaliacao/obs_060.webp",
       "sat": {
-        "ch13_noaa": "sat_ch13_noaa_060.webp",
-        "airmass": "sat_airmass_060.webp",
-        "simplewv": "sat_simplewv_060.webp",
-        "true_color": "sat_true_color_060.webp",
-        "daylandcloudfire": "sat_daylandcloudfire_060.webp",
-        "swd": "sat_swd_060.webp",
-        "cpd": "sat_cpd_060.webp",
-        "wvd": "sat_wvd_060.webp",
-        "sod": "sat_sod_060.webp",
-        "swvd": "sat_swvd_060.webp"
+        "ch13_noaa": "avaliacao/sat_ch13_noaa_060.webp",
+        "airmass": "avaliacao/sat_airmass_060.webp",
+        "simplewv": "avaliacao/sat_simplewv_060.webp",
+        "true_color": "avaliacao/sat_true_color_060.webp",
+        "swd": "avaliacao/sat_swd_060.webp",
+        "cpd": "avaliacao/sat_cpd_060.webp",
+        "wvd": "avaliacao/sat_wvd_060.webp",
+        "sod": "avaliacao/sat_sod_060.webp",
+        "swvd": "avaliacao/sat_swvd_060.webp"
       }
     },
     {
       "lead": 66,
-      "prev": "prev_066.webp",
-      "obs": "obs_066.webp",
+      "prev": "previsao/chuva6h_066.webp",
+      "obs": "avaliacao/obs_066.webp",
       "sat": {
-        "ch13_noaa": "sat_ch13_noaa_066.webp",
-        "airmass": "sat_airmass_066.webp",
-        "simplewv": "sat_simplewv_066.webp",
-        "true_color": "sat_true_color_066.webp",
-        "daylandcloudfire": "sat_daylandcloudfire_066.webp",
-        "swd": "sat_swd_066.webp",
-        "cpd": "sat_cpd_066.webp",
-        "wvd": "sat_wvd_066.webp",
-        "sod": "sat_sod_066.webp",
-        "swvd": "sat_swvd_066.webp"
+        "ch13_noaa": "avaliacao/sat_ch13_noaa_066.webp",
+        "airmass": "avaliacao/sat_airmass_066.webp",
+        "simplewv": "avaliacao/sat_simplewv_066.webp",
+        "true_color": "avaliacao/sat_true_color_066.webp",
+        "swd": "avaliacao/sat_swd_066.webp",
+        "cpd": "avaliacao/sat_cpd_066.webp",
+        "wvd": "avaliacao/sat_wvd_066.webp",
+        "sod": "avaliacao/sat_sod_066.webp",
+        "swvd": "avaliacao/sat_swvd_066.webp"
       }
     },
     {
       "lead": 72,
-      "prev": "prev_072.webp",
-      "obs": "obs_072.webp",
+      "prev": "previsao/chuva6h_072.webp",
+      "obs": "avaliacao/obs_072.webp",
       "sat": {
-        "ch13_noaa": "sat_ch13_noaa_072.webp",
-        "airmass": "sat_airmass_072.webp",
-        "simplewv": "sat_simplewv_072.webp",
-        "true_color": null,
-        "daylandcloudfire": null,
-        "swd": "sat_swd_072.webp",
-        "cpd": "sat_cpd_072.webp",
-        "wvd": "sat_wvd_072.webp",
-        "sod": "sat_sod_072.webp",
-        "swvd": "sat_swvd_072.webp"
+        "ch13_noaa": "avaliacao/sat_ch13_noaa_072.webp",
+        "airmass": "avaliacao/sat_airmass_072.webp",
+        "simplewv": "avaliacao/sat_simplewv_072.webp",
+        "swd": "avaliacao/sat_swd_072.webp",
+        "cpd": "avaliacao/sat_cpd_072.webp",
+        "wvd": "avaliacao/sat_wvd_072.webp",
+        "sod": "avaliacao/sat_sod_072.webp",
+        "swvd": "avaliacao/sat_swvd_072.webp"
       }
     }
   ],
@@ -1241,11 +1211,6 @@ window.AVALIACAO = {
     {
       "id": "true_color",
       "nome": "Cor real (True Color)",
-      "diurno": true
-    },
-    {
-      "id": "daylandcloudfire",
-      "nome": "Day Land Cloud/Fire",
       "diurno": true
     },
     {

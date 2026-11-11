@@ -39,6 +39,10 @@
             <button class="fc-aba" id="aba-previsao" data-aba="previsao" role="tab">Previsão</button>
             <button class="fc-aba" id="aba-avaliacao" data-aba="avaliacao" role="tab">Avaliação</button>
         </div>
+        <div class="fc-semana">
+            <label for="sel-semana">Semana:</label>
+            <select id="sel-semana"></select>
+        </div>
 
         <!-- ================= PREVISÃO ================= -->
         <div class="fc-painel" id="painel-previsao">
@@ -126,7 +130,7 @@
                 <h2>De 6 em 6 horas</h2>
                 <div class="fc-dias" id="av-dias"></div>
                 <div class="fc-controles" id="av-controles">
-                    <label class="fc-produto">Satélite:
+                    <label class="fc-produto" id="av-produto-rot">Satélite:
                         <select id="av-produto"></select>
                     </label>
                 </div>
@@ -139,12 +143,14 @@
                         <figcaption>Observado (MERGE)</figcaption>
                         <div class="fc-mapa" id="av-obs"></div>
                     </figure>
-                    <figure class="fc-painel-img">
+                    <figure class="fc-painel-img" id="av-sat-fig">
                         <figcaption>Satélite GOES-19</figcaption>
                         <div class="fc-mapa" id="av-sat"></div>
                     </figure>
                 </div>
             </section>
+
+            <p class="fc-nota" id="av-sem-sat" hidden>As imagens de satélite ficam no site só nas semanas mais recentes.</p>
 
             <p class="fc-nota" id="av-legenda" hidden>
                 <strong>CSI</strong>: acerto da área de chuva (1 = perfeito, 0 = nenhum) ·
@@ -163,10 +169,11 @@
         <p>&copy; 2026 Meteo Projects · <a href="mailto:victor.ranieri@inpe.br">victor.ranieri@inpe.br</a></p>
     </footer>
 
-    <script src="forecast/previsao/meta.js"></script>
-    <script src="forecast/avaliacao/meta.js"></script>
+    <script src="forecast/semanas.js"></script>
     <script>
-    (function () {
+    // Monta a página com window.PREVISAO e window.AVALIACAO (meta.js da semana escolhida,
+    // carregados pelo script do fim da página)
+    function iniciar() {
         var DIAS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
         var DIAS_LONGOS = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
         var PERIODOS = { 21: "Madrugada", 3: "Manhã", 9: "Tarde", 15: "Noite" };
@@ -269,10 +276,31 @@
 
         var seletores = {};
 
+        // ---------- SEMANA ----------
+        (function () {
+            var sel = document.getElementById("sel-semana"), esc = window.FC_ESCOLHA || {};
+            var atual = document.createElement("option");
+            atual.value = ""; atual.textContent = "Atual"; sel.appendChild(atual);
+            (window.SEMANAS || []).forEach(function (s) {
+                var o = document.createElement("option"); o.value = s.semana;
+                var txt = "Semana " + numSemana(s.semana);
+                if (s.rodada) {   // sexta 00Z: sexta a domingo
+                    var r = new Date(s.rodada);
+                    txt += " · " + dm(r) + " a " + dm(new Date(r.getTime() + 48 * 3600e3));
+                }
+                if (!s.avaliacao) txt += " (avaliação ainda não saiu)";
+                o.textContent = txt; sel.appendChild(o);
+            });
+            sel.value = esc.semana || "";
+            sel.addEventListener("change", function () {
+                location.href = location.pathname + (sel.value ? "?semana=" + sel.value : "") + location.hash;
+            });
+        })();
+
         // ---------- PREVISÃO ----------
         var P = window.PREVISAO;
         if (P) {
-            var BP = "forecast/previsao/";
+            var BP = "forecast/" + P.semana + "/";
             document.getElementById("aba-previsao").textContent = "Previsão · semana " + numSemana(P.semana);
             document.getElementById("pv-periodo").textContent = periodoTexto(P);
             resumo(document.getElementById("pv-resumo"), P);
@@ -292,7 +320,7 @@
         // ---------- AVALIAÇÃO ----------
         var A = window.AVALIACAO;
         if (A) {
-            var BA = "forecast/avaliacao/";
+            var BA = "forecast/" + A.semana + "/";
             document.getElementById("aba-avaliacao").textContent = "Avaliação · semana " + numSemana(A.semana);
             document.getElementById("av-periodo").textContent = periodoTexto(A);
             resumo(document.getElementById("av-resumo"), A);
@@ -304,14 +332,21 @@
                 var o = document.createElement("option"); o.value = p.id;
                 o.textContent = p.nome + (p.diurno ? " · só de dia" : ""); sel.appendChild(o);
             });
+            if (!A.produtos.length) {   // semana antiga: o satélite já saiu do site
+                document.getElementById("av-sat-fig").hidden = true;
+                document.getElementById("av-produto-rot").hidden = true;
+                document.getElementById("av-sem-sat").hidden = false;
+                document.querySelector("#painel-avaliacao .fc-tres").classList.add("fc-dois");
+            }
             var ja = janelas(A);
             seletores.avaliacao = seletor(document.getElementById("av-dias"), document.getElementById("av-controles"), ja,
                 function (i, j) {
                     var d = j.dados, prod = A.produtos.filter(function (p) { return p.id === sel.value; })[0];
                     imagem(document.getElementById("av-prev"), d.prev && BA + d.prev, "Previsão");
                     imagem(document.getElementById("av-obs"), d.obs && BA + d.obs, "Observado");
-                    imagem(document.getElementById("av-sat"), d.sat[prod.id] && BA + d.sat[prod.id], prod.nome,
-                        prod.diurno && !d.sat[prod.id] ? "Produto diurno: sem imagem à noite" : null);
+                    if (prod)
+                        imagem(document.getElementById("av-sat"), d.sat[prod.id] && BA + d.sat[prod.id], prod.nome,
+                            prod.diurno && !d.sat[prod.id] ? "Produto diurno: sem imagem à noite" : null);
                 });
             sel.addEventListener("change", function () { seletores.avaliacao.redesenhar(); });
 
@@ -427,6 +462,35 @@
             if (e.target.tagName === "SELECT") return;
             if (e.key === "ArrowLeft") seletores[abaAtual].anterior();
             if (e.key === "ArrowRight") seletores[abaAtual].proximo();
+        });
+    }
+    </script>
+    <script>
+    // Escolha da semana: forecast.html?semana=2026-S45 mostra a previsão e a avaliação dessa
+    // semana; sem ?semana, a semana corrente (última previsão e última avaliação publicadas).
+    (function () {
+        var S = window.SEMANAS || [];
+        var pedida = new URLSearchParams(location.search).get("semana");
+        var item = pedida && S.filter(function (s) { return s.semana === pedida; })[0];
+        var semPrev, semAval;
+        if (item) {
+            semPrev = item.previsao ? item.semana : null;
+            semAval = item.avaliacao ? item.semana : null;
+        } else {
+            semPrev = (S.filter(function (s) { return s.previsao; })[0] || {}).semana;
+            semAval = (S.filter(function (s) { return s.avaliacao; })[0] || {}).semana;
+        }
+        window.FC_ESCOLHA = { semana: item ? item.semana : "", previsao: semPrev, avaliacao: semAval };
+        var arquivos = [];
+        if (semPrev) arquivos.push("forecast/" + semPrev + "/previsao/meta.js");
+        if (semAval) arquivos.push("forecast/" + semAval + "/avaliacao/meta.js");
+        var faltam = arquivos.length;
+        if (!faltam) { iniciar(); return; }
+        arquivos.forEach(function (src) {
+            var el = document.createElement("script");
+            el.src = src;
+            el.onload = el.onerror = function () { if (--faltam === 0) iniciar(); };
+            document.body.appendChild(el);
         });
     })();
     </script>

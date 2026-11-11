@@ -1187,6 +1187,31 @@ footer a:hover {
     color: #fff;
 }
 
+.fc-semana {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    color: #8888a0;
+    font-size: 0.85rem;
+}
+
+.fc-semana select {
+    background: #15151f;
+    color: #e0e0ea;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 0.4rem 0.6rem;
+    font-family: inherit;
+    font-size: 0.85rem;
+    max-width: 100%;
+}
+
+.fc-tres.fc-dois {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .fc-sub {
     text-align: center;
     color: #8888a0;
@@ -1429,4 +1454,10 @@ footer a:hover {
 
 .fc-espaco {
     margin-top: 1.5rem;
+}
+
+@media (max-width: 600px) {
+    .fc-tres.fc-dois {
+        grid-template-columns: 1fr;
+    }
 }
