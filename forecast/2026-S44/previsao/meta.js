@@ -55,11 +55,6 @@ window.PREVISAO = {
       "img": "previsao/chuva6h_072.webp"
     }
   ],
-  "texto": [
-    "Escreva aqui o resumo do fim de semana em uma ou duas frases."
-  ],
-  "destaques": [
-    "Primeiro destaque",
-    "Segundo destaque"
-  ]
+  "texto": [],
+  "destaques": []
 };

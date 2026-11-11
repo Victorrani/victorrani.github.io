@@ -1233,8 +1233,6 @@ window.AVALIACAO = {
       "diurno": false
     }
   ],
-  "texto": [
-    "Escreva aqui como foi a previsão: o que acertou e o que errou."
-  ],
+  "texto": [],
   "destaques": []
 };
