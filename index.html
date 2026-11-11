@@ -36,7 +36,7 @@
             <h2 class="section-label">Previsão do fim de semana</h2>
             <a href="forecast.html" class="fc-destaque">
                 <div class="fc-destaque-img">
-                    <img src="forecast/previsao/total.webp" alt="Chuva acumulada prevista para o fim de semana">
+                    <img id="fc-home-img" alt="Chuva acumulada prevista para o fim de semana">
                 </div>
                 <div class="fc-destaque-texto">
                     <span class="eyebrow" id="fc-home-semana">Forecast</span>
@@ -129,12 +129,22 @@
         </div>
     </footer>
 
-    <script src="forecast/previsao/meta.js"></script>
+    <script src="forecast/semanas.js"></script>
     <script>
-        // Semana e período da previsão publicada no card de destaque
+        // Card de destaque: a previsão mais recente (forecast/<semana>/previsao/, lista em semanas.js)
         (function () {
-            var F = window.PREVISAO;
+            var S = (window.SEMANAS || []).filter(function (s) { return s.previsao; })[0];
+            if (!S) return;
+            var base = "forecast/" + S.semana + "/";
+            var el = document.createElement("script");
+            el.src = base + "previsao/meta.js";
+            el.onload = function () { preencher(window.PREVISAO, base); };
+            document.body.appendChild(el);
+        })();
+
+        function preencher(F, base) {
             if (!F) return;
+            document.getElementById("fc-home-img").src = base + F.total;
             var D = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
             function brt(h) { return new Date(new Date(F.rodada).getTime() + (h - 3) * 3600e3); }
             function txt(d) { return D[d.getUTCDay()] + " " + String(d.getUTCDate()).padStart(2, "0") + "/" +
@@ -142,7 +152,7 @@
             document.getElementById("fc-home-semana").textContent = "Forecast · semana " + F.semana.split("-S")[1] + "/" + F.semana.split("-S")[0];
             document.getElementById("fc-home-periodo").textContent = "Chuva prevista de " + txt(brt(0)) + " a " + txt(brt(F.alcance)) +
                 " (Brasília): mapas de 6 em 6 horas e o acumulado do fim de semana.";
-        })();
+        }
     </script>
     <script>
         // Alterna as imagens de cada card (cards com uma imagem só ficam parados)
