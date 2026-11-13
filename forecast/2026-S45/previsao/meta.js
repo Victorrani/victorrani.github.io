@@ -1,4 +1,4 @@
-// Gerado pelo publicar_site.py: não edite aqui, edite o texto.md da semana
+// Gerado pelo 6.publicar_site.py: não edite aqui, edite o texto.md da semana
 window.PREVISAO = {
   "semana": "2026-S45",
   "rodada": "2026-11-06T00:00Z",

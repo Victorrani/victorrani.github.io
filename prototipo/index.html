@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeteoLab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f5f2; --superficie: #ffffff; --texto: #1c1c1a; --texto-2: #5f5f5a; --texto-3: #8d8d86;
+            --linha: #e3e3dd; --destaque: #2457c5;
+            --sombra: 0 1px 2px rgba(20, 20, 15, .06), 0 4px 16px rgba(20, 20, 15, .06);
+            --sombra-hover: 0 2px 4px rgba(20, 20, 15, .07), 0 12px 32px rgba(20, 20, 15, .10);
+            --raio: 10px; --largura: 1120px;
+            --e1: 4px; --e2: 8px; --e3: 12px; --e4: 16px; --e5: 24px; --e6: 32px; --e7: 48px; --e8: 72px; --e9: 112px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--texto); font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+               font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; }
+        img { display: block; max-width: 100%; }
+        .conteiner { max-width: var(--largura); margin: 0 auto; padding: 0 var(--e5); }
+
+        header { border-bottom: 1px solid var(--linha); }
+        .topo { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .marca { font-weight: 700; font-size: 15px; letter-spacing: -.01em; text-decoration: none; }
+        nav { display: flex; gap: var(--e5); }
+        nav a { text-decoration: none; font-size: 14px; color: var(--texto-2); }
+        nav a:hover, nav a.ativo { color: var(--texto); }
+        nav a.ativo { font-weight: 600; }
+
+        /* sobre */
+        .sobre { padding: var(--e9) 0 var(--e8); max-width: 680px; }
+        .sobre p { font-size: 22px; line-height: 1.5; letter-spacing: -.01em; color: var(--texto); }
+
+        /* projetos */
+        .projetos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--e5); padding-bottom: var(--e9); }
+        .projeto {
+            display: flex; flex-direction: column; text-decoration: none; background: var(--superficie);
+            border-radius: var(--raio); box-shadow: var(--sombra); overflow: hidden; transition: box-shadow .2s, transform .2s;
+        }
+        a.projeto:hover { box-shadow: var(--sombra-hover); transform: translateY(-2px); }
+        .projeto-img { aspect-ratio: 4 / 3; overflow: hidden; background: #fff; }
+        .projeto-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .projeto.dev .projeto-img img { filter: grayscale(.6); opacity: .75; }
+        .projeto-texto { padding: var(--e4) var(--e5) var(--e5); display: flex; align-items: center; justify-content: space-between; gap: var(--e3); }
+        .projeto h2 { font-size: 18px; font-weight: 600; letter-spacing: -.01em; }
+        .selo { font-size: 12px; font-weight: 500; color: var(--texto-3); border: 1px solid var(--linha); border-radius: 20px;
+                padding: 2px 10px; white-space: nowrap; }
+        .seta { font-size: 14px; font-weight: 600; color: var(--destaque); white-space: nowrap; }
+
+        footer { border-top: 1px solid var(--linha); padding: var(--e6) 0 var(--e7); color: var(--texto-3); font-size: 13px; }
+        footer a { color: var(--texto-2); }
+
+        @media (max-width: 860px) {
+            .projetos { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .conteiner { padding: 0 var(--e4); }
+            .sobre { padding: var(--e8) 0 var(--e7); }
+            .sobre p { font-size: 19px; }
+            nav { gap: var(--e4); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="conteiner topo">
+        <a class="marca" href="index.html">MeteoLab</a>
+        <nav>
+            <a href="index.html" class="ativo">Home</a>
+            <a href="forecast.html">Previsão/Avaliação</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+    </div>
+</header>
+
+<main class="conteiner">
+    <section class="sobre">
+        <p>Sou meteorologista e mestrando no PGMET/CPTEC/INPE. Este site reúne meus projetos de meteorologia, feitos em Python e abertos para quem quiser usar.</p>
+    </section>
+
+    <section class="projetos">
+        <a class="projeto" href="forecast.html">
+            <div class="projeto-img"><img src="img/previsao.webp" alt="Previsão de chuva do fim de semana"></div>
+            <div class="projeto-texto">
+                <h2>Previsão/Avaliação</h2>
+                <span class="seta">→</span>
+            </div>
+        </a>
+        <div class="projeto dev">
+            <div class="projeto-img"><img src="../figs/satelite/melissa_ch13_noaa.jpg" alt="Imagem de satélite GOES-19"></div>
+            <div class="projeto-texto">
+                <h2>sat_goes</h2>
+                <span class="selo">Em desenvolvimento</span>
+            </div>
+        </div>
+        <div class="projeto dev">
+            <div class="projeto-img"><img src="../figs/tropical/balanco_2024-01.jpg" alt="Balanço de energia com ERA5"></div>
+            <div class="projeto-texto">
+                <h2>Tropical</h2>
+                <span class="selo">Em desenvolvimento</span>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="conteiner">© 2026 MeteoLab · <a href="mailto:victor.ranieri@inpe.br">victor.ranieri@inpe.br</a></div>
+</footer>
+
+</body>
+</html>

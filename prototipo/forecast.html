@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsão · MeteoLab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- tokens ---------- */
+        :root {
+            --bg: #f5f5f2;          /* quase branco: os mapas (fundo branco) continuam visíveis */
+            --superficie: #ffffff;
+            --texto: #1c1c1a;
+            --texto-2: #5f5f5a;     /* secundário */
+            --texto-3: #8d8d86;     /* rótulos */
+            --linha: #e3e3dd;
+            --destaque: #2457c5;    /* única cor de destaque */
+            --destaque-claro: #e8eefb;
+            --sombra: 0 1px 2px rgba(20, 20, 15, .06), 0 4px 16px rgba(20, 20, 15, .06);
+            --raio: 10px;
+            --largura: 1120px;
+            /* escala de espaço (múltiplos de 4) */
+            --e1: 4px; --e2: 8px; --e3: 12px; --e4: 16px; --e5: 24px; --e6: 32px; --e7: 48px; --e8: 72px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--texto);
+            font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; }
+        img { display: block; max-width: 100%; height: auto; }
+        .num { font-variant-numeric: tabular-nums; }
+
+        .conteiner { max-width: var(--largura); margin: 0 auto; padding: 0 var(--e5); }
+
+        /* ---------- topo ---------- */
+        header { border-bottom: 1px solid var(--linha); }
+        .topo { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .marca { font-weight: 700; font-size: 15px; letter-spacing: -.01em; text-decoration: none; }
+        .marca span { color: var(--texto-3); font-weight: 500; }
+        nav { display: flex; gap: var(--e5); }
+        nav a { text-decoration: none; font-size: 14px; color: var(--texto-2); }
+        nav a.ativo { color: var(--texto); font-weight: 600; }
+        nav a:hover { color: var(--texto); }
+
+        /* ---------- cabeçalho da página ---------- */
+        .cabecalho { padding: var(--e8) 0 var(--e6); }
+        .sobretitulo { font-size: 13px; font-weight: 600; color: var(--destaque); letter-spacing: .02em; }
+        h1 { font-size: 40px; line-height: 1.15; font-weight: 700; letter-spacing: -.025em; margin: var(--e2) 0 var(--e3); }
+        .periodo { color: var(--texto-2); font-size: 16px; max-width: 64ch; }
+        .periodo a { color: var(--destaque); text-decoration: none; font-weight: 500; }
+        .periodo a:hover { text-decoration: underline; }
+        .rotina { margin-top: var(--e3); }
+
+        /* ---------- abas ---------- */
+        .abas { display: flex; gap: var(--e6); border-bottom: 1px solid var(--linha); margin-bottom: var(--e7); }
+        .aba {
+            background: none; border: none; font: inherit; font-size: 15px; font-weight: 500;
+            color: var(--texto-2); padding: var(--e3) 0; cursor: pointer;
+            border-bottom: 2px solid transparent; margin-bottom: -1px;
+        }
+        .aba:hover { color: var(--texto); }
+        .aba.ativo { color: var(--texto); font-weight: 600; border-bottom-color: var(--texto); }
+        .abas { flex-wrap: wrap; }
+        .seletor-semana { margin-left: auto; align-self: center; }
+
+        /* ---------- seções ---------- */
+        .secao { margin-bottom: var(--e8); }
+        .secao + .secao { padding-top: var(--e7); border-top: 1px solid var(--linha); }
+        h2 { font-size: 22px; font-weight: 600; letter-spacing: -.015em; margin-bottom: var(--e2); }
+        .intro { color: var(--texto-2); font-size: 15px; margin-bottom: var(--e5); max-width: 62ch; }
+        h3 { font-size: 15px; font-weight: 600; margin-bottom: var(--e3); }
+
+        /* ---------- figuras ---------- */
+        figure { margin: 0; }
+        .fig {
+            background: var(--superficie); border-radius: var(--raio); box-shadow: var(--sombra);
+            padding: var(--e3); overflow: hidden;
+        }
+        .fig a { display: block; }
+        figcaption { font-size: 13px; color: var(--texto-3); margin-top: var(--e3); }
+        figcaption strong { color: var(--texto); font-weight: 600; }
+        .fig-principal { max-width: 860px; }
+        .dupla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--e5); align-items: start; }
+        .tripla { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--e4); align-items: start; }
+        .rotulo-painel { font-size: 13px; font-weight: 600; color: var(--texto-2); margin-bottom: var(--e2); }
+        .sem-dado {
+            aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center;
+            text-align: center; color: var(--texto-3); font-size: 14px; padding: var(--e4);
+        }
+
+        /* ---------- seletor de janelas ---------- */
+        .dias { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--e5); margin-bottom: var(--e4); }
+        .dia-nome { font-size: 12px; font-weight: 600; color: var(--texto-3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: var(--e2); }
+        .dia-botoes { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--linha); border-radius: 8px; overflow: hidden; background: var(--superficie); }
+        .janela {
+            background: none; border: none; font: inherit; cursor: pointer; padding: var(--e2) var(--e1);
+            display: grid; gap: 0; border-left: 1px solid var(--linha); color: var(--texto-2);
+        }
+        .janela:first-child { border-left: none; }
+        .janela strong { font-size: 13px; font-weight: 600; color: var(--texto); }
+        .janela span { font-size: 11px; color: var(--texto-3); white-space: nowrap; }
+        .janela:hover { background: var(--bg); }
+        .janela.ativo { background: var(--destaque); }
+        .janela.ativo strong, .janela.ativo span { color: #fff; }
+
+        .controles { display: flex; align-items: center; gap: var(--e2); flex-wrap: wrap; margin-bottom: var(--e5); }
+        .btn {
+            font: inherit; font-size: 14px; background: var(--superficie); color: var(--texto);
+            border: 1px solid var(--linha); border-radius: 8px; padding: 6px 14px; cursor: pointer;
+        }
+        .btn:hover { border-color: var(--texto-3); }
+        .btn-principal { background: var(--texto); color: #fff; border-color: var(--texto); }
+        .btn-principal:hover { background: #000; }
+        .atual { color: var(--texto-2); font-size: 14px; margin-left: var(--e2); }
+        .seletor-produto { margin-left: auto; display: flex; align-items: center; gap: var(--e2); font-size: 14px; color: var(--texto-2); }
+        select { font: inherit; font-size: 14px; padding: 6px 10px; border: 1px solid var(--linha); border-radius: 8px; background: var(--superficie); color: var(--texto); }
+
+        /* ---------- números ---------- */
+        .numeros { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: var(--e6) 0 var(--e7); border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha); }
+        .numero { padding: var(--e5) var(--e5) var(--e5) 0; }
+        .numero + .numero { padding-left: var(--e5); border-left: 1px solid var(--linha); }
+        .numero .rot { font-size: 13px; color: var(--texto-3); }
+        .numero .val { font-size: 30px; font-weight: 600; letter-spacing: -.02em; line-height: 1.25; margin: var(--e1) 0; }
+        .numero .val small { font-size: 16px; font-weight: 500; color: var(--texto-2); }
+        .numero .sub { font-size: 13px; color: var(--texto-2); }
+
+        /* ---------- tabelas ---------- */
+        table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+        th { text-align: left; font-weight: 500; color: var(--texto-3); font-size: 13px; padding: var(--e2) var(--e3); border-bottom: 1px solid var(--texto); }
+        td { padding: var(--e3); border-bottom: 1px solid var(--linha); }
+        th.n, td.n { text-align: right; }
+        .tabela-bloco { max-width: 640px; }
+        .bloco { margin-top: var(--e7); }
+
+        .nota { font-size: 13px; color: var(--texto-3); max-width: 80ch; margin-top: var(--e6); line-height: 1.7; }
+        .nota strong { color: var(--texto-2); font-weight: 600; }
+
+        footer { border-top: 1px solid var(--linha); padding: var(--e6) 0 var(--e7); color: var(--texto-3); font-size: 13px; }
+        footer a { color: var(--texto-2); }
+
+        [hidden] { display: none !important; }
+
+        /* ---------- celular ---------- */
+        @media (max-width: 860px) {
+            .tripla { grid-template-columns: 1fr; }
+            .dias { grid-template-columns: 1fr; gap: var(--e3); }
+            .numeros { grid-template-columns: 1fr; }
+            .numero + .numero { padding-left: 0; border-left: none; border-top: 1px solid var(--linha); }
+        }
+        @media (max-width: 640px) {
+            .conteiner { padding: 0 var(--e4); }
+            h1 { font-size: 30px; }
+            .cabecalho { padding: var(--e7) 0 var(--e5); }
+            nav { gap: var(--e4); }
+            .dupla { grid-template-columns: 1fr; }
+            .seletor-produto { margin-left: 0; flex-basis: 100%; }
+            .numero .val { font-size: 24px; }
+            .abas { gap: var(--e5); }
+            .seletor-semana { order: -1; flex-basis: 100%; margin: 0 0 var(--e3); }
+            .seletor-semana select { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="conteiner topo">
+        <a class="marca" href="index.html">MeteoLab</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="forecast.html" class="ativo">Previsão/Avaliação</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+    </div>
+</header>
+
+<main class="conteiner">
+    <div class="cabecalho">
+        <div class="sobretitulo" id="sobretitulo">Previsão do fim de semana</div>
+        <h1>MONAN regional 5 km</h1>
+        <p class="periodo">Model for Ocean-laNd-Atmosphere PredictioN: modelo comunitário do sistema terrestre,
+            desenvolvido por instituições brasileiras sob coordenação do INPE, aqui na versão regional para a América do Sul e Caribe.
+            <a href="https://github.com/monanadmin/MONAN-Model" target="_blank" rel="noopener">Código</a> ·
+            <a href="https://dataserver.cptec.inpe.br/dataserver_dimnt/monan_adm/MONAN/REG_AMS_CAR_5km/" target="_blank" rel="noopener">dados</a></p>
+        <p class="periodo rotina">Previsão publicada todo fim de semana (se o dado estiver disponível), com inicialização sempre na sexta-feira às 00Z e 72 h de previsão.</p>
+    </div>
+
+    <div class="abas" role="tablist">
+        <button class="aba" data-aba="previsao" id="aba-previsao">Previsão</button>
+        <button class="aba" data-aba="avaliacao" id="aba-avaliacao">Avaliação</button>
+        <label class="seletor-semana"><select id="sel-semana" aria-label="Semana"></select></label>
+    </div>
+
+    <!-- ================= PREVISÃO ================= -->
+    <div id="painel-previsao">
+        <section class="secao">
+            <h2>Acumulado de precipitação de 72 h</h2>
+            <figure class="fig-principal">
+                <div class="fig"><a id="pv-total-link" target="_blank" rel="noopener"><img id="pv-total" alt="Chuva prevista no fim de semana"></a></div>
+            </figure>
+        </section>
+
+        <section class="secao">
+            <h2>De 6 em 6 horas</h2>
+            <div class="dias" id="pv-dias"></div>
+            <div class="controles" id="pv-controles"></div>
+            <figure class="fig-principal">
+                <div class="fig"><a id="pv-img-link" target="_blank" rel="noopener"><img id="pv-img" alt=""></a></div>
+            </figure>
+        </section>
+    </div>
+
+    <!-- ================= AVALIAÇÃO ================= -->
+    <div id="painel-avaliacao" hidden>
+        <section class="secao">
+            <h2>Acumulado de precipitação de 72 h</h2>
+            <div class="dupla">
+                <figure><div class="rotulo-painel">Previsão · MONAN</div><div class="fig"><a id="av-tp-link" target="_blank" rel="noopener"><img id="av-tp" alt="Total previsto"></a></div></figure>
+                <figure><div class="rotulo-painel" id="rot-obs-total">Observado</div><div class="fig"><a id="av-to-link" target="_blank" rel="noopener"><img id="av-to" alt="Total observado"></a></div></figure>
+            </div>
+
+            <div class="numeros" id="av-numeros"></div>
+
+            <div class="dupla">
+                <figure><div class="rotulo-painel">Diferença (previsão − observado)</div><div class="fig"><a id="av-dif-link" target="_blank" rel="noopener"><img id="av-dif" alt="Diferença"></a></div></figure>
+                <figure><div class="rotulo-painel">Desempenho por limiar</div><div class="fig"><a id="av-d72-link" target="_blank" rel="noopener"><img id="av-d72" alt="Diagrama de desempenho"></a></div></figure>
+            </div>
+
+            <div class="bloco tabela-bloco">
+                <h3>Tabela de contingência</h3>
+                <table id="av-ct72"></table>
+            </div>
+
+            <div class="bloco dupla" id="av-mode" hidden>
+                <figure><div class="rotulo-painel">Objetos (MODE) · chuva ≥ <span id="av-mode-lim"></span> mm</div><div class="fig"><a id="av-mode-img-link" target="_blank" rel="noopener"><img id="av-mode-img" alt="Objetos do MODE"></a></div></figure>
+                <div>
+                    <h3>Pares de objetos</h3>
+                    <table id="av-pares"></table>
+                </div>
+            </div>
+        </section>
+
+        <section class="secao">
+            <h2>De 6 em 6 horas</h2>
+            <div class="dias" id="av-dias"></div>
+            <div class="controles" id="av-controles">
+                <label class="seletor-produto">Satélite <select id="av-produto"></select></label>
+            </div>
+            <div class="tripla">
+                <figure><div class="rotulo-painel">Previsão · MONAN</div><div class="fig" id="av-prev"></div></figure>
+                <figure><div class="rotulo-painel" id="rot-obs-6h">Observado</div><div class="fig" id="av-obs"></div></figure>
+                <figure><div class="rotulo-painel">Satélite · GOES-19</div><div class="fig" id="av-sat"></div></figure>
+            </div>
+
+            <div class="bloco" id="bloco-jan" hidden>
+                <h3>Por janela de 6 h</h3>
+                <figure><div class="fig"><a id="av-jan-link" target="_blank" rel="noopener"><img id="av-jan" alt="Estatísticas por janela de 6 horas"></a></div></figure>
+            </div>
+
+            <div class="bloco" id="bloco-d6" style="max-width: 560px" hidden>
+                <h3>Desempenho por limiar (12 janelas juntas)</h3>
+                <figure><div class="fig"><a id="av-d6-link" target="_blank" rel="noopener"><img id="av-d6" alt="Diagrama de desempenho de 6 horas"></a></div></figure>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<footer>
+    <div class="conteiner">© 2026 MeteoLab · <a href="mailto:victor.ranieri@inpe.br">victor.ranieri@inpe.br</a></div>
+</footer>
+
+<script src="../forecast/semanas.js"></script>
+<script>
+function iniciar() {
+    var DIAS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+    var DIAS_L = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+    var PER = { 21: "Madrugada", 3: "Manhã", 9: "Tarde", 15: "Noite" };
+    function brt(d) { return new Date(d.getTime() - 3 * 3600e3); }
+    function dm(d) { return String(d.getUTCDate()).padStart(2, "0") + "/" + String(d.getUTCMonth() + 1).padStart(2, "0"); }
+    function hh(d) { return String(d.getUTCHours()).padStart(2, "0") + "h"; }
+    function curto(d) { return DIAS[d.getUTCDay()] + " " + dm(d) + " " + hh(d); }
+    function fx(v, n) { return v === null || v === undefined ? "–" : v.toFixed(n).replace(".", ","); }
+    function sinal(v) { return (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(1).replace(".", ","); }
+
+    function janelas(M) {
+        var init = new Date(M.rodada);
+        return M.janelas.map(function (j) {
+            var fim = brt(new Date(init.getTime() + j.lead * 3600e3)), ini = new Date(fim.getTime() - M.intervalo * 3600e3);
+            var dia = new Date(ini.getTime() + 3 * 3600e3);
+            return { d: j, ini: ini, fim: fim, per: PER[ini.getUTCHours()] || "", chave: dm(dia), nome: DIAS_L[dia.getUTCDay()] + " " + dm(dia) };
+        });
+    }
+    function liga(id, src) { var i = document.getElementById(id); if (!i || !src) return; i.src = src; document.getElementById(id + "-link").href = src; }
+    function imagem(cont, src, alt, aviso) {
+        cont.innerHTML = "";
+        if (src) { cont.innerHTML = '<a target="_blank" rel="noopener"><img></a>'; cont.firstChild.href = src; cont.querySelector("img").src = src; cont.querySelector("img").alt = alt; }
+        else { var d = document.createElement("div"); d.className = "sem-dado"; d.textContent = aviso || "Sem dado para este horário"; cont.appendChild(d); }
+    }
+
+    function seletor(contDias, contCtrl, js, desenha) {
+        var bts = [], grupos = {}, at = 0, timer = null;
+        js.forEach(function (j, i) {
+            if (!grupos[j.chave]) {
+                var g = document.createElement("div");
+                g.innerHTML = '<div class="dia-nome"></div><div class="dia-botoes"></div>';
+                g.firstChild.textContent = j.nome; contDias.appendChild(g); grupos[j.chave] = g.lastChild;
+            }
+            var b = document.createElement("button"); b.className = "janela";
+            b.innerHTML = "<strong>" + j.per + "</strong><span>" + hh(j.ini) + "–" + hh(j.fim) + "</span>";
+            b.onclick = function () { parar(); mostra(i); }; grupos[j.chave].appendChild(b); bts.push(b);
+        });
+        var ant = document.createElement("button"), play = document.createElement("button"), prox = document.createElement("button"), rot = document.createElement("span");
+        ant.className = prox.className = "btn"; play.className = "btn btn-principal"; rot.className = "atual";
+        ant.textContent = "←"; prox.textContent = "→"; play.textContent = "▶ Animar";
+        ant.setAttribute("aria-label", "Anterior"); prox.setAttribute("aria-label", "Próximo");
+        var primeiro = contCtrl.firstChild;
+        [ant, play, prox, rot].forEach(function (e) { contCtrl.insertBefore(e, primeiro); });
+        function mostra(i) {
+            at = (i + js.length) % js.length; var j = js[at];
+            rot.textContent = j.nome + " · " + j.per + " (" + hh(j.ini) + "–" + hh(j.fim) + ")";
+            bts.forEach(function (b, k) { b.classList.toggle("ativo", k === at); }); desenha(j);
+        }
+        function parar() { clearInterval(timer); timer = null; play.textContent = "▶ Animar"; }
+        ant.onclick = function () { parar(); mostra(at - 1); };
+        prox.onclick = function () { parar(); mostra(at + 1); };
+        play.onclick = function () { if (timer) return parar(); play.textContent = "❚❚ Pausar"; timer = setInterval(function () { mostra(at + 1); }, 1200); };
+        mostra(0);
+        return { ant: ant.onclick, prox: prox.onclick, redesenha: function () { mostra(at); } };
+    }
+
+    var sel = {};
+    var P = window.PREVISAO, A = window.AVALIACAO;
+
+    // ---------- previsão ----------
+    if (P) {
+        var BP = "../forecast/" + P.semana + "/";
+        liga("pv-total", BP + P.total);
+        var jp = janelas(P);
+        jp.forEach(function (j) { if (j.d.img) new Image().src = BP + j.d.img; });
+        sel.previsao = seletor(document.getElementById("pv-dias"), document.getElementById("pv-controles"), jp, function (j) {
+            var src = BP + j.d.img; document.getElementById("pv-img").src = src; document.getElementById("pv-img-link").href = src;
+            document.getElementById("pv-img").alt = "Chuva prevista, " + curto(j.ini) + " a " + curto(j.fim);
+        });
+    }
+
+    // ---------- avaliação ----------
+    if (A) {
+        var BA = "../forecast/" + A.semana + "/", E = A.estatisticas, fonte = (E && E.fonte_obs) || "IMERG";
+        document.getElementById("rot-obs-total").textContent = "Observado · " + fonte;
+        document.getElementById("rot-obs-6h").textContent = "Observado · " + fonte;
+        liga("av-tp", BA + A.total.prev); liga("av-to", BA + A.total.obs);
+        var s = document.getElementById("av-produto");
+        A.produtos.forEach(function (p) { var o = document.createElement("option"); o.value = p.id; o.textContent = p.nome + (p.diurno ? " (só de dia)" : ""); s.appendChild(o); });
+        sel.avaliacao = seletor(document.getElementById("av-dias"), document.getElementById("av-controles"), janelas(A), function (j) {
+            var d = j.d, pr = A.produtos.filter(function (p) { return p.id === s.value; })[0];
+            imagem(document.getElementById("av-prev"), d.prev && BA + d.prev, "Previsão");
+            imagem(document.getElementById("av-obs"), d.obs && BA + d.obs, "Observado");
+            imagem(document.getElementById("av-sat"), d.sat[pr.id] && BA + d.sat[pr.id], pr.nome, pr.diurno && !d.sat[pr.id] ? "Produto diurno: sem imagem à noite" : null);
+        });
+        s.onchange = function () { sel.avaliacao.redesenha(); };
+
+        if (E) {
+            var M = E.mode_total, par = M && M.pares && M.pares[0];
+            var nums = [
+                ["BIAS", sinal(E.total.bias) + " <small>mm</small>", E.total.bias < 0 ? "" : ""],
+                ["RMSE", fx(E.total.rmse, 1) + " <small>mm</small>", ""],
+                ["Chuva forte (≥ " + (M ? M.limiar : 75) + " mm)", par ? Math.round(par.distancia_km) + " <small>km</small>" : "–",
+                 par ? "deslocamento para " + par.direcao : ""]
+            ];
+            document.getElementById("av-numeros").innerHTML = nums.map(function (n) {
+                return '<div class="numero"><div class="rot">' + n[0] + '</div><div class="val num">' + n[1] + '</div><div class="sub">' + n[2] + "</div></div>";
+            }).join("");
+            liga("av-dif", BA + E.fig_dif); liga("av-d72", BA + E.fig_desempenho_total);
+            if (E.fig_janelas) { document.getElementById("bloco-jan").hidden = false; liga("av-jan", BA + E.fig_janelas); }
+            if (E.fig_desempenho_6h) { document.getElementById("bloco-d6").hidden = false; liga("av-d6", BA + E.fig_desempenho_6h); }
+
+            var t = "<thead><tr><th>Limiar</th><th class=n>CSI</th><th class=n>FBIAS</th><th class=n>GSS</th><th class=n>Pontos obs.</th></tr></thead><tbody>";
+            E.contingencia_total.forEach(function (c) {
+                t += "<tr><td>≥ " + c.limiar + " mm</td><td class=n>" + fx(c.csi, 2) + "</td><td class=n>" + fx(c.fbias, 2) +
+                     "</td><td class=n>" + fx(c.gss, 2) + "</td><td class=n>" + c.eventos_obs.toLocaleString("pt-BR") + "</td></tr>";
+            });
+            document.getElementById("av-ct72").innerHTML = t + "</tbody>";
+
+            if (M) {
+                document.getElementById("av-mode").hidden = false;
+                document.getElementById("av-mode-lim").textContent = M.limiar;
+                liga("av-mode-img", BA + E.fig_mode);
+                var tp = "<thead><tr><th>Par</th><th class=n>Deslocamento</th><th class=n>Área prev./obs.</th><th class=n>Interesse</th></tr></thead><tbody>";
+                (M.pares || []).forEach(function (p, k) {
+                    tp += "<tr><td>" + (k + 1) + "</td><td class=n>" + Math.round(p.distancia_km) + " km a " + p.direcao + "</td><td class=n>" +
+                          fx(p.razao_area, 1) + "×</td><td class=n>" + fx(p.interesse, 2) + "</td></tr>";
+                });
+                document.getElementById("av-pares").innerHTML = tp + "</tbody>";
+            }
+        }
+    }
+
+    // ---------- cabeçalho e abas ----------
+    function cabecalho(M, tipo) {
+        var init = new Date(M.rodada), sem = M.semana.split("-S");
+        document.getElementById("sobretitulo").textContent = (tipo === "avaliacao" ? "Avaliação" : "Previsão") + " · semana " + sem[1] + " de " + sem[0];
+    }
+    var atual = "previsao";
+    function abre(n) {
+        if (!sel[n]) n = "previsao"; atual = n;
+        ["previsao", "avaliacao"].forEach(function (k) {
+            document.getElementById("painel-" + k).hidden = k !== n;
+            document.getElementById("aba-" + k).classList.toggle("ativo", k === n);
+        });
+        cabecalho(n === "avaliacao" ? A : P, n);
+    }
+    document.querySelectorAll(".aba").forEach(function (b) {
+        b.addEventListener("click", function (e) { var n = b.dataset.aba || b.getAttribute("href").slice(1); e.preventDefault(); abre(n); history.replaceState(null, "", "#" + n); });
+    });
+    abre(location.hash.slice(1) || "previsao");
+    document.addEventListener("keydown", function (e) {
+        if (e.target.tagName === "SELECT") return;
+        if (e.key === "ArrowLeft") sel[atual].ant(); if (e.key === "ArrowRight") sel[atual].prox();
+    });
+
+    // ---------- seletor de semana ----------
+    var ss = document.getElementById("sel-semana"), esc = window.FC_ESCOLHA || {};
+    var o0 = document.createElement("option"); o0.value = ""; o0.textContent = "Semana atual"; ss.appendChild(o0);
+    (window.SEMANAS || []).forEach(function (w) {
+        var o = document.createElement("option"), r = new Date(w.rodada), sem = w.semana.split("-S");
+        o.value = w.semana;
+        o.textContent = "Semana " + sem[1] + " · " + dm(r) + " a " + dm(new Date(r.getTime() + 48 * 3600e3)) + (w.avaliacao ? "" : " (sem avaliação)");
+        ss.appendChild(o);
+    });
+    ss.value = esc.semana || "";
+    ss.onchange = function () { location.href = location.pathname + (ss.value ? "?semana=" + ss.value : "") + location.hash; };
+}
+
+// Escolha da semana (igual ao forecast.html): ?semana=2026-S45 ou, sem nada, a última publicada
+(function () {
+    var S = window.SEMANAS || [], pedida = new URLSearchParams(location.search).get("semana");
+    var item = pedida && S.filter(function (w) { return w.semana === pedida; })[0], sp, sa;
+    if (item) { sp = item.previsao ? item.semana : null; sa = item.avaliacao ? item.semana : null; }
+    else { sp = (S.filter(function (w) { return w.previsao; })[0] || {}).semana; sa = (S.filter(function (w) { return w.avaliacao; })[0] || {}).semana; }
+    window.FC_ESCOLHA = { semana: item ? item.semana : "", previsao: sp, avaliacao: sa };
+    var arq = [];
+    if (sp) arq.push("../forecast/" + sp + "/previsao/meta.js");
+    if (sa) arq.push("../forecast/" + sa + "/avaliacao/meta.js");
+    var faltam = arq.length;
+    if (!faltam) return iniciar();
+    arq.forEach(function (src) {
+        var el = document.createElement("script"); el.src = src;
+        el.onload = el.onerror = function () { if (--faltam === 0) iniciar(); };
+        document.body.appendChild(el);
+    });
+})();
+</script>
+</body>
+</html>
