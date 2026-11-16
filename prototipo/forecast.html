@@ -234,9 +234,15 @@
                 <figure><div class="rotulo-painel">Desempenho por limiar</div><div class="fig"><a id="av-d72-link" target="_blank" rel="noopener"><img id="av-d72" alt="Diagrama de desempenho"></a></div></figure>
             </div>
 
-            <div class="bloco tabela-bloco">
-                <h3>Tabela de contingência</h3>
-                <table id="av-ct72"></table>
+            <div class="bloco dupla">
+                <div>
+                    <h3>Tabela de contingência</h3>
+                    <table id="av-ct72"></table>
+                </div>
+                <div id="av-pct-bloco" hidden>
+                    <h3>Percentis do total</h3>
+                    <table id="av-pct"></table>
+                </div>
             </div>
 
             <div class="bloco dupla" id="av-mode" hidden>
@@ -364,7 +370,8 @@ function iniciar() {
             var d = j.d, pr = A.produtos.filter(function (p) { return p.id === s.value; })[0];
             imagem(document.getElementById("av-prev"), d.prev && BA + d.prev, "Previsão");
             imagem(document.getElementById("av-obs"), d.obs && BA + d.obs, "Observado");
-            imagem(document.getElementById("av-sat"), d.sat[pr.id] && BA + d.sat[pr.id], pr.nome, pr.diurno && !d.sat[pr.id] ? "Produto diurno: sem imagem à noite" : null);
+            if (pr) imagem(document.getElementById("av-sat"), d.sat[pr.id] && BA + d.sat[pr.id], pr.nome, pr.diurno && !d.sat[pr.id] ? "Produto diurno: sem imagem à noite" : null);
+            else imagem(document.getElementById("av-sat"), null, "Satélite");
         });
         s.onchange = function () { sel.avaliacao.redesenha(); };
 
@@ -390,6 +397,16 @@ function iniciar() {
             });
             document.getElementById("av-ct72").innerHTML = t + "</tbody>";
 
+            if (E.total.percentis) {
+                var tp = "<thead><tr><th>Percentil</th><th class=n>Previsto</th><th class=n>Observado</th><th class=n>Diferença</th></tr></thead><tbody>";
+                E.total.percentis.forEach(function (q) {
+                    tp += "<tr><td>P" + q.p + "</td><td class=n>" + fx(q.prev, 1) + " mm</td><td class=n>" + fx(q.obs, 1) +
+                          " mm</td><td class=n>" + sinal(q.prev - q.obs) + " mm</td></tr>";
+                });
+                document.getElementById("av-pct").innerHTML = tp + "</tbody>";
+                document.getElementById("av-pct-bloco").hidden = false;
+            }
+
             if (M) {
                 document.getElementById("av-mode").hidden = false;
                 document.getElementById("av-mode-lim").textContent = M.limiar;
@@ -399,6 +416,7 @@ function iniciar() {
                     tp += "<tr><td>" + (k + 1) + "</td><td class=n>" + Math.round(p.distancia_km) + " km a " + p.direcao + "</td><td class=n>" +
                           fx(p.razao_area, 1) + "×</td><td class=n>" + fx(p.interesse, 2) + "</td></tr>";
                 });
+                if (!(M.pares || []).length) tp += "<tr><td colspan=4>Nenhum par</td></tr>";
                 document.getElementById("av-pares").innerHTML = tp + "</tbody>";
             }
         }
