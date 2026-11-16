@@ -3,178 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Meteo Projects">
-    <title>Meteo Projects</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script data-goatcounter="https://victorrani.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+    <title>MeteoLab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f5f2; --superficie: #ffffff; --texto: #1c1c1a; --texto-2: #5f5f5a; --texto-3: #8d8d86;
+            --linha: #e3e3dd; --destaque: #2457c5;
+            --sombra: 0 1px 2px rgba(20, 20, 15, .06), 0 4px 16px rgba(20, 20, 15, .06);
+            --sombra-hover: 0 2px 4px rgba(20, 20, 15, .07), 0 12px 32px rgba(20, 20, 15, .10);
+            --raio: 10px; --largura: 1120px;
+            --e1: 4px; --e2: 8px; --e3: 12px; --e4: 16px; --e5: 24px; --e6: 32px; --e7: 48px; --e8: 72px; --e9: 112px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--texto); font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+               font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; }
+        img { display: block; max-width: 100%; }
+        .conteiner { max-width: var(--largura); margin: 0 auto; padding: 0 var(--e5); }
+
+        header { border-bottom: 1px solid var(--linha); }
+        .topo { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+        .marca { font-weight: 700; font-size: 15px; letter-spacing: -.01em; text-decoration: none; }
+        nav { display: flex; gap: var(--e5); }
+        nav a { text-decoration: none; font-size: 14px; color: var(--texto-2); }
+        nav a:hover, nav a.ativo { color: var(--texto); }
+        nav a.ativo { font-weight: 600; }
+
+        /* sobre */
+        .sobre { padding: var(--e9) 0 var(--e8); max-width: 680px; }
+        .sobre p { font-size: 22px; line-height: 1.5; letter-spacing: -.01em; color: var(--texto); }
+
+        /* projetos */
+        .projetos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--e5); padding-bottom: var(--e9); }
+        .projeto {
+            display: flex; flex-direction: column; text-decoration: none; background: var(--superficie);
+            border-radius: var(--raio); box-shadow: var(--sombra); overflow: hidden; transition: box-shadow .2s, transform .2s;
+        }
+        a.projeto:hover { box-shadow: var(--sombra-hover); transform: translateY(-2px); }
+        .projeto-img { aspect-ratio: 4 / 3; overflow: hidden; background: #fff; }
+        .projeto-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .projeto.dev .projeto-img img { filter: grayscale(.6); opacity: .75; }
+        .projeto-texto { padding: var(--e4) var(--e5) var(--e5); display: flex; align-items: center; justify-content: space-between; gap: var(--e3); }
+        .projeto h2 { font-size: 18px; font-weight: 600; letter-spacing: -.01em; }
+        .selo { font-size: 12px; font-weight: 500; color: var(--texto-3); border: 1px solid var(--linha); border-radius: 20px;
+                padding: 2px 10px; white-space: nowrap; }
+        .seta { font-size: 14px; font-weight: 600; color: var(--destaque); white-space: nowrap; }
+
+        footer { border-top: 1px solid var(--linha); padding: var(--e6) 0 var(--e7); color: var(--texto-3); font-size: 13px; }
+        footer a { color: var(--texto-2); }
+
+        @media (max-width: 860px) {
+            .projetos { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .conteiner { padding: 0 var(--e4); }
+            .sobre { padding: var(--e8) 0 var(--e7); }
+            .sobre p { font-size: 19px; }
+            nav { gap: var(--e4); }
+        }
+    </style>
 </head>
 <body>
 
-    <header>
+<header>
+    <div class="conteiner topo">
+        <a class="marca" href="index.html">MeteoLab</a>
         <nav>
-            <div class="nav-container">
-                <a href="index.html" class="logo">Meteo Projects</a>
-                <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="forecast.html">Forecast</a>
-                    <a href="projetos/satelite.html">SatView</a>
-                    <a href="projetos/tropical.html">Tropical</a>
-                    <a href="sobre.html">Sobre</a>
-                </div>
-            </div>
+            <a href="index.html" class="ativo">Home</a>
+            <a href="forecast.html">Previsão/Avaliação</a>
+            <a href="contato.html">Contato</a>
         </nav>
-    </header>
+    </div>
+</header>
 
-    <main>
-        <div class="profile">
-            <h1>Meteo Projects</h1>
-            <p class="subtitle">Ferramentas abertas em Python para análise e visualização de dados meteorológicos</p>
-        </div>
+<main class="conteiner">
+    <section class="sobre">
+        <p>Sou meteorologista e mestrando no PGMET/CPTEC/INPE. Este site reúne meus projetos de meteorologia, feitos em Python e abertos para quem quiser usar.</p>
+    </section>
 
-        <section class="home-section">
-            <h2 class="section-label">Previsão do fim de semana</h2>
-            <a href="forecast.html" class="fc-destaque">
-                <div class="fc-destaque-img">
-                    <img id="fc-home-img" alt="Chuva acumulada prevista para o fim de semana">
-                </div>
-                <div class="fc-destaque-texto">
-                    <span class="eyebrow" id="fc-home-semana">Forecast</span>
-                    <h3>Chuva no Sul e Sudeste</h3>
-                    <p id="fc-home-periodo">Previsão de chuva de 6 em 6 horas e acumulado do fim de semana, publicada toda sexta-feira.</p>
-                    <span class="project-link">Ver previsão</span>
-                </div>
-            </a>
-        </section>
-
-        <section class="home-section">
-            <h2 class="section-label">Projetos</h2>
-            <div class="projects-grid featured">
-
-                <!-- SatView -->
-                <article class="project-card">
-                    <div class="project-image-wrapper">
-                        <img src="figs/index/MELISSA_GOES19_202510261500.png" alt="SatView - imagens dos satélites GOES" class="project-image is-active">
-                        <img src="figs/satelite/melissa_ch13_noaa.jpg" alt="SatView - imagens dos satélites GOES" class="project-image" loading="lazy">
-                        <img src="figs/satelite/melissa_airmass.jpg" alt="SatView - imagens dos satélites GOES" class="project-image" loading="lazy">
-                        <img src="figs/satelite/melissa_simplewv.jpg" alt="SatView - imagens dos satélites GOES" class="project-image" loading="lazy">
-                        <img src="figs/satelite/melissa_daysnowfog.jpg" alt="SatView - imagens dos satélites GOES" class="project-image" loading="lazy">
-                        <img src="figs/satelite/melissa_cpd.jpg" alt="SatView - imagens dos satélites GOES" class="project-image" loading="lazy">
-                        <img src="figs/satelite/melissa_sod.jpg" alt="SatView - imagens dos satélites GOES" class="project-image" loading="lazy">
-                        <img src="figs/satelite/melissa_swvd.jpg" alt="SatView - imagens dos satélites GOES" class="project-image" loading="lazy">
-                    </div>
-                    <div class="project-content">
-                        <h3>SatView</h3>
-                        <p>Download e plotagem de imagens dos satélites GOES-16 e GOES-19 sobre a América do Sul.</p>
-                        <div class="project-tags">
-                            <span>Python</span>
-                            <span>GOES</span>
-                            <span>Satélite</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="projetos/satelite.html" class="project-link">Ver detalhes</a>
-                            <a href="https://github.com/Victorrani/sat_goes" target="_blank" rel="noopener" class="project-repo">GitHub ↗</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Tropical -->
-                <article class="project-card">
-                    <div class="project-image-wrapper">
-                        <img src="figs/tropical/balanco_2024-01.jpg" alt="Tropical - balanços de energia com ERA5" class="project-image is-active">
-                        <img src="figs/tropical/balanco_amazonia_oeste_out2021_out2023.jpg" alt="Tropical - balanços de energia com ERA5" class="project-image" loading="lazy">
-                        <img src="figs/tropical/boxes.jpg" alt="Tropical - balanços de energia com ERA5" class="project-image" loading="lazy">
-                        <img src="figs/tropical/anomalia_chuva_amazonia_oeste.jpg" alt="Tropical - balanços de energia com ERA5" class="project-image" loading="lazy">
-                    </div>
-                    <div class="project-content">
-                        <h3>Tropical</h3>
-                        <p>Balanços de energia em domínios escolhidos pelo usuário com a reanálise ERA5.</p>
-                        <div class="project-tags">
-                            <span>Python</span>
-                            <span>ERA5</span>
-                            <span>Clima</span>
-                            <span>Em desenvolvimento</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="projetos/tropical.html" class="project-link">Ver detalhes</a>
-                        </div>
-                    </div>
-                </article>
-
+    <section class="projetos">
+        <a class="projeto" href="forecast.html">
+            <div class="projeto-img"><img src="img/previsao.webp" alt="Previsão de chuva do fim de semana"></div>
+            <div class="projeto-texto">
+                <h2>Previsão/Avaliação</h2>
+                <span class="seta">→</span>
             </div>
-        </section>
-
-        <section class="home-section">
-            <h2 class="section-label">Em desenvolvimento</h2>
-            <div class="upcoming-grid">
-                <div class="upcoming-card">
-                    <h3>MasterTrack</h3>
-                    <p>Geração de trackfiles de sistemas meteorológicos.</p>
-                </div>
-                <div class="upcoming-card">
-                    <h3>Forecast</h3>
-                    <p>Mapas sinóticos operacionais.</p>
-                </div>
-                <div class="upcoming-card">
-                    <h3>MODE-BR</h3>
-                    <p>Avaliação de previsões orientada a objetos.</p>
-                </div>
+        </a>
+        <div class="projeto dev">
+            <div class="projeto-img"><img src="figs/satelite/melissa_ch13_noaa.jpg" alt="Imagem de satélite GOES-19"></div>
+            <div class="projeto-texto">
+                <h2>sat_goes</h2>
+                <span class="selo">Em desenvolvimento</span>
             </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Meteo Projects · <a href="mailto:victor.ranieri@inpe.br">victor.ranieri@inpe.br</a></p>
-        <div class="visitor-badge">
-            <span>Visitas:</span>
-            <img src="https://visitor-badge.laobi.icu/badge?page_id=victorrani.github.io" alt="contador de visitas">
         </div>
-    </footer>
+        <div class="projeto dev">
+            <div class="projeto-img"><img src="figs/tropical/balanco_2024-01.jpg" alt="Balanço de energia com ERA5"></div>
+            <div class="projeto-texto">
+                <h2>Tropical</h2>
+                <span class="selo">Em desenvolvimento</span>
+            </div>
+        </div>
+    </section>
+</main>
 
-    <script src="forecast/semanas.js"></script>
-    <script>
-        // Card de destaque: a previsão mais recente (forecast/<semana>/previsao/, lista em semanas.js)
-        (function () {
-            var S = (window.SEMANAS || []).filter(function (s) { return s.previsao; })[0];
-            if (!S) return;
-            var base = "forecast/" + S.semana + "/";
-            var el = document.createElement("script");
-            el.src = base + "previsao/meta.js";
-            el.onload = function () { preencher(window.PREVISAO, base); };
-            document.body.appendChild(el);
-        })();
-
-        function preencher(F, base) {
-            if (!F) return;
-            document.getElementById("fc-home-img").src = base + F.total;
-            var D = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
-            function brt(h) { return new Date(new Date(F.rodada).getTime() + (h - 3) * 3600e3); }
-            function txt(d) { return D[d.getUTCDay()] + " " + String(d.getUTCDate()).padStart(2, "0") + "/" +
-                                     String(d.getUTCMonth() + 1).padStart(2, "0") + " " + String(d.getUTCHours()).padStart(2, "0") + "h"; }
-            document.getElementById("fc-home-semana").textContent = "Forecast · semana " + F.semana.split("-S")[1] + "/" + F.semana.split("-S")[0];
-            document.getElementById("fc-home-periodo").textContent = "Chuva prevista de " + txt(brt(0)) + " a " + txt(brt(F.alcance)) +
-                " (Brasília): mapas de 6 em 6 horas e o acumulado do fim de semana.";
-        }
-    </script>
-    <script>
-        // Alterna as imagens de cada card (cards com uma imagem só ficam parados)
-        (function () {
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-            document.querySelectorAll('.project-image-wrapper').forEach(function (wrapper, n) {
-                var imgs = wrapper.querySelectorAll('.project-image');
-                if (imgs.length < 2) return;
-                var i = 0;
-                // Defasagem entre cards para não trocarem todos ao mesmo tempo
-                setTimeout(function () {
-                    setInterval(function () {
-                        imgs[i].classList.remove('is-active');
-                        i = (i + 1) % imgs.length;
-                        imgs[i].classList.add('is-active');
-                    }, 4000);
-                }, n * 1300);
-            });
-        })();
-    </script>
+<footer>
+    <div class="conteiner">© 2026 MeteoLab · <a href="mailto:victor.ranieri@inpe.br">victor.ranieri@inpe.br</a></div>
+</footer>
 
 </body>
 </html>
