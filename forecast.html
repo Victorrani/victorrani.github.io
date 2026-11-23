@@ -88,6 +88,20 @@
         figcaption { font-size: 13px; color: var(--texto-3); margin-top: var(--e3); }
         figcaption strong { color: var(--texto); font-weight: 600; }
         .fig-principal { max-width: 860px; }
+        /* troca de modelo no painel da previsão (avaliação) */
+        .rotulo-painel.com-troca { display: flex; align-items: center; justify-content: space-between; gap: var(--e3); }
+        .troca-modelo { display: inline-flex; border: 1px solid var(--linha); border-radius: 999px; overflow: hidden; }
+        .troca-modelo button {
+            font: inherit; font-size: 12px; font-weight: 600; background: var(--superficie); color: var(--texto-2);
+            border: none; padding: 3px var(--e3); cursor: pointer;
+        }
+        .troca-modelo button + button { border-left: 1px solid var(--linha); }
+        .troca-modelo button:hover { background: var(--bg); }
+        .troca-modelo button.ativo { background: var(--destaque); color: #fff; }
+        /* mesma altura nos dois rótulos do par, com ou sem o botão: os mapas ficam alinhados */
+        .dupla.com-troca-par .rotulo-painel { min-height: 26px; display: flex; align-items: center; }
+        .linha-troca { margin: var(--e6) 0 0; }
+        .nota-grade { font-size: 13px; color: var(--texto-3); margin-top: var(--e3); max-width: 80ch; }
         .dupla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--e5); align-items: start; }
         .tripla { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--e4); align-items: start; }
         .rotulo-painel { font-size: 13px; font-weight: 600; color: var(--texto-2); margin-bottom: var(--e2); }
@@ -222,32 +236,34 @@
     <div id="painel-avaliacao" hidden>
         <section class="secao">
             <h2>Acumulado de precipitação de 72 h</h2>
-            <div class="dupla">
-                <figure><div class="rotulo-painel">Previsão · MONAN</div><div class="fig"><a id="av-tp-link" target="_blank" rel="noopener"><img id="av-tp" alt="Total previsto"></a></div></figure>
+            <div class="dupla com-troca-par">
+                <figure><div class="rotulo-painel com-troca"><span id="rot-prev-total">Previsão · MONAN</span><span class="troca-modelo" data-troca role="group" aria-label="Modelo" hidden></span></div><div class="fig"><a id="av-tp-link" target="_blank" rel="noopener"><img id="av-tp" alt="Total previsto"></a></div></figure>
                 <figure><div class="rotulo-painel" id="rot-obs-total">Observado</div><div class="fig"><a id="av-to-link" target="_blank" rel="noopener"><img id="av-to" alt="Total observado"></a></div></figure>
             </div>
+            <p class="nota-grade" id="av-nota-grade" hidden></p>
 
+            <div class="rotulo-painel com-troca linha-troca"><span id="rot-est">Estatísticas</span><span class="troca-modelo" data-troca role="group" aria-label="Modelo" hidden></span></div>
             <div class="numeros" id="av-numeros"></div>
 
-            <div class="dupla">
-                <figure><div class="rotulo-painel">Diferença (previsão − observado)</div><div class="fig"><a id="av-dif-link" target="_blank" rel="noopener"><img id="av-dif" alt="Diferença"></a></div></figure>
-                <figure><div class="rotulo-painel">Desempenho por limiar</div><div class="fig"><a id="av-d72-link" target="_blank" rel="noopener"><img id="av-d72" alt="Diagrama de desempenho"></a></div></figure>
+            <div class="dupla com-troca-par">
+                <figure><div class="rotulo-painel com-troca"><span id="rot-dif">Diferença (previsão − observado)</span><span class="troca-modelo" data-troca role="group" aria-label="Modelo" hidden></span></div><div class="fig"><a id="av-dif-link" target="_blank" rel="noopener"><img id="av-dif" alt="Diferença"></a></div></figure>
+                <figure><div class="rotulo-painel" id="rot-d72">Desempenho por limiar</div><div class="fig"><a id="av-d72-link" target="_blank" rel="noopener"><img id="av-d72" alt="Diagrama de desempenho"></a></div></figure>
             </div>
 
             <div class="bloco dupla">
                 <div>
-                    <h3>Tabela de contingência</h3>
+                    <h3>Tabela de contingência · <span id="rot-ct">MONAN</span></h3>
                     <table id="av-ct72"></table>
                 </div>
                 <div id="av-pct-bloco" hidden>
-                    <h3>Percentis do total</h3>
+                    <h3>Percentis do total · <span id="rot-pct">MONAN</span></h3>
                     <table id="av-pct"></table>
                 </div>
             </div>
 
-            <div class="bloco dupla" id="av-mode" hidden>
-                <figure><div class="rotulo-painel">Objetos (MODE) · chuva ≥ <span id="av-mode-lim"></span> mm</div><div class="fig"><a id="av-mode-img-link" target="_blank" rel="noopener"><img id="av-mode-img" alt="Objetos do MODE"></a></div></figure>
-                <div>
+            <div class="bloco" id="av-mode" hidden>
+                <figure><div class="rotulo-painel" id="rot-mode">Objetos (MODE)</div><div class="fig"><a id="av-mode-img-link" target="_blank" rel="noopener"><img id="av-mode-img" alt="Objetos do MODE"></a></div></figure>
+                <div class="bloco">
                     <h3>Pares de objetos</h3>
                     <table id="av-pares"></table>
                 </div>
@@ -260,10 +276,10 @@
             <div class="controles" id="av-controles">
                 <label class="seletor-produto">Satélite <select id="av-produto"></select></label>
             </div>
-            <div class="tripla">
-                <figure><div class="rotulo-painel">Previsão · MONAN</div><div class="fig" id="av-prev"></div></figure>
-                <figure><div class="rotulo-painel" id="rot-obs-6h">Observado</div><div class="fig" id="av-obs"></div></figure>
-                <figure><div class="rotulo-painel">Satélite · GOES-19</div><div class="fig" id="av-sat"></div></figure>
+            <div class="tripla com-troca-par">
+                <figure><div class="rotulo-painel com-troca"><span id="rot-prev-6h">Previsão · MONAN</span><span class="troca-modelo" data-troca role="group" aria-label="Modelo" hidden></span></div><div class="fig" id="av-prev"></div></figure>
+                <figure><div class="rotulo-painel com-troca" id="rot-obs-6h">Observado</div><div class="fig" id="av-obs"></div></figure>
+                <figure><div class="rotulo-painel com-troca">Satélite · GOES-19</div><div class="fig" id="av-sat"></div></figure>
             </div>
 
             <div class="bloco" id="bloco-jan" hidden>
@@ -363,32 +379,47 @@ function iniciar() {
         var BA = "forecast/" + A.semana + "/", E = A.estatisticas, fonte = (E && E.fonte_obs) || "IMERG";
         document.getElementById("rot-obs-total").textContent = "Observado · " + fonte;
         document.getElementById("rot-obs-6h").textContent = "Observado · " + fonte;
-        liga("av-tp", BA + A.total.prev); liga("av-to", BA + A.total.obs);
+        // Modelos: MONAN sempre; GFS se a semana tem. EST = estatísticas de cada um (5.avaliacao_fds.py),
+        // C = figuras comuns (desempenho e MODE com os dois, 7.comparacao_modelos.py). Semanas antigas:
+        // só A.estatisticas (MONAN, grade 0,1°) e as figuras dele.
+        var EST = A.modelos || (E ? { MONAN: E } : {}), C = A.comparacao || null;
+        var nomes = ["MONAN"].concat(A.total.prev_gfs ? ["GFS"] : []), modelo = "MONAN";
+        var totalImg = { MONAN: A.total.prev, GFS: A.total.prev_gfs };
+        liga("av-to", BA + A.total.obs);
+
         var s = document.getElementById("av-produto");
         A.produtos.forEach(function (p) { var o = document.createElement("option"); o.value = p.id; o.textContent = p.nome + (p.diurno ? " (só de dia)" : ""); s.appendChild(o); });
+        A.janelas.forEach(function (j) { if (j.prev_gfs) new Image().src = BA + j.prev_gfs; });
         sel.avaliacao = seletor(document.getElementById("av-dias"), document.getElementById("av-controles"), janelas(A), function (j) {
-            var d = j.d, pr = A.produtos.filter(function (p) { return p.id === s.value; })[0];
-            imagem(document.getElementById("av-prev"), d.prev && BA + d.prev, "Previsão");
+            var d = j.d, pr = A.produtos.filter(function (p) { return p.id === s.value; })[0], src = modelo === "GFS" ? d.prev_gfs : d.prev;
+            imagem(document.getElementById("av-prev"), src && BA + src, "Previsão · " + modelo);
             imagem(document.getElementById("av-obs"), d.obs && BA + d.obs, "Observado");
             if (pr) imagem(document.getElementById("av-sat"), d.sat[pr.id] && BA + d.sat[pr.id], pr.nome, pr.diurno && !d.sat[pr.id] ? "Produto diurno: sem imagem à noite" : null);
             else imagem(document.getElementById("av-sat"), null, "Satélite");
         });
         s.onchange = function () { sel.avaliacao.redesenha(); };
 
-        if (E) {
+        function texto(id, t) { document.getElementById(id).textContent = t; }
+
+        // Tudo que muda com o modelo escolhido
+        function desenhaModelo(nome) {
+            var E = EST[nome];
+            texto("rot-prev-total", "Previsão · " + nome); texto("rot-prev-6h", "Previsão · " + nome);
+            liga("av-tp", BA + totalImg[nome]); document.getElementById("av-tp").alt = "Total previsto · " + nome;
+            texto("rot-est", "Estatísticas · " + nome + " × " + fonte + (E && E.grade ? " · grade " + E.grade.split(" ")[0] : ""));
+            texto("rot-dif", "Diferença (" + nome + " − " + fonte + ")"); texto("rot-ct", nome); texto("rot-pct", nome);
+            if (!E) { document.getElementById("av-numeros").innerHTML = '<div class="sem-dado">Sem estatísticas do ' + nome + "</div>"; return; }
             var M = E.mode_total, par = M && M.pares && M.pares[0];
             var nums = [
-                ["BIAS", sinal(E.total.bias) + " <small>mm</small>", E.total.bias < 0 ? "" : ""],
+                ["BIAS", sinal(E.total.bias) + " <small>mm</small>", ""],
                 ["RMSE", fx(E.total.rmse, 1) + " <small>mm</small>", ""],
                 ["Chuva forte (≥ " + (M ? M.limiar : 75) + " mm)", par ? Math.round(par.distancia_km) + " <small>km</small>" : "–",
-                 par ? "deslocamento para " + par.direcao : ""]
+                 par ? "deslocamento para " + par.direcao : (M ? "nenhum objeto pareado" : "")]
             ];
             document.getElementById("av-numeros").innerHTML = nums.map(function (n) {
                 return '<div class="numero"><div class="rot">' + n[0] + '</div><div class="val num">' + n[1] + '</div><div class="sub">' + n[2] + "</div></div>";
             }).join("");
-            liga("av-dif", BA + E.fig_dif); liga("av-d72", BA + E.fig_desempenho_total);
-            if (E.fig_janelas) { document.getElementById("bloco-jan").hidden = false; liga("av-jan", BA + E.fig_janelas); }
-            if (E.fig_desempenho_6h) { document.getElementById("bloco-d6").hidden = false; liga("av-d6", BA + E.fig_desempenho_6h); }
+            liga("av-dif", BA + E.fig_dif);
 
             var t = "<thead><tr><th>Limiar</th><th class=n>CSI</th><th class=n>FBIAS</th><th class=n>GSS</th><th class=n>Pontos obs.</th></tr></thead><tbody>";
             E.contingencia_total.forEach(function (c) {
@@ -398,7 +429,7 @@ function iniciar() {
             document.getElementById("av-ct72").innerHTML = t + "</tbody>";
 
             if (E.total.percentis) {
-                var tp = "<thead><tr><th>Percentil</th><th class=n>Previsto</th><th class=n>Observado</th><th class=n>Diferença</th></tr></thead><tbody>";
+                var tp = "<thead><tr><th>Percentil</th><th class=n>" + nome + "</th><th class=n>" + fonte + "</th><th class=n>Diferença</th></tr></thead><tbody>";
                 E.total.percentis.forEach(function (q) {
                     tp += "<tr><td>P" + q.p + "</td><td class=n>" + fx(q.prev, 1) + " mm</td><td class=n>" + fx(q.obs, 1) +
                           " mm</td><td class=n>" + sinal(q.prev - q.obs) + " mm</td></tr>";
@@ -406,20 +437,63 @@ function iniciar() {
                 document.getElementById("av-pct").innerHTML = tp + "</tbody>";
                 document.getElementById("av-pct-bloco").hidden = false;
             }
+        }
 
-            if (M) {
+        // Comum aos dois modelos: desempenho e MODE
+        function linhaPar(p) {
+            return "<td class=n>" + (p ? Math.round(p.distancia_km) + " km a " + p.direcao : "–") + "</td><td class=n>" +
+                   (p ? fx(p.razao_area, 1) + "×" : "–") + "</td><td class=n>" + (p ? fx(p.interesse, 2) : "–") + "</td>";
+        }
+        if (C) {
+            texto("rot-d72", "Desempenho por limiar · " + nomes.join(" e ") + " × " + fonte);
+            liga("av-d72", BA + C.fig_desempenho);
+            document.getElementById("av-mode").hidden = false;
+            texto("rot-mode", "Objetos (MODE) no total · " + fonte + " × " + nomes.join(" × ") + " · grade " + C.grade.split(" ")[0]);
+            liga("av-mode-img", BA + C.fig_mode);
+            var tm = "<thead><tr><th>Modelo</th><th>Limiar</th><th class=n>Objetos prev. / obs.</th><th class=n>Melhor par: deslocamento</th><th class=n>Área prev./obs.</th><th class=n>Interesse</th></tr></thead><tbody>";
+            C.mode.forEach(function (l) {
+                tm += "<tr><td>" + l.modelo + "</td><td>≥ " + l.limiar + " mm</td><td class=n>" + l.n_prev + " / " + l.n_obs + "</td>" + linhaPar(l.par) + "</tr>";
+            });
+            document.getElementById("av-pares").innerHTML = tm + "</tbody>";
+        } else if (EST.MONAN) {
+            var E0 = EST.MONAN, M0 = E0.mode_total;
+            liga("av-d72", BA + E0.fig_desempenho_total);
+            if (M0) {
                 document.getElementById("av-mode").hidden = false;
-                document.getElementById("av-mode-lim").textContent = M.limiar;
-                liga("av-mode-img", BA + E.fig_mode);
-                var tp = "<thead><tr><th>Par</th><th class=n>Deslocamento</th><th class=n>Área prev./obs.</th><th class=n>Interesse</th></tr></thead><tbody>";
-                (M.pares || []).forEach(function (p, k) {
-                    tp += "<tr><td>" + (k + 1) + "</td><td class=n>" + Math.round(p.distancia_km) + " km a " + p.direcao + "</td><td class=n>" +
-                          fx(p.razao_area, 1) + "×</td><td class=n>" + fx(p.interesse, 2) + "</td></tr>";
-                });
-                if (!(M.pares || []).length) tp += "<tr><td colspan=4>Nenhum par</td></tr>";
-                document.getElementById("av-pares").innerHTML = tp + "</tbody>";
+                texto("rot-mode", "Objetos (MODE) · chuva ≥ " + M0.limiar + " mm");
+                liga("av-mode-img", BA + E0.fig_mode);
+                var tp0 = "<thead><tr><th>Par</th><th class=n>Deslocamento</th><th class=n>Área prev./obs.</th><th class=n>Interesse</th></tr></thead><tbody>";
+                (M0.pares || []).forEach(function (p, k) { tp0 += "<tr><td>" + (k + 1) + "</td>" + linhaPar(p) + "</tr>"; });
+                if (!(M0.pares || []).length) tp0 += "<tr><td colspan=4>Nenhum par</td></tr>";
+                document.getElementById("av-pares").innerHTML = tp0 + "</tbody>";
             }
         }
+
+        // Barrinhas MONAN | GFS: todas mostram o mesmo modelo (trocar uma troca todas)
+        var trocas = document.querySelectorAll("[data-troca]");
+        function escolhe(nome) {
+            modelo = nome;
+            Array.prototype.forEach.call(trocas, function (t) {
+                Array.prototype.forEach.call(t.children, function (b) { var on = b.textContent === nome; b.className = on ? "ativo" : ""; b.setAttribute("aria-pressed", on); });
+            });
+            desenhaModelo(nome);
+            sel.avaliacao.redesenha();
+        }
+        if (nomes.length > 1) {
+            Array.prototype.forEach.call(trocas, function (t) {
+                nomes.forEach(function (n) {
+                    var b = document.createElement("button"); b.type = "button"; b.textContent = n;
+                    b.onclick = function () { escolhe(n); }; t.appendChild(b);
+                });
+                t.hidden = false;
+            });
+            nomes.forEach(function (n) { if (totalImg[n]) new Image().src = BA + totalImg[n]; if (EST[n] && EST[n].fig_dif) new Image().src = BA + EST[n].fig_dif; });
+            var nota = document.getElementById("av-nota-grade");
+            nota.textContent = "Os mapas estão na grade nativa de cada fonte (MONAN 5 km, GFS 0,25°, " + fonte + " 0,1°). " +
+                "As estatísticas, o diagrama de desempenho e os objetos do MODE usam os três campos na grade de 0,25° do GFS (regrid conservativo), para os dois modelos serem comparáveis.";
+            nota.hidden = false;
+        }
+        escolhe("MONAN");
     }
 
     // ---------- cabeçalho e abas ----------
