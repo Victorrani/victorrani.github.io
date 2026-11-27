@@ -1,6 +1,12 @@
 // Gerado pelo 6.publicar_site.py: semanas publicadas, da mais recente para a mais antiga
 window.SEMANAS = [
   {
+    "semana": "2026-S48",
+    "previsao": true,
+    "rodada": "2026-11-27T00:00Z",
+    "avaliacao": false
+  },
+  {
     "semana": "2026-S47",
     "previsao": true,
     "rodada": "2026-11-20T00:00Z",
