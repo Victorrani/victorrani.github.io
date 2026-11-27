@@ -146,6 +146,84 @@
         footer { border-top: 1px solid var(--linha); padding: var(--e6) 0 var(--e7); color: var(--texto-3); font-size: 13px; }
         footer a { color: var(--texto-2); }
 
+        /* ---------- comparação ---------- */
+        #painel-comparacao .cp-cartao { background: var(--superficie); border: 1px solid var(--linha); border-radius: var(--raio); box-shadow: var(--sombra); overflow: hidden; }
+        #painel-comparacao h2 small { font-size: 14px; font-weight: 500; color: var(--texto-3); margin-left: 6px; letter-spacing: 0; }
+        .cp-bolinha { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--c); margin-right: 6px; vertical-align: 1px; }
+        .cp-carregando { color: var(--texto-3); padding: var(--e6) 0; }
+        .cp-ranking { padding: var(--e2) var(--e4); max-width: 520px; }
+        .cp-lugar { display: grid; grid-template-columns: 40px 1fr auto; align-items: baseline; gap: var(--e3); padding: var(--e3) 0; }
+        .cp-lugar + .cp-lugar { border-top: 1px solid var(--linha); }
+        .cp-lugar .n { font-size: 18px; font-weight: 700; color: var(--texto-3); }
+        .cp-lugar.primeiro .n { color: var(--destaque); }
+        .cp-lugar .mod { font-weight: 700; }
+        .cp-lugar .val { font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+        .cp-lugar .val small { font-size: 13px; color: var(--texto-3); font-weight: 500; }
+        .cp-barra { display: flex; flex-wrap: wrap; gap: var(--e3) var(--e5); align-items: center; padding: var(--e3) var(--e4); border-bottom: 1px solid var(--linha); font-size: 13px; color: var(--texto-2); }
+        .cp-barra label { display: inline-flex; align-items: center; gap: var(--e2); font-weight: 600; }
+        .cp-barra select { font-size: 13px; padding: 4px 8px; border-radius: 6px; }
+        .cp-troca { display: inline-flex; border: 1px solid var(--linha); border-radius: 999px; overflow: hidden; background: var(--superficie); }
+        .cp-troca button { font: inherit; font-size: 13px; font-weight: 600; background: none; color: var(--texto-2); border: none; padding: 4px 14px; cursor: pointer; }
+        .cp-troca button + button { border-left: 1px solid var(--linha); }
+        .cp-troca button.ativo { background: var(--destaque); color: #fff; }
+        .cp-janelas { display: flex; align-items: center; gap: var(--e2); padding: var(--e2) var(--e4); border-bottom: 1px solid var(--linha); }
+        .cp-chips { display: flex; gap: 4px; overflow-x: auto; flex: 1; scrollbar-width: thin; }
+        .cp-chips button, .cp-seta { font: inherit; font-size: 12px; font-weight: 600; border: 1px solid var(--linha); background: var(--superficie); color: var(--texto-2); border-radius: 6px; padding: 3px 8px; cursor: pointer; white-space: nowrap; font-variant-numeric: tabular-nums; }
+        .cp-chips button.dia { margin-left: 8px; }
+        .cp-chips button.ativo { background: var(--texto); border-color: var(--texto); color: #fff; }
+        .cp-seta { font-size: 16px; line-height: 1; padding: 3px 10px; }
+        .cp-mapa-caixa { position: relative; }
+        #cp-mapa { width: 100%; aspect-ratio: 1 / 1; max-height: 78vh; background: #fff; cursor: crosshair; }
+        #painel-comparacao .leaflet-container { font-family: inherit; background: #fff; }
+        .cp-rot-lado { position: absolute; top: 10px; z-index: 800; background: rgba(255, 255, 255, .94); border: 1px solid var(--linha); border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 700; pointer-events: none; }
+        #cp-rot-esq { left: 52px; } #cp-rot-dir { right: 10px; }
+        .cp-divisor { position: absolute; top: 0; bottom: 0; width: 0; z-index: 790; border-left: 2px solid #1c1c1a; cursor: ew-resize; touch-action: none; }
+        .cp-divisor::before { content: ""; position: absolute; top: 0; bottom: 0; left: -12px; width: 24px; }
+        .cp-divisor span { position: absolute; top: 50%; left: -15px; width: 28px; height: 28px; margin-top: -14px; border-radius: 50%; background: #fff; border: 2px solid #1c1c1a; display: grid; place-items: center; font-size: 13px; font-weight: 700; box-shadow: var(--sombra); }
+        .cp-leitura { background: rgba(255, 255, 255, .95); border: 1px solid var(--linha); border-radius: 8px; padding: 8px 12px; box-shadow: var(--sombra); font-size: 13px; line-height: 1.45; min-width: 180px; pointer-events: none; font-variant-numeric: tabular-nums; }
+        .cp-leitura .pos { color: var(--texto-3); font-size: 12px; }
+        .cp-leitura .lin { display: flex; justify-content: space-between; gap: var(--e4); }
+        .cp-leitura .lin b { font-weight: 600; }
+        .cp-leitura .vazio { color: var(--texto-3); }
+        .cp-cidade { font-size: 11px; font-weight: 600; color: #2b2b28; white-space: nowrap; text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 2px #fff; pointer-events: none; }
+        .cp-cidade::before { content: ""; display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: #2b2b28; margin-right: 4px; vertical-align: middle; }
+        .cp-legenda { padding: var(--e3) var(--e4) var(--e4); border-top: 1px solid var(--linha); }
+        .cp-legenda .rot { font-size: 12px; font-weight: 600; color: var(--texto-2); margin-bottom: 6px; }
+        .cp-classes, .cp-marcas { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; }
+        .cp-classes div { height: 12px; }
+        .cp-classes div:first-child { border-radius: 3px 0 0 3px; }
+        .cp-classes div:last-child { clip-path: polygon(0 0, 70% 0, 100% 50%, 70% 100%, 0 100%); }
+        .cp-marcas { font-size: 11px; color: var(--texto-3); margin-top: 2px; font-variant-numeric: tabular-nums; }
+        .cp-marcas span { transform: translateX(-50%); }
+        .cp-marcas span:first-child { transform: none; }
+        .cp-serie-caixa { margin-top: var(--e4); padding: var(--e4); }
+        .cp-serie-caixa h3 span { color: var(--texto-3); font-weight: 500; }
+        #cp-serie { width: 100%; height: 320px; }
+        .cp-duas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: var(--e4); align-items: start; }
+        .cp-coluna { display: grid; gap: var(--e4); }
+        #painel-comparacao .cp-cartao h3 { padding: var(--e3) var(--e4) 0; margin: 0; }
+        #painel-comparacao .cp-cartao h3 small { color: var(--texto-3); font-weight: 500; }
+        .cp-tab { overflow-x: auto; padding: var(--e2) var(--e4) var(--e4); }
+        #painel-comparacao table.cp-score { border-collapse: separate; border-spacing: 2px; width: 100%; font-size: 14px; }
+        #painel-comparacao .cp-score th, #painel-comparacao .cp-score td { padding: 6px 10px; border: none; }
+        #painel-comparacao .cp-score thead th { text-align: center; font-size: 12px; font-weight: 700; white-space: nowrap; color: var(--texto-2); }
+        #painel-comparacao .cp-score thead tr.metr th { font-size: 13px; color: var(--texto); border-bottom: 1px solid var(--texto); }
+        #painel-comparacao .cp-score thead th:first-child { text-align: left; }
+        #painel-comparacao .cp-score tbody th { text-align: left; font-weight: 600; white-space: nowrap; color: var(--texto-2); font-size: 14px; }
+        #painel-comparacao .cp-score tbody th small { color: var(--texto-3); font-weight: 500; }
+        #painel-comparacao .cp-score td { text-align: center; border-radius: 4px; }
+        #painel-comparacao .cp-score td.melhor { font-weight: 700; box-shadow: inset 0 0 0 2px #1c1c1a; }
+        #painel-comparacao .cp-score td.pouco { opacity: .45; }
+        #painel-comparacao .cp-score .sep { border-left: 10px solid transparent; }
+        .cp-escala { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e2); font-size: 12px; color: var(--texto-3); margin-top: var(--e3); }
+        .cp-escala .grad { width: 120px; height: 10px; border-radius: 3px; background: linear-gradient(90deg, #f1f5fd, #2457c5); }
+        .cp-escala .box { display: inline-block; width: 14px; height: 14px; border-radius: 3px; box-shadow: inset 0 0 0 2px #1c1c1a; margin-left: var(--e4); }
+        .cp-mode { max-width: 760px; }
+        .cp-mode .rotulo { padding: var(--e3) var(--e4); font-size: 13px; font-weight: 700; border-bottom: 1px solid var(--linha); }
+        .cp-mode img { width: 100%; }
+        @media (max-width: 860px) { .cp-duas { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { #cp-mapa { aspect-ratio: 4 / 5; } }
+
         [hidden] { display: none !important; }
 
         /* ---------- celular ---------- */
@@ -195,6 +273,7 @@
     <div class="abas" role="tablist">
         <button class="aba" data-aba="previsao" id="aba-previsao">Previsão</button>
         <button class="aba" data-aba="avaliacao" id="aba-avaliacao">Avaliação</button>
+        <button class="aba" data-aba="comparacao" id="aba-comparacao">Comparação</button>
         <label class="seletor-semana"><select id="sel-semana" aria-label="Semana"></select></label>
     </div>
 
@@ -276,6 +355,78 @@
             </div>
         </section>
 
+    </div>
+
+    <!-- ================= COMPARAÇÃO ================= -->
+    <div id="painel-comparacao" hidden>
+        <div class="cp-carregando" id="cp-carregando">Carregando…</div>
+        <div id="cp-conteudo" hidden>
+            <section class="secao">
+                <h2>Ranking da semana <small>métricas em que cada modelo é o melhor</small></h2>
+                <div class="cp-cartao cp-ranking" id="cp-ranking"></div>
+            </section>
+
+            <section class="secao">
+                <h2>Precipitação</h2>
+                <div class="cp-cartao">
+                    <div class="cp-barra">
+                        <div class="cp-troca" id="cp-modo" role="group" aria-label="Período">
+                            <button type="button" data-m="total" class="ativo">Total 72 h</button>
+                            <button type="button" data-m="6h">6 em 6 h</button>
+                        </div>
+                        <label>Esquerda <select id="cp-sel-esq"></select></label>
+                        <label>Direita <select id="cp-sel-dir"></select></label>
+                    </div>
+                    <div class="cp-janelas" id="cp-janelas" hidden>
+                        <button type="button" class="cp-seta" id="cp-jan-ant" aria-label="Janela anterior">‹</button>
+                        <div class="cp-chips" id="cp-chips"></div>
+                        <button type="button" class="cp-seta" id="cp-jan-prox" aria-label="Próxima janela">›</button>
+                    </div>
+                    <div class="cp-mapa-caixa">
+                        <div id="cp-mapa"></div>
+                        <div class="cp-rot-lado" id="cp-rot-esq"></div>
+                        <div class="cp-rot-lado" id="cp-rot-dir"></div>
+                        <div class="cp-divisor" id="cp-divisor"><span>⇔</span></div>
+                    </div>
+                    <div class="cp-legenda">
+                        <div class="rot" id="cp-rot-legenda"></div>
+                        <div class="cp-classes" id="cp-classes"></div>
+                        <div class="cp-marcas" id="cp-marcas"></div>
+                    </div>
+                </div>
+                <div class="cp-cartao cp-serie-caixa" id="cp-caixa-serie" hidden>
+                    <h3>Chuva de 6 em 6 horas <span id="cp-pos-serie"></span></h3>
+                    <div id="cp-serie"></div>
+                </div>
+            </section>
+
+            <section class="secao">
+                <h2>Estatísticas <small id="cp-rot-score"></small></h2>
+                <div class="cp-duas">
+                    <div class="cp-coluna">
+                        <div class="cp-cartao">
+                            <h3>Campo total</h3>
+                            <div class="cp-tab"><table class="cp-score" id="cp-tab-campo"></table></div>
+                        </div>
+                        <div class="cp-cartao">
+                            <h3>MODE <small id="cp-rot-tab-mode"></small></h3>
+                            <div class="cp-tab"><table class="cp-score" id="cp-tab-mode"></table></div>
+                        </div>
+                    </div>
+                    <div class="cp-cartao">
+                        <h3>Tabela de contingência</h3>
+                        <div class="cp-tab"><table class="cp-score" id="cp-tab-ct"></table>
+                            <div class="cp-escala"><span>pior</span><span class="grad"></span><span>melhor</span><span class="box"></span><span>melhor</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="secao">
+                <h2>Objetos (MODE) <small id="cp-rot-mode"></small></h2>
+                <div id="cp-mode"></div>
+            </section>
+        </div>
     </div>
 </main>
 
@@ -421,19 +572,26 @@ function iniciar() {
         }
     }
 
+    // ---------- comparação (carregada só quando a aba abre) ----------
+    var SC = (window.FC_ESCOLHA || {}).comparacao, CP = null;
+    if (SC) sel.comparacao = { ant: function () { if (CP) CP.ant(); }, prox: function () { if (CP) CP.prox(); } };
+    else document.getElementById("aba-comparacao").hidden = true;
+
     // ---------- cabeçalho e abas ----------
+    var NOME_ABA = { previsao: "Previsão", avaliacao: "Avaliação", comparacao: "Comparação" };
     function cabecalho(M, tipo) {
-        var init = new Date(M.rodada), sem = M.semana.split("-S");
-        document.getElementById("sobretitulo").textContent = (tipo === "avaliacao" ? "Avaliação" : "Previsão") + " · semana " + sem[1] + " de " + sem[0];
+        var sem = M.semana.split("-S");
+        document.getElementById("sobretitulo").textContent = NOME_ABA[tipo] + " · semana " + sem[1] + " de " + sem[0];
     }
     var atual = "previsao";
     function abre(n) {
         if (!sel[n]) n = "previsao"; atual = n;
-        ["previsao", "avaliacao"].forEach(function (k) {
+        ["previsao", "avaliacao", "comparacao"].forEach(function (k) {
             document.getElementById("painel-" + k).hidden = k !== n;
             document.getElementById("aba-" + k).classList.toggle("ativo", k === n);
         });
-        cabecalho(n === "avaliacao" ? A : P, n);
+        cabecalho(n === "avaliacao" ? A : n === "comparacao" ? { semana: SC } : P, n);
+        if (n === "comparacao") { if (!CP) CP = carregaComparacao(SC); else if (CP.ajusta) CP.ajusta(); }
     }
     document.querySelectorAll(".aba").forEach(function (b) {
         b.addEventListener("click", function (e) { var n = b.dataset.aba || b.getAttribute("href").slice(1); e.preventDefault(); abre(n); history.replaceState(null, "", "#" + n); });
@@ -457,13 +615,298 @@ function iniciar() {
     ss.onchange = function () { location.href = location.pathname + (ss.value ? "?semana=" + ss.value : "") + location.hash; };
 }
 
+
+// =====================================================================================
+// Aba Comparação: IMERG × modelos (dados do 8.comparacao_site.py)
+// Leaflet, Plotly e os dados só são baixados quando a aba é aberta.
+// =====================================================================================
+function carregaScript(src) {
+    return new Promise(function (ok, erro) { var el = document.createElement("script"); el.src = src; el.onload = ok; el.onerror = erro; document.body.appendChild(el); });
+}
+function carregaComparacao(semana) {
+    var ctl = { janela: null, ant: function () { if (ctl.janela) ctl.janela(-1); }, prox: function () { if (ctl.janela) ctl.janela(1); } };
+    var css = document.createElement("link"); css.rel = "stylesheet"; css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"; document.head.appendChild(css);
+    Promise.all([
+        carregaScript("https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"),
+        carregaScript("https://cdn.jsdelivr.net/npm/plotly.js-basic-dist-min@2.35.2/plotly-basic.min.js"),
+        carregaScript("forecast/comum/mapa_base.js"),
+        carregaScript("forecast/" + semana + "/comparacao/dados.js")
+    ]).then(function () { return montaComparacao(window.COMPARACAO, window.MAPA_BASE, "forecast/" + semana + "/comparacao/", ctl); })
+      .catch(function () { document.getElementById("cp-carregando").textContent = "Não foi possível carregar a comparação."; });
+    return ctl;
+}
+
+async function montaComparacao(D, BASE, B, ctl) {
+    var E = D.extent, bounds = [[E[2], E[0]], [E[3], E[1]]], S = D.score, M = D.modelos;
+    var COR = { IMERG: "#1c1c1a", MONAN: "#2457c5", GFS: "#c2571a" };
+    function cor(id) { return COR[id] || "#7a5bb5"; }
+    function bol(id) { return '<span class="cp-bolinha" style="--c:' + cor(id) + '"></span>'; }
+    function fx(v, n) { return v == null || isNaN(v) ? "–" : v.toFixed(n).replace(".", ",").replace("-", "−"); }
+    function sinal(v, n) { return v == null ? "–" : (v > 0 ? "+" : "") + fx(v, n); }
+    function $(id) { return document.getElementById(id); }
+
+    // ---------- grades (uint16 comprimidas com zlib) ----------
+    async function abreGrade(g) {
+        var bin = atob(g.d), bytes = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        var st = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("deflate"));
+        g.v = new Uint16Array(await new Response(st).arrayBuffer());
+    }
+    var F = {};
+    D.fontes.forEach(function (f) { F[f.id] = f; });
+    await Promise.all(D.fontes.map(function (f) { return Promise.all([abreGrade(f.total), abreGrade(f.serie)]); }));
+    function indice(g, lat, lon) {
+        var i = Math.round((lat - g.lat0) / g.dlat), j = Math.round((lon - g.lon0) / g.dlon);
+        return (i < 0 || j < 0 || i >= g.nlat || j >= g.nlon) ? -1 : i * g.nlon + j;
+    }
+    function valor(g, lat, lon) { var k = indice(g, lat, lon); return k < 0 ? null : g.v[k] / g.escala; }
+    function serie(g, lat, lon) {
+        var k = indice(g, lat, lon), n = g.nlat * g.nlon, out = [];
+        if (k < 0) return null;
+        for (var t = 0; t < g.n; t++) out.push(g.v[t * n + k] / g.escala);
+        return out;
+    }
+
+    // ---------- textos ----------
+    var DIAS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+    function brt(iso) { return new Date(Date.parse(iso + ":00:00Z") - 3 * 3600e3); }
+    function rotHora(d) { return DIAS[d.getUTCDay()] + " " + String(d.getUTCHours()).padStart(2, "0") + "h"; }
+    function grau(v, p, n) { return Math.abs(v).toFixed(2).replace(".", ",") + "°" + (v < 0 ? n : p); }
+    function pos(lat, lon) { return grau(lat, "N", "S") + " " + grau(lon, "L", "W"); }
+    function mm(v) { return v == null ? "–" : (v < 1 && v > 0 ? "< 1" : Math.round(v)) + " mm"; }
+    var rotJan = D.tempos.map(function (t) { return rotHora(brt(t)); });
+
+    $("cp-carregando").hidden = true; $("cp-conteudo").hidden = false;
+
+    // ---------- ranking: 1 ponto por métrica vencida (empate divide; desempate: interesse do MODE) ----------
+    function bomFbias(v) { return v > 0 ? -Math.abs(Math.log(v)) : -9; }
+    var criterios = [];
+    function crit(f, bom) { criterios.push(function (m) { var v = f(S[m]); return v == null ? null : bom(v); }); }
+    crit(function (s) { return s.bias; }, function (v) { return -Math.abs(v); });
+    crit(function (s) { return s.rmse; }, function (v) { return -v; });
+    D.limiares.forEach(function (l) {
+        if (M.some(function (m) { return !S[m].ct[l] || S[m].ct[l].pouco; })) return;   // limiar com poucos pontos não conta
+        crit(function (s) { return s.ct[l].csi; }, function (v) { return v; });
+        crit(function (s) { return s.ct[l].fbias; }, bomFbias);
+        crit(function (s) { return s.ct[l].gss; }, function (v) { return v; });
+    });
+    if (M.some(function (m) { return S[m].mode && (S[m].mode.n_prev || S[m].mode.n_obs); }))
+        crit(function (s) { return s.mode && s.mode.valor; }, function (v) { return v; });
+    var pontos = {};
+    M.forEach(function (m) { pontos[m] = 0; });
+    criterios.forEach(function (c) {
+        var b = M.map(c), ok = b.filter(function (x) { return x != null; });
+        if (!ok.length) return;
+        var mx = Math.max.apply(null, ok), vence = M.filter(function (m, i) { return b[i] === mx; });
+        vence.forEach(function (m) { pontos[m] += 1 / vence.length; });
+    });
+    function interesse(m) { return (S[m].mode && S[m].mode.valor) || 0; }
+    var ordem = M.slice().sort(function (a, b) { return pontos[b] - pontos[a] || interesse(b) - interesse(a); });
+    $("cp-ranking").innerHTML = ordem.map(function (m, i) {
+        return '<div class="cp-lugar' + (i === 0 ? " primeiro" : "") + '"><span class="n">' + (i + 1) + "º</span>" +
+            '<span class="mod">' + bol(m) + m + "</span>" +
+            '<span class="val">' + String(Math.round(pontos[m] * 10) / 10).replace(".", ",") + "<small> de " + criterios.length + "</small></span></div>";
+    }).join("");
+
+    // ---------- legenda ----------
+    function legenda(seis) {
+        var cores = seis ? D.cores_6h : D.cores_total, niv = seis ? D.niveis_6h : D.niveis_total;
+        $("cp-rot-legenda").textContent = seis ? "Chuva em 6 h (mm)" : "Chuva acumulada em 72 h (mm)";
+        $("cp-classes").innerHTML = cores.map(function (c) { return '<div style="background:' + c + '"></div>'; }).join("");
+        $("cp-marcas").innerHTML = niv.map(function (n) { return "<span>" + n + "</span>"; }).join("");
+    }
+    legenda(false);
+
+    // ---------- mapa com divisor ----------
+    var mapa = L.map("cp-mapa", { crs: L.CRS.EPSG4326, zoomSnap: 0.25, zoomDelta: 0.5, attributionControl: false,
+                                  maxBounds: L.latLngBounds(bounds).pad(0.15), maxBoundsViscosity: 0.8 });
+    mapa.fitBounds(bounds, { padding: [4, 4] });
+    var zBase = mapa.getZoom();
+    mapa.setMinZoom(zBase - 0.5); mapa.setMaxZoom(zBase + 4);
+    ["esq", "dir"].forEach(function (p) { mapa.createPane(p).style.zIndex = 300; });
+    mapa.createPane("linhas").style.zIndex = 450; mapa.getPane("linhas").style.pointerEvents = "none";
+    mapa.createPane("rotulos").style.zIndex = 460; mapa.getPane("rotulos").style.pointerEvents = "none";
+
+    var img = { esq: null, dir: null }, lado = { esq: "MONAN", dir: "IMERG" }, janela = -1;   // -1 = total 72 h
+    if (!F.MONAN) lado.esq = M[0];
+    function arquivo(id) { return B + (janela < 0 ? F[id].img : F[id].img6[janela]); }
+    function rotulo(id) { return id + (F[id].obs ? " (observado)" : "") + " · " + F[id].grade; }
+    function poe(p) {
+        var novo = L.imageOverlay(arquivo(lado[p]), bounds, { pane: p, interactive: false }).addTo(mapa), velho = img[p];
+        img[p] = novo;
+        if (velho) novo.once("load", function () { velho.remove(); });   // troca sem piscar
+        $("cp-rot-" + p).innerHTML = bol(lado[p]) + rotulo(lado[p]);
+    }
+    D.fontes.forEach(function (f) { new Image().src = B + f.img; });
+    ["esq", "dir"].forEach(function (p) {
+        var sl = $("cp-sel-" + p);
+        D.fontes.forEach(function (f) { var o = document.createElement("option"); o.value = f.id; o.textContent = f.id + (f.obs ? " (observado)" : ""); sl.appendChild(o); });
+        sl.value = lado[p];
+        sl.onchange = function () { lado[p] = sl.value; poe(p); };
+        poe(p);
+    });
+
+    var divisor = $("cp-divisor"), frac = 0.5;
+    function recorta() {
+        var tam = mapa.getSize(), x = Math.round(tam.x * frac);
+        var nw = mapa.containerPointToLayerPoint([0, 0]), se = mapa.containerPointToLayerPoint(tam), cx = nw.x + x;
+        mapa.getPane("esq").style.clip = "rect(" + [nw.y, cx, se.y, nw.x].join("px,") + "px)";
+        mapa.getPane("dir").style.clip = "rect(" + [nw.y, se.x, se.y, cx].join("px,") + "px)";
+        divisor.style.left = x + "px";
+    }
+    mapa.on("move zoom zoomend moveend resize", recorta); recorta();
+    ctl.ajusta = function () { mapa.invalidateSize(); mapa.fitBounds(bounds, { padding: [4, 4] }); recorta(); };   // aba reaberta
+    L.DomEvent.disableClickPropagation(divisor);
+    divisor.addEventListener("pointerdown", function (e) {
+        e.preventDefault(); divisor.setPointerCapture(e.pointerId); mapa.dragging.disable();
+        function mexe(ev) { var r = mapa.getContainer().getBoundingClientRect(); frac = Math.min(1, Math.max(0, (ev.clientX - r.left) / r.width)); recorta(); }
+        function solta() { divisor.removeEventListener("pointermove", mexe); divisor.removeEventListener("pointerup", solta); mapa.dragging.enable(); }
+        divisor.addEventListener("pointermove", mexe); divisor.addEventListener("pointerup", solta);
+    });
+
+    var rend = L.canvas({ pane: "linhas", padding: 0.3 });
+    function linha(geo, c, w) { L.geoJSON(geo, { renderer: rend, interactive: false, style: { color: c, weight: w, opacity: 1 } }).addTo(mapa); }
+    linha(BASE.estados, "#8a8a84", 0.7); linha(BASE.paises, "#5f5f5a", 1); linha(BASE.costa, "#5f5f5a", 0.9);
+    L.rectangle(bounds, { renderer: rend, fill: false, color: "#1c1c1a", weight: 1, interactive: false }).addTo(mapa);
+    var cidades = BASE.cidades.map(function (c) {
+        return { pop: c[3], m: L.marker([c[1], c[2]], { pane: "rotulos", interactive: false, keyboard: false,
+                 icon: L.divIcon({ className: "", html: '<span class="cp-cidade">' + c[0] + "</span>", iconSize: null, iconAnchor: [2, 8] }) }) };
+    });
+    function mostraCidades() {
+        var z = mapa.getZoom() - zBase, lim = z < 0.75 ? 2e6 : z < 1.75 ? 7e5 : 0;
+        cidades.forEach(function (c) { if (c.pop >= lim) c.m.addTo(mapa); else c.m.remove(); });
+    }
+    mapa.on("zoomend", mostraCidades); mostraCidades();
+
+    // valor sob o mouse: todas as fontes
+    var ultimo = null;
+    var Leitura = L.Control.extend({ options: { position: "bottomright" },
+        onAdd: function () { this.div = L.DomUtil.create("div", "cp-leitura"); this.limpa(); return this.div; },
+        limpa: function () { this.div.innerHTML = '<span class="vazio">Passe o mouse no mapa</span>'; },
+        mostra: function (lat, lon) {
+            var h = '<div class="pos">' + pos(lat, lon) + (janela < 0 ? " · 72 h" : " · 6 h até " + rotJan[janela]) + "</div>", algum = false;
+            D.fontes.forEach(function (f) {
+                var v = janela < 0 ? valor(f.total, lat, lon) : (serie(f.serie, lat, lon) || [])[janela];
+                if (v == null) v = null; else algum = true;
+                h += '<div class="lin"><span>' + bol(f.id) + f.id + "</span><b>" + mm(v) + "</b></div>";
+            });
+            if (algum) this.div.innerHTML = h; else this.limpa();
+        } });
+    var leitura = new Leitura().addTo(mapa);
+    mapa.on("mousemove", function (e) { ultimo = e.latlng; leitura.mostra(e.latlng.lat, e.latlng.lng); });
+    mapa.on("mouseout", function () { ultimo = null; leitura.limpa(); });
+
+    // total × janelas de 6 h
+    var chips = $("cp-chips");
+    chips.innerHTML = rotJan.map(function (r, i) {
+        var novoDia = i > 0 && r.slice(0, 3) !== rotJan[i - 1].slice(0, 3);
+        return '<button type="button" data-i="' + i + '"' + (novoDia ? ' class="dia"' : "") + ">" + r + "</button>";
+    }).join("");
+    function preCarrega(i) { D.fontes.forEach(function (f) { if (f.img6[i]) new Image().src = B + f.img6[i]; }); }
+    function escolheJanela(i) {
+        janela = i;
+        Array.prototype.forEach.call(chips.children, function (b, k) { b.classList.toggle("ativo", k === i); });
+        poe("esq"); poe("dir"); legenda(i >= 0);
+        if (i >= 0) { preCarrega(Math.min(i + 1, D.tempos.length - 1)); preCarrega(Math.max(i - 1, 0)); }
+        if (ultimo) leitura.mostra(ultimo.lat, ultimo.lng);
+        destacaBarra();
+    }
+    function modo(seis) {
+        document.querySelectorAll("#cp-modo button").forEach(function (x) { x.classList.toggle("ativo", (x.dataset.m === "6h") === seis); });
+        $("cp-janelas").hidden = !seis;
+        escolheJanela(seis ? (janela < 0 ? 0 : janela) : -1);
+    }
+    chips.onclick = function (e) { var b = e.target.closest("button"); if (b) escolheJanela(+b.dataset.i); };
+    $("cp-jan-ant").onclick = function () { escolheJanela(Math.max(0, janela - 1)); };
+    $("cp-jan-prox").onclick = function () { escolheJanela(Math.min(D.tempos.length - 1, janela + 1)); };
+    document.querySelectorAll("#cp-modo button").forEach(function (b) { b.onclick = function () { modo(b.dataset.m === "6h"); }; });
+    ctl.janela = function (d) { if (janela >= 0) escolheJanela(Math.min(D.tempos.length - 1, Math.max(0, janela + d))); };
+
+    // série no ponto clicado (Plotly); clicar numa barra leva o mapa para a janela
+    var marcador = null;
+    mapa.on("click", function (e) {
+        var lat = e.latlng.lat, lon = e.latlng.lng;
+        var tr = D.fontes.map(function (f) {
+            return { type: "bar", name: f.id, x: rotJan, y: serie(f.serie, lat, lon), marker: { color: cor(f.id) }, hovertemplate: "%{y:.1f} mm<extra>%{fullData.name}</extra>" };
+        }).filter(function (t) { return t.y; });
+        if (!tr.length) return;
+        if (marcador) marcador.setLatLng(e.latlng);
+        else marcador = L.circleMarker(e.latlng, { pane: "rotulos", radius: 6, color: "#fff", weight: 2, fillColor: "#1c1c1a", fillOpacity: 1, interactive: false }).addTo(mapa);
+        $("cp-pos-serie").textContent = "· " + pos(lat, lon);
+        $("cp-caixa-serie").hidden = false;
+        var el = $("cp-serie");
+        Plotly.react(el, tr, {
+            barmode: "group", bargap: 0.22, bargroupgap: 0.06,
+            margin: { l: 44, r: 8, t: 8, b: 48 }, paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
+            font: { family: "Inter, system-ui, sans-serif", size: 12, color: "#5f5f5a" },
+            xaxis: { title: { text: "Fim da janela de 6 h (Brasília)", font: { size: 12 } }, fixedrange: true },
+            yaxis: { title: { text: "mm", font: { size: 12 } }, gridcolor: "#e3e3dd", zeroline: false, rangemode: "tozero", fixedrange: true },
+            legend: { orientation: "h", x: 1, xanchor: "right", y: 1.1 }, hovermode: "x unified"
+        }, { displayModeBar: false, responsive: true });
+        destacaBarra();
+        if (!el._ligado) {
+            el._ligado = true;
+            el.on("plotly_click", function (ev) { var i = rotJan.indexOf(ev.points[0].x); if (i < 0) return; modo(true); escolheJanela(i); });
+        }
+        leitura.mostra(lat, lon);
+    });
+    function destacaBarra() {
+        var el = $("cp-serie"); if (!el || !el.data) return;
+        Plotly.relayout(el, { shapes: janela < 0 ? [] : [{ type: "rect", xref: "x", yref: "paper", x0: janela - 0.5, x1: janela + 0.5, y0: 0, y1: 1,
+                                                          fillcolor: "rgba(36,87,197,.08)", line: { width: 0 }, layer: "below" }] });
+    }
+
+    // ---------- estatísticas ----------
+    $("cp-rot-score").textContent = "× " + D.fonte_obs + " · grade " + D.grade_metricas;
+    function mistura(t) {
+        var a = [241, 245, 253], b = [36, 87, 197];
+        return "rgb(" + a.map(function (x, i) { return Math.round(x + (b[i] - x) * t); }).join(",") + ")";
+    }
+    // células de uma métrica para todos os modelos; bom(v): quanto maior, melhor
+    function celulas(vals, bom, fmt, pouco, sep) {
+        var b = vals.map(function (v) { return v == null ? null : bom(v); });
+        var ok = b.filter(function (x) { return x != null; }), mx = Math.max.apply(null, ok), mn = Math.min.apply(null, ok);
+        return vals.map(function (v, i) {
+            var t = b[i] == null ? 0 : (mx === mn ? 1 : (b[i] - mn) / (mx - mn));
+            var cls = (b[i] != null && b[i] === mx && ok.length > 1 ? "melhor" : "") + (pouco && pouco[i] ? " pouco" : "") + (sep && i === 0 ? " sep" : "");
+            return '<td class="' + cls + '" style="background:' + mistura(0.08 + 0.85 * t) + ";color:" + (t > 0.55 ? "#fff" : "#1c1c1a") + '">' + fmt(v) + "</td>";
+        }).join("");
+    }
+    var cab = '<thead><tr class="metr"><th></th>' + M.map(function (m) { return "<th>" + bol(m) + m + "</th>"; }).join("") + "</tr></thead><tbody>";
+    $("cp-tab-campo").innerHTML = cab +
+        "<tr><th>BIAS <small>mm</small></th>" + celulas(M.map(function (m) { return S[m].bias; }), function (v) { return -Math.abs(v); }, function (v) { return sinal(v, 1); }) + "</tr>" +
+        "<tr><th>RMSE <small>mm</small></th>" + celulas(M.map(function (m) { return S[m].rmse; }), function (v) { return -v; }, function (v) { return fx(v, 1); }) + "</tr></tbody>";
+    $("cp-rot-tab-mode").textContent = "≥ " + D.limiar_mode + " mm";
+    $("cp-tab-mode").innerHTML = cab +
+        "<tr><th>Interesse total médio</th>" + celulas(M.map(function (m) { return S[m].mode && S[m].mode.valor; }), function (v) { return v; }, function (v) { return fx(v, 2); }) + "</tr>" +
+        "<tr><th>Objetos <small>prev. / obs.</small></th>" + M.map(function (m) { var md = S[m].mode; return "<td>" + (md ? md.n_prev + " / " + md.n_obs : "–") + "</td>"; }).join("") + "</tr></tbody>";
+    var MET = [["CSI", function (v) { return v; }], ["FBIAS", bomFbias], ["GSS", function (v) { return v; }]];
+    var h = '<thead><tr class="metr"><th></th>' + MET.map(function (mt) { return '<th class="sep" colspan="' + M.length + '">' + mt[0] + "</th>"; }).join("") + "</tr>";
+    h += "<tr><th>Limiar</th>" + MET.map(function () { return M.map(function (m, i) { return "<th" + (i === 0 ? ' class="sep"' : "") + ">" + bol(m) + m + "</th>"; }).join(""); }).join("") + "</tr></thead><tbody>";
+    D.limiares.forEach(function (l) {
+        var pouco = M.map(function (m) { return S[m].ct[l] && S[m].ct[l].pouco; });
+        h += "<tr><th>≥ " + l + " <small>mm</small></th>" + MET.map(function (mt) {
+            var k = mt[0].toLowerCase();
+            return celulas(M.map(function (m) { return S[m].ct[l] && S[m].ct[l][k]; }), mt[1], function (v) { return fx(v, 2); }, pouco, true);
+        }).join("") + "</tr>";
+    });
+    $("cp-tab-ct").innerHTML = h + "</tbody>";
+
+    // ---------- objetos do MODE ----------
+    $("cp-rot-mode").textContent = "chuva ≥ " + D.limiar_mode + " mm · grade " + D.grade_metricas;
+    $("cp-mode").innerHTML = D.fig_mode ?
+        '<figure class="cp-cartao cp-mode"><div class="rotulo">' + [D.fonte_obs].concat(M).map(function (m) { return bol(m) + m; }).join(" × ") + "</div>" +
+        '<a href="' + B + D.fig_mode + '" target="_blank" rel="noopener"><img src="' + B + D.fig_mode + '" alt="Objetos do MODE"></a></figure>' : "";
+}
+
 // Escolha da semana (igual ao forecast.html): ?semana=2026-S45 ou, sem nada, a última publicada
 (function () {
     var S = window.SEMANAS || [], pedida = new URLSearchParams(location.search).get("semana");
     var item = pedida && S.filter(function (w) { return w.semana === pedida; })[0], sp, sa;
     if (item) { sp = item.previsao ? item.semana : null; sa = item.avaliacao ? item.semana : null; }
     else { sp = (S.filter(function (w) { return w.previsao; })[0] || {}).semana; sa = (S.filter(function (w) { return w.avaliacao; })[0] || {}).semana; }
-    window.FC_ESCOLHA = { semana: item ? item.semana : "", previsao: sp, avaliacao: sa };
+    var sc = item ? (item.comparacao ? item.semana : null) : (S.filter(function (w) { return w.comparacao; })[0] || {}).semana;
+    window.FC_ESCOLHA = { semana: item ? item.semana : "", previsao: sp, avaliacao: sa, comparacao: sc };
     var arq = [];
     if (sp) arq.push("forecast/" + sp + "/previsao/meta.js");
     if (sa) arq.push("forecast/" + sa + "/avaliacao/meta.js");

@@ -4,30 +4,35 @@ window.SEMANAS = [
     "semana": "2026-S48",
     "previsao": true,
     "rodada": "2026-11-27T00:00Z",
-    "avaliacao": false
+    "avaliacao": false,
+    "comparacao": false
   },
   {
     "semana": "2026-S47",
     "previsao": true,
     "rodada": "2026-11-20T00:00Z",
-    "avaliacao": true
+    "avaliacao": true,
+    "comparacao": true
   },
   {
     "semana": "2026-S46",
     "previsao": true,
     "rodada": "2026-11-13T00:00Z",
-    "avaliacao": true
+    "avaliacao": true,
+    "comparacao": true
   },
   {
     "semana": "2026-S45",
     "previsao": true,
     "rodada": "2026-11-06T00:00Z",
-    "avaliacao": true
+    "avaliacao": true,
+    "comparacao": true
   },
   {
     "semana": "2026-S44",
     "previsao": true,
     "rodada": "2026-10-30T00:00Z",
-    "avaliacao": true
+    "avaliacao": true,
+    "comparacao": true
   }
 ];
